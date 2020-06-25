@@ -25,6 +25,7 @@
     "dev": "run-p --race dev:firebase dev:react",
     "dev:firebase": "firebase serve -p 4000",
     "dev:react": "react-scripts start",
+    "deploy": "yarn build && firebase deploy",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
