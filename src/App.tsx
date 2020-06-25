@@ -15,6 +15,9 @@ function App() {
           <p>Image example using import</p>
           <img src={sample} alt=""/>
         </div>
+        <div className="farts">
+          <p>Now we're cookin with farts - Scott 2020 at the age of 32billion years</p>
+        </div>
       </div>
     </div>
   );
