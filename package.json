@@ -1,0 +1,10 @@
+{
+  "name": "hangzone",
+  "version": "0.0.1",
+  "description": "An app for hanging",
+  "main": "src/index.js",
+  "repository": "git@github.com:hangforever/hangzone.git",
+  "author": "aburd <burdick.aaron@gmail.com>, scott coffrin <scott.coffrin@gmail.com>",
+  "license": "MIT",
+  "private": true
+}
