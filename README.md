@@ -46,6 +46,11 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 - TODO: find out how this works, lol
 
+### Adding static assets (images, etc)
+
+- You can put a static assets in `src` and `import` it.
+- You can put any static asset in the `public` directory and reference the path to it.
+
 
 ## Deployments
 
