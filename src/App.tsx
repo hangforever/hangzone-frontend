@@ -16,7 +16,7 @@ function App() {
           <img src={sample} alt=""/>
         </div>
         <div className="farts">
-          <p>Now we're cookin with farts - Scott 2020 at the age of 32billion years</p>
+          <p>Now we're cookin with farts - Scott 2020 at the age of a single Willennium<br /><img src="https://upload.wikimedia.org/wikipedia/en/c/c1/WillSmith-Willennium.jpg" /></p>
         </div>
       </div>
     </div>
