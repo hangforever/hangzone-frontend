@@ -1,0 +1,14 @@
+.App {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+}
+
+.app-body {
+  flex: 1;
+  text-align: center;
+}
+
+.app-body h1 {
+  text-align: center;
+}
