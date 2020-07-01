@@ -11,6 +11,9 @@ const Navigation = () => (
       <li>
         <Link to={Routes.Login}>Login</Link>
       </li>
+      <li>
+        <Link to={Routes.Map}>Map</Link>
+      </li>
     </ul>
   </div>
 );
