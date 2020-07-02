@@ -1,24 +1,29 @@
 import React from 'react';
-import sample from './sample.png'
 import './App.css';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+import Navigation from './components/Navigation';
+import Main from './components/Main'
+import Login from './components/Login'
+import Map from './components/Map'
+import Routes from './types/Routes'
 
 function App() {
   return (
     <div className="App">
-      <div className="app-body">
-        <h1>Hangzonessss</h1>
-        <div className="pika">
-          <p>Image example using path</p>
-          <img src="/images/pikawho.png" alt=""/>
+      <Router>
+        <div className="navigation">
+          <Navigation />
         </div>
-        <div className="sample">
-          <p>Image example using import</p>
-          <img src={sample} alt=""/>
+
+        <hr />
+
+        <div className="body">
+          <Route exact path={Routes.Main} component={Main} />
+          <Route path={Routes.Login} component={Login} />
+          <Route path={Routes.Map} component={Map}/>
         </div>
-        <div className="farts">
-          <p>Now we're cookin with farts - Scott 2020 at the age of a single Willennium<br /><img src="https://upload.wikimedia.org/wikipedia/en/c/c1/WillSmith-Willennium.jpg" /></p>
-        </div>
-      </div>
+      </Router>
     </div>
   );
 }
