@@ -6,6 +6,7 @@ import "firebase/auth";
 import "firebase/firestore";
 import "firebase/storage"
 
+// TODO: add potentially multiple configs for addition of STG/PRD servers
 var firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
   authDomain: process.env.FIREBASE_AUTH_DOMAIN,
