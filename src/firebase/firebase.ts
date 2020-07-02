@@ -1,4 +1,3 @@
-// Firebase App (the core Firebase SDK) is always required and must be listed first
 import * as firebase from "firebase/app";
 
 // Add the Firebase products that you want to use
@@ -16,8 +15,6 @@ var firebaseConfig = {
   appId: process.env.FIREBASE_APP_ID,
 };
 
-export default class Firebase {
-  constructor() {
-    firebase.initializeApp(firebaseConfig)
-  }
-}
+firebase.initializeApp(firebaseConfig)
+
+export default firebase
