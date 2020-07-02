@@ -15,7 +15,8 @@ function App() {
     <div className="App">
       {user.email && (
         <div>
-          logged in as: {user.email}
+          <div><img src={user.photoURL || ''} alt="" style={{ width: '50px', height: '50px', borderRadius: '50%'}} /></div>
+          <div>logged in as: {user.email}</div>
         </div>
       )}
       <Router>

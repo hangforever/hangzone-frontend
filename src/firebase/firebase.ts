@@ -15,28 +15,55 @@ var firebaseConfig = {
   appId: process.env.REACT_APP_APP_ID,
 };
 
+type SetUserFn = (user: firebase.User) => void
+
 export default class Firebase {
   public auth: firebase.auth.Auth
   public gAuthProvider: firebase.auth.GoogleAuthProvider
+  private setUser: SetUserFn
 
   constructor() {
     firebase.initializeApp(firebaseConfig)
     
     this.auth = firebase.auth()
     this.gAuthProvider = new firebase.auth.GoogleAuthProvider();
+    this.setUser = () => {}
     
     this.gAuthProvider.addScope('https://www.googleapis.com/auth/contacts.readonly');
   }
 
+  setSetUserFn = (setUser: SetUserFn) => this.setUser = setUser
+
   signUp = (email: string, password: string) => {
-    return this.auth.createUserWithEmailAndPassword(email, password)
+    return this.auth
+      .createUserWithEmailAndPassword(email, password)
+      .then(user => {
+        if (user) this.setUser(user.user as firebase.User)
+      })
+      .catch(function (error) {
+        console.error(error.code, error.message)
+      })
   }
 
   login = (email: string, password: string) => {
-    return this.auth.signInWithEmailAndPassword(email, password)
+    return this.auth
+      .signInWithEmailAndPassword(email, password)
+      .then(user => {
+        if (user) this.setUser(user.user as firebase.User)
+      })
+      .catch(function (error) {
+        console.error(error.code, error.message)
+      })
   }
 
   loginGmail = () => {
-    return this.auth.signInWithPopup(this.gAuthProvider)
+    return this.auth
+      .signInWithPopup(this.gAuthProvider)
+      .then(user => {
+        if (user) this.setUser(user.user as firebase.User)
+      })
+      .catch(function (error) {
+        console.error(error.code, error.message)
+      })
   }
 }

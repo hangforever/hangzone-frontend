@@ -13,49 +13,19 @@ const Login: React.SFC<LoginProps> = ({ setUser }) => {
   return (
     <FirebaseContext.Consumer>
       {firebase => { 
-        function signUp(email: string, password: string) {
-          return firebase.signUp(email, password)
-            .then(user => {
-              if (user) setUser(user.user as firebase.User)
-              history.push('/')
-            })
-            .catch(function (error) {
-              console.error(error.code, error.message)
-            })
-        }
-
-        function login(email: string, password: string) {
-          return firebase
-            .login(email, password)
-            .then(user => {
-              if (user) setUser(user.user as firebase.User)
-              history.push('/')
-            })
-            .catch(function (error) {
-              console.error(error.code, error.message)
-            })
-        }
-          
-        function loginGmail() {
-          firebase
-            .loginGmail()
-            .then(user => {
-              if (user) setUser(user.user as firebase.User)
-              history.push('/')
-            })
-            .catch(function (error) {
-              console.error(error.code, error.message)
-            })
-        }
-
+        firebase.setSetUserFn(setUser)
         return (
           <div className="Login">
             <h1>Gmail</h1>
-            <button onClick={loginGmail}>Gmail</button>
+            <button onClick={() => {
+              firebase.loginGmail()
+                .then(() => history.push('/'))
+            }}>Gmail</button>
             <h1>Sign up</h1>
             <form onSubmit={e => {
               e.preventDefault()
-              signUp(email, password)
+              firebase.signUp(email, password)
+                .then(() => history.push('/'))
             }}>
               <input type="text" name="email" value={email} onChange={e => updateEmail(e.target.value)} />
               <input type="password" name="password" value={password} onChange={e => updatePassword(e.target.value)} />
@@ -64,7 +34,8 @@ const Login: React.SFC<LoginProps> = ({ setUser }) => {
             <h1>Login</h1>
             <form onSubmit={e => {
               e.preventDefault()
-              login(email, password)
+              firebase.login(email, password)
+                .then(() => history.push('/'))
             }}>
               <input type="text" name="email" value={email} onChange={e => updateEmail(e.target.value)} />
               <input type="password" name="password" value={password} onChange={e => updatePassword(e.target.value)} />
