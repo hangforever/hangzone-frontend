@@ -36,8 +36,22 @@ const Login: React.SFC<LoginProps> = ({ setUser }) => {
             })
         }
           
+        function loginGmail() {
+          firebase
+            .loginGmail()
+            .then(user => {
+              if (user) setUser(user.user as firebase.User)
+              history.push('/')
+            })
+            .catch(function (error) {
+              console.error(error.code, error.message)
+            })
+        }
+
         return (
           <div className="Login">
+            <h1>Gmail</h1>
+            <button onClick={loginGmail}>Gmail</button>
             <h1>Sign up</h1>
             <form onSubmit={e => {
               e.preventDefault()

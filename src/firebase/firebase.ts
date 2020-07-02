@@ -35,4 +35,8 @@ export default class Firebase {
   login = (email: string, password: string) => {
     return this.auth.signInWithEmailAndPassword(email, password)
   }
+
+  loginGmail = () => {
+    return this.auth.signInWithPopup(this.gAuthProvider)
+  }
 }
