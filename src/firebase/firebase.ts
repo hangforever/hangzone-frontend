@@ -15,6 +15,24 @@ var firebaseConfig = {
   appId: process.env.REACT_APP_APP_ID,
 };
 
-firebase.initializeApp(firebaseConfig)
+export default class Firebase {
+  public auth: firebase.auth.Auth
+  public gAuthProvider: firebase.auth.GoogleAuthProvider
 
-export default firebase
+  constructor() {
+    firebase.initializeApp(firebaseConfig)
+    
+    this.auth = firebase.auth()
+    this.gAuthProvider = new firebase.auth.GoogleAuthProvider();
+    
+    this.gAuthProvider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+  }
+
+  signUp = (email: string, password: string) => {
+    return this.auth.createUserWithEmailAndPassword(email, password)
+  }
+
+  login = (email: string, password: string) => {
+    return this.auth.signInWithEmailAndPassword(email, password)
+  }
+}

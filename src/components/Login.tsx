@@ -14,9 +14,7 @@ const Login: React.SFC<LoginProps> = ({ setUser }) => {
     <FirebaseContext.Consumer>
       {firebase => { 
         function signUp(email: string, password: string) {
-          return firebase
-            .auth()
-            .createUserWithEmailAndPassword(email, password)
+          return firebase.signUp(email, password)
             .then(user => {
               if (user) setUser(user.user as firebase.User)
               history.push('/')
@@ -28,8 +26,7 @@ const Login: React.SFC<LoginProps> = ({ setUser }) => {
 
         function login(email: string, password: string) {
           return firebase
-            .auth()
-            .signInWithEmailAndPassword(email, password)
+            .login(email, password)
             .then(user => {
               if (user) setUser(user.user as firebase.User)
               history.push('/')
