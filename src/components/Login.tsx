@@ -2,7 +2,11 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router'
 import { FirebaseContext } from '../firebase'
 
-export default function Login() {
+interface LoginProps {
+  setUser: (user: firebase.User) => void
+}
+
+const Login: React.SFC<LoginProps> = ({ setUser }) => {
   const [email, updateEmail] = useState('')
   const [password, updatePassword] = useState('')
   const history = useHistory()
@@ -14,7 +18,7 @@ export default function Login() {
             .auth()
             .createUserWithEmailAndPassword(email, password)
             .then(user => {
-              console.log('Successfully created user!', user)
+              if (user) setUser(user.user as firebase.User)
               history.push('/')
             })
             .catch(function (error) {
@@ -27,7 +31,7 @@ export default function Login() {
             .auth()
             .signInWithEmailAndPassword(email, password)
             .then(user => {
-              console.log('Successfully logged in!', user)
+              if (user) setUser(user.user as firebase.User)
               history.push('/')
             })
             .catch(function (error) {
@@ -61,3 +65,5 @@ export default function Login() {
     </FirebaseContext.Consumer>
   )
 }
+
+export default Login
