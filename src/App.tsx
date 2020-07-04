@@ -1,12 +1,11 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-
-import Navigation from './components/Navigation';
-import Main from './components/Main'
-import Login from './components/Login'
-import Map from './components/Map'
-import Routes from './types/Routes'
+import Navigation from 'components/Navigation';
+import Main from 'components/Main'
+import Login from 'components/Login'
+import Map from 'components/Map'
+import Routes from 'types/Routes'
 
 function App() {
   return (
