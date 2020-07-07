@@ -6,7 +6,7 @@ import Navigation from './Navigation';
 import Main from './Main'
 import Login from './Login'
 import Map from './Map'
-import Routes from '../types/Routes'
+import { Routes } from '../types'
 
 function App() {
   return (
