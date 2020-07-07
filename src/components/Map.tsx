@@ -1,9 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { observer } from "mobx-react-lite"
+import AppStore from '../stores/AppStore'
+import HangzoneItem from './HangzoneItem'
 
-const Map = () => (
-  <div className="map-container">
-    <img src="https://nick-intl.mtvnimages.com/uri/mgid:file:gsp:scenic:/international/nick/shows/nickjr/dora-the-explorer/site-image/character-large-map.jpg?quality=0.75&height=0&width=480&matte=true&crop=false" alt="map image"/>
-  </div>
-)
+const Map = () => {
+  const appStore = useContext(AppStore)
+  function handleAddHangzoneClick() {
+    appStore.addHangzone('Test', 'test description', true)
+  }
+  return (
+    <div className="map-container">
+      <h1>Hangzones</h1>
+      <ul>
+        {appStore.hangzones.map((hangzone) => (
+          <HangzoneItem {...hangzone} />
+        ))}
+      </ul>
+      <button onClick={handleAddHangzoneClick}>Add Hangzone</button>
+    </div>
+  )
+}
 
-export default Map
+export default observer(Map)

@@ -1,7 +1,8 @@
+import { createContext } from 'react'
 import { observable, action } from 'mobx'
 import { Hangzone } from '../types'
 
-export default class AppStore {
+class AppStore {
   hangzones: Hangzone[] = observable([])
 
   addHangzone = action((name: string, description: string, isPrivate: boolean = true) => {
@@ -13,3 +14,5 @@ export default class AppStore {
     this.hangzones = this.hangzones.filter(h => h.id !== id)
   })
 }
+
+export default createContext(new AppStore())
