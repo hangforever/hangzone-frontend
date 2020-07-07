@@ -1,8 +1,9 @@
 import Routes from './Routes'
 
 export interface Hangzone {
+  id: string
   name: string
-  private: boolean
+  isPrivate: boolean
   description: string
 }
 
