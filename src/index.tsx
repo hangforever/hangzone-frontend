@@ -2,11 +2,15 @@ import './styles/main.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
+import AppStore from './stores/AppStore'
+import { AppStoreContext } from './stores'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <AppStoreContext.Provider value={new AppStore()}>
+      <App />
+    </AppStoreContext.Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
