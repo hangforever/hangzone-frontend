@@ -32,7 +32,18 @@ export default class Firebase {
     this.gAuthProvider.addScope('https://www.googleapis.com/auth/contacts.readonly');
   }
 
-  setSetUserFn = (setUser: SetUserFn) => this.setUser = setUser
+  setSetUserFn = (setUser: SetUserFn) => {
+    this.setUser = setUser
+    this.auth.onAuthStateChanged(function (user) {
+      if (user) {
+        console.log('user', user)
+        setUser(user)
+      } else {
+        // No user is signed in.
+        console.log('No user signed in')
+      }
+    });
+  }
 
   signUp = (email: string, password: string) => {
     return this.auth
