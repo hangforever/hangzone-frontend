@@ -28,6 +28,22 @@ cd hangzone
 yarn
 ```
 
+4. Add `.env` file to root dir
+
+This file is in .gitignore so it will not be tracked
+
+`.env`
+```
+REACT_APP_API_KEY=AIzaSyCRi1Xpc3e0HR9g66H0Mtkn8VzvTmU3U4Y 
+REACT_APP_AUTH_DOMAIN=hangzone-494fc.firebaseapp.com
+REACT_APP_DATABASE_URL=https://hangzone-494fc.firebaseio.com
+REACT_APP_PROJECT_ID=hangzone-494fc
+REACT_APP_STORAGE_BUCKET=hangzone-494fc.appspot.com
+REACT_APP_MESSAGING_SENDER_ID=376999931997
+REACT_APP_APP_ID=1:376999931997:web:17cedeae05969d116dddb4
+SASS_PATH=node_modules:src
+```
+
 ## Development
 
 ### `yarn dev`
