@@ -13,7 +13,7 @@ const HangzoneItem: React.SFC<Props> = ({
       ID: {id} <br/>
       Name: {name} <br/>
       Description: {description} <br/>
-      Private?: <input type="checkbox" checked={isPrivate} /> <br/>
+      Private?: <input type="checkbox" checked={isPrivate} onChange={() => console.log('Go fuck yourself')}/> <br/>
     </li>
   )
 

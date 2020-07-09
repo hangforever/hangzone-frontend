@@ -3,7 +3,7 @@ import { observable, action } from 'mobx'
 import { Hangzone } from '../types'
 
 class AppStore {
-  hangzones: Hangzone[] = observable([])
+  hangzones = observable<Hangzone>([])
 
   addHangzone = action((name: string, description: string, isPrivate: boolean = true) => {
     const hangzone = { id: this.hangzones.length.toString(), name, description, isPrivate }
@@ -11,7 +11,8 @@ class AppStore {
   })
 
   removeHangzone = action((id: string) => {
-    this.hangzones = this.hangzones.filter(h => h.id !== id)
+    console.log('this.hangzones.filter(h => h.id !== id)', this.hangzones.filter(h => h.id !== id))
+    this.hangzones.replace(this.hangzones.filter(h => h.id !== id))
   })
 }
 
