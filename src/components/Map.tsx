@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react';
 import { observer } from "mobx-react-lite"
-import AppStore from '../stores/AppStore'
+import appStoreContext from '../stores/appStoreContext'
 import HangzoneItem from './HangzoneItem'
 
 const Map = () => {
-  const appStore = useContext(AppStore)
+  const appStore = useContext(appStoreContext)
   const [name, updateName] = useState('')
   const [isPrivate, updateIsPrivate] = useState(false)
   const [description, updateDescription] = useState('')
