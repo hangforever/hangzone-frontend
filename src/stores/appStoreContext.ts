@@ -3,7 +3,8 @@ import { observable, action } from 'mobx'
 import { Hangzone } from '../types'
 
 class AppStore {
-  hangzones = observable<Hangzone>([])
+  hangzones = observable.array<Hangzone>([]) // https://mobx.js.org/refguide/array.html
+  wordOfTheDay = observable.box('') // https://mobx.js.org/refguide/boxed.html
 
   addHangzone = action((name: string, description: string, isPrivate: boolean = true) => {
     const hangzone = { id: this.hangzones.length.toString(), name, description, isPrivate }
@@ -11,8 +12,11 @@ class AppStore {
   })
 
   removeHangzone = action((id: string) => {
-    console.log('this.hangzones.filter(h => h.id !== id)', this.hangzones.filter(h => h.id !== id))
     this.hangzones.replace(this.hangzones.filter(h => h.id !== id))
+  })
+
+  updateWordOfTheDay = action((newWord: string) => {
+    this.wordOfTheDay.set(newWord)
   })
 }
 
