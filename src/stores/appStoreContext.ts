@@ -4,7 +4,7 @@ import { Hangzone } from '../types'
 
 class AppStore {
   hangzones = observable.array<Hangzone>([]) // https://mobx.js.org/refguide/array.html
-  wordOfTheDay = observable.box('') // https://mobx.js.org/refguide/boxed.html
+  wordOfTheDay = observable.box('FARTS') // https://mobx.js.org/refguide/boxed.html
 
   addHangzone = action((name: string, description: string, isPrivate: boolean = true) => {
     const hangzone = { id: this.hangzones.length.toString(), name, description, isPrivate }
