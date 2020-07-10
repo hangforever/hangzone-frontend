@@ -1,13 +1,50 @@
-import React from 'react'
+import React, { useState, useContext } from 'react'
+import { useHistory } from 'react-router'
+import { firebaseContext } from '../firebase'
 
-export default function Login() {
+interface LoginProps {
+  setUser: (user: firebase.User) => void
+}
+
+const Login: React.SFC<LoginProps> = ({ setUser }) => {
+  const [email, updateEmail] = useState('')
+  const [password, updatePassword] = useState('')
+  const history = useHistory()
+  const firebase = useContext(firebaseContext)
+  firebase.setSetUserFn(setUser)
+  
   return (
     <div className="Login">
-      <form onSubmit={e => e.preventDefault()}>
-        <input type="text" name="email" />
-        <input type="password" name="password" />
+      <h1>Gmail</h1>
+      <button
+        onClick={() => firebase.loginGmail().then(() => history.push('/'))}
+      >
+        Gmail
+      </button>
+      <h1>Sign up</h1>
+      <form
+        onSubmit={e => {
+          e.preventDefault()
+          firebase.signUp(email, password).then(() => history.push('/'))
+        }}
+      >
+        <input type="text" name="email" value={email} onChange={e => updateEmail(e.target.value)} />
+        <input type="password" name="password" value={password} onChange={e => updatePassword(e.target.value)} />
+        <input type="submit" value="Submit" />
+      </form>
+      <h1>Login</h1>
+      <form
+        onSubmit={e => {
+          e.preventDefault()
+          firebase.login(email, password).then(() => history.push('/'))
+        }}
+      >
+        <input type="text" name="email" value={email} onChange={e => updateEmail(e.target.value)} />
+        <input type="password" name="password" value={password} onChange={e => updatePassword(e.target.value)} />
         <input type="submit" value="Submit" />
       </form>
     </div>
   )
 }
+
+export default Login
