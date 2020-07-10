@@ -2,7 +2,8 @@ import { createContext } from 'react'
 import { observable, action } from 'mobx'
 import { Hangzone } from '../types'
 
-class AppStore {
+export class AppStore {
+  user = observable.box<null | firebase.User>(null)
   hangzones = observable.array<Hangzone>([]) // https://mobx.js.org/refguide/array.html
   wordOfTheDay = observable.box('FARTS') // https://mobx.js.org/refguide/boxed.html
 

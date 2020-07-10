@@ -11,7 +11,6 @@ const Login: React.SFC<LoginProps> = ({ setUser }) => {
   const [password, updatePassword] = useState('')
   const history = useHistory()
   const firebase = useContext(firebaseContext)
-  firebase.setSetUserFn(setUser)
   
   return (
     <div className="Login">
