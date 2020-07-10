@@ -1,12 +1,8 @@
 import React, { useState, useContext } from 'react'
 import { useHistory } from 'react-router'
-import { firebaseContext } from '../firebase'
+import firebaseContext from 'firebaseContext'
 
-interface LoginProps {
-  setUser: (user: firebase.User) => void
-}
-
-const Login: React.SFC<LoginProps> = ({ setUser }) => {
+const Login: React.SFC = () => {
   const [email, updateEmail] = useState('')
   const [password, updatePassword] = useState('')
   const history = useHistory()
@@ -16,7 +12,13 @@ const Login: React.SFC<LoginProps> = ({ setUser }) => {
     <div className="Login">
       <h1>Gmail</h1>
       <button
-        onClick={() => firebase.loginGmail().then(() => history.push('/'))}
+        onClick={() => {
+          const gAuthProvider = new firebase.auth.GoogleAuthProvider();
+          firebase.auth()
+            .signInWithPopup(gAuthProvider).then(() => history.push('/')).catch(function (error) {
+            console.error(error.code, error.message)
+          })
+        }}
       >
         Gmail
       </button>
@@ -24,7 +26,13 @@ const Login: React.SFC<LoginProps> = ({ setUser }) => {
       <form
         onSubmit={e => {
           e.preventDefault()
-          firebase.signUp(email, password).then(() => history.push('/'))
+          
+          firebase.auth()
+            .createUserWithEmailAndPassword(email, password)
+            .then(() => history.push('/'))
+            .catch(function (error) {
+              console.error(error.code, error.message)
+            })
         }}
       >
         <input type="text" name="email" value={email} onChange={e => updateEmail(e.target.value)} />
@@ -35,7 +43,12 @@ const Login: React.SFC<LoginProps> = ({ setUser }) => {
       <form
         onSubmit={e => {
           e.preventDefault()
-          firebase.login(email, password).then(() => history.push('/'))
+          firebase.auth()
+            .signInWithEmailAndPassword(email, password)
+            .then(() => history.push('/'))
+            .catch(function (error) {
+              console.error(error.code, error.message)
+            })
         }}
       >
         <input type="text" name="email" value={email} onChange={e => updateEmail(e.target.value)} />

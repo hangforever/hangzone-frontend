@@ -7,7 +7,7 @@ import Main from 'components/Main'
 import Login from 'components/Login'
 import Map from 'components/Map'
 import { Routes } from 'types'
-import { firebaseContext } from '../firebase'
+import firebaseContext from 'firebaseContext'
 import { appStoreContext } from 'stores'
 
 
@@ -17,7 +17,7 @@ function App() {
   const user = appStore.user.get()
 
   useEffect(() => {
-    firebase.auth.onAuthStateChanged(function (user) {
+    firebase.auth().onAuthStateChanged(function (user) {
       if (user) appStore.user.set(user)
     });
   }, [appStore, firebase])
