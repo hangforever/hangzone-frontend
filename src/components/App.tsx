@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import './App.scss';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-
-import Navigation from './Navigation';
-import Main from './Main'
-import Login from './Login'
-import Map from './Map'
-import Routes from '../types/Routes'
+import Navigation from 'components/Navigation';
+import Main from 'components/Main'
+import Login from 'components/Login'
+import Map from 'components/Map'
+import Routes from 'types/Routes'
 
 function App() {
   const [user, setUser] = useState({} as firebase.User)

@@ -67,6 +67,9 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 - You can put a static assets in `src` and `import` it.
 - You can put any static asset in the `public` directory and reference the path to it.
 
+### Resolution
+
+- 'src' directory is added to paths so relative imports like './components/MyComponent' or '../components/MyComponent' can just be 'components/MyComponent'
 
 ## Deployments
 
