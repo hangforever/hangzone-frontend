@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.scss';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Navigation from 'components/Navigation';
@@ -8,8 +8,16 @@ import Map from 'components/Map'
 import Routes from 'types/Routes'
 
 function App() {
+  const [user, setUser] = useState({} as firebase.User)
+
   return (
     <div className="App">
+      {user.email && (
+        <div>
+          <div><img src={user.photoURL || ''} alt="" style={{ width: '50px', height: '50px', borderRadius: '50%' }} /></div>
+          <div>logged in as: {user.email}</div>
+        </div>
+      )}
       <Router>
         <div className="navigation">
           <Navigation />
@@ -19,8 +27,8 @@ function App() {
 
         <div className="body">
           <Route exact path={Routes.Main} component={Main} />
-          <Route path={Routes.Login} component={Login} />
-          <Route path={Routes.Map} component={Map}/>
+          <Route path={Routes.Login} component={() => <Login setUser={setUser} />} />
+          <Route path={Routes.Map} component={Map} />
         </div>
       </Router>
     </div>
