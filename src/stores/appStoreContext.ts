@@ -16,6 +16,10 @@ export class AppStore {
     this.hangzones.replace(this.hangzones.filter(h => h.id !== id))
   })
 
+  updateHangzone = action((id: string, diff: Partial<Hangzone>) => {
+    this.hangzones.replace(this.hangzones.map(h => h.id === id ? { ...h, ...diff } : h))
+  })
+
   updateWordOfTheDay = action((newWord: string) => {
     this.wordOfTheDay.set(newWord)
   })
