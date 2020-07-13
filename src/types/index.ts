@@ -13,6 +13,14 @@ export interface ISettings {
   notifications: boolean
 }
 
+export interface IProfile {
+  id: string
+  name: string
+  bio: string
+  photo?: string
+  email: string
+}
+
 export {
   Routes
 }

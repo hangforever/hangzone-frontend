@@ -6,7 +6,8 @@ enum Routes {
   Main = '/',
   Login = '/login',
   Map = '/map',
-  Settings = '/settings'
+  Settings = '/settings',
+  Profile ='/profile'
 }
 
 export default Routes

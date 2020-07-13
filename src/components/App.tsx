@@ -7,6 +7,7 @@ import Main from 'components/Main'
 import Login from 'components/Login'
 import Map from 'components/Map'
 import Settings from 'components/Settings'
+import Profile from 'components/Profile'
 import { Routes } from 'types'
 import firebaseContext from 'firebaseContext'
 import { appStoreContext } from 'stores'
@@ -43,6 +44,7 @@ function App() {
           <Route path={Routes.Login} component={Login} />
           <Route path={Routes.Map} component={Map} />
           <Route path={Routes.Settings} component={Settings} />
+          <Route path={Routes.Profile} component={Profile} />
         </div>
       </Router>
     </div>

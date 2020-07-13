@@ -1,6 +1,6 @@
 import { createContext } from 'react'
 import { observable, action } from 'mobx'
-import { Hangzone, ISettings } from 'types'
+import { Hangzone, ISettings, IProfile } from 'types'
 
 export class AppStore {
   user = observable.box<null | firebase.User>(null)
@@ -10,6 +10,13 @@ export class AppStore {
     gpsOn: true,
     emailOnFriendHang: true,
     notifications: true,
+  })
+
+  profile = observable.object<IProfile>({
+    id: '123',
+    name: 'xXxTakara89Xx',
+    bio: 'Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time.',
+    email: 'takara89@hotmail.biz'
   })
 
   updateSettings = action((key: keyof ISettings, val: any) => {
