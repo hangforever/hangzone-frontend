@@ -6,6 +6,7 @@ import Navigation from 'components/Navigation';
 import Main from 'components/Main'
 import Login from 'components/Login'
 import Map from 'components/Map'
+import Settings from 'components/Settings'
 import { Routes } from 'types'
 import firebaseContext from 'firebaseContext'
 import { appStoreContext } from 'stores'
@@ -41,6 +42,7 @@ function App() {
           <Route exact path={Routes.Main} component={Main} />
           <Route path={Routes.Login} component={Login} />
           <Route path={Routes.Map} component={Map} />
+          <Route path={Routes.Settings} component={Settings} />
         </div>
       </Router>
     </div>

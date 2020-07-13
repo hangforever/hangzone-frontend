@@ -14,6 +14,9 @@ const Navigation = () => (
       <li>
         <Link to={Routes.Map}>Map</Link>
       </li>
+      <li>
+        <Link to={Routes.Settings}>Settings</Link>
+      </li>
     </ul>
   </div>
 );
