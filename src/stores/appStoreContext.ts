@@ -19,6 +19,10 @@ export class AppStore {
     email: 'takara89@hotmail.biz'
   })
 
+  updateProfile = action((key: keyof IProfile, val: any) => {
+    this.profile[key] = val
+  })
+
   updateSettings = action((key: keyof ISettings, val: any) => {
     this.settings[key] = val
   })
