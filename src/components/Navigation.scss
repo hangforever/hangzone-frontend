@@ -10,23 +10,30 @@
     display: flex;
     height: 100%;
 
-    li {
+    a {
+      background: $bg-btn;
       height: 100%;
-      flex: 1;
-      text-align: center;
+      width: 100%;
+      color: $font-secondary;
 
-      a {
-        background: $bg-btn;
+      &.active {
+        background: $bg-btn-active;
+        li { border-right: none; }
+      }
+
+      &:last-child {
+        li { border-right: none; }
+      }
+
+      li {
+        height: calc(100% - 10px);
+        margin: 5px 0;
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 100%;
-        width: 100%;
-        color: $font-secondary;
-
-        &.active {
-          background: $bg-btn-active;
-        }
+        flex: 1;
+        text-align: center;
+        border-right: 2px solid $border-primary;
       }
     }
   }
