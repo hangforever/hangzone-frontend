@@ -18,6 +18,17 @@ const Profile = () => {
         <div>
           <div><img src={user.photoURL || ''} alt="" style={{ width: '50px', height: '50px', borderRadius: '50%' }} /></div>
           <div>logged in as: {user.email}</div>
+          <button
+            onClick={() => {
+              firebase.auth().signOut()
+                .then(() => {
+                  appStore.user.set(null)
+                })
+                .catch(() => alert('whoops'))
+            }}
+          >
+            Sign Out
+      </button>
         </div>
       )}
       <Field
@@ -37,14 +48,6 @@ const Profile = () => {
       <div><img src="" alt="photo here"/></div>
       <div>email: {profile.email}</div>
       <button>change password</button>
-      <button onClick={() => {
-        firebase.auth().signOut()
-          .then(() => {
-            appStore.user.set(null)
-          })
-          .catch(() => alert('whoops'))
-
-      }}>Sign Out</button>
     </div>
   )
 }
