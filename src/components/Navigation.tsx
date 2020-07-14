@@ -1,27 +1,30 @@
+import './Navigation.scss'
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Routes from '../types/Routes'
 
-const Navigation = () => (
-  <div>
-    <ul>
-      <li>
-        <Link to={Routes.Main}>Main</Link>
-      </li>
-      <li>
-        <Link to={Routes.Login}>Login</Link>
-      </li>
-      <li>
-        <Link to={Routes.Map}>Map</Link>
-      </li>
-      <li>
-        <Link to={Routes.Settings}>Settings</Link>
-      </li>
-      <li>
-        <Link to={Routes.Profile}>Profile</Link>
-      </li>
-    </ul>
-  </div>
-);
+const Navigation = () => {
+  return (
+    <nav className="Navigation">
+      <ul>
+        <li>
+          <NavLink exact activeClassName='active' to={Routes.Main}>Main</NavLink>
+        </li>
+        <li>
+          <NavLink activeClassName='active' to={Routes.Login}>Login</NavLink>
+        </li>
+        <li>
+          <NavLink activeClassName='active' to={Routes.Map}>Map</NavLink>
+        </li>
+        <li>
+          <NavLink activeClassName='active' to={Routes.Settings}>Settings</NavLink>
+        </li>
+        <li>
+          <NavLink activeClassName='active' to={Routes.Profile}>Profile</NavLink>
+        </li>
+      </ul>
+    </nav>
+  )
+};
 
 export default Navigation;
