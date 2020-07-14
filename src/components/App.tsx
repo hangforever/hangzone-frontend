@@ -33,12 +33,7 @@ function App() {
         </div>
       )}
       <Router>
-        <div className="navigation">
-          <Navigation />
-        </div>
-
-        <hr />
-
+        
         <div className="body">
           <Route exact path={Routes.Main} component={Main} />
           <Route path={Routes.Login} component={Login} />
@@ -46,6 +41,8 @@ function App() {
           <Route path={Routes.Settings} component={Settings} />
           <Route path={Routes.Profile} component={Profile} />
         </div>
+
+        <Navigation />
       </Router>
     </div>
   );
