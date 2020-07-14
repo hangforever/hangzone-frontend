@@ -1,14 +1,12 @@
 import React, { useState, useContext } from 'react'
 import { useHistory } from 'react-router'
 import firebaseContext from 'firebaseContext'
-import { appStoreContext } from 'stores'
 
 const Login: React.SFC = () => {
   const [email, updateEmail] = useState('')
   const [password, updatePassword] = useState('')
   const history = useHistory()
   const firebase = useContext(firebaseContext)
-  const appStore = useContext(appStoreContext)
   
   return (
     <div className="Login">
@@ -57,14 +55,6 @@ const Login: React.SFC = () => {
         <input type="password" name="password" value={password} onChange={e => updatePassword(e.target.value)} />
         <input type="submit" value="Submit" />
       </form>
-      <button onClick={() => {
-        firebase.auth().signOut()
-          .then(() => {
-            appStore.user.set(null)
-          })
-          .catch(() => alert('whoops'))
-        
-      }}>Sign Out</button>
     </div>
   )
 }

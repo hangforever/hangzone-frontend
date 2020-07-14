@@ -8,7 +8,6 @@ const Navigation = () => {
     <nav className="Navigation">
       <ul>
         <NavLink exact activeClassName='active' to={Routes.Main}><li>Main</li></NavLink>
-        <NavLink activeClassName='active' to={Routes.Login}><li>Login</li></NavLink>
         <NavLink activeClassName='active' to={Routes.Map}><li>Map</li></NavLink>
         <NavLink activeClassName='active' to={Routes.Settings}><li>Settings</li></NavLink>
         <NavLink activeClassName='active' to={Routes.Profile}><li>Profile</li></NavLink>
