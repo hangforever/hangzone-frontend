@@ -1,0 +1,14 @@
+@import 'styles/colors';
+
+.Field {
+
+  .Field__input {
+
+  }
+
+  .Field__value {
+    &:hover {
+      border: 1px solid $bg-secondary;
+    }
+  }
+}

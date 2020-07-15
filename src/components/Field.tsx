@@ -22,10 +22,10 @@ const Field: React.SFC<FieldProps> = ({
           onSubmit(value)
           updateActive(false)
         }}>
-          <input type="text" name={label} value={value} onChange={(e) => updateValue(e.target.value)} />
+          <input className="Field__input" type="text" name={label} value={value} onChange={(e) => updateValue(e.target.value)} />
         </form>
       ) : (
-          <div className="field-value" onClick={() => updateActive(true)}>{value}</div>
+          <div className="Field__value" onClick={() => updateActive(true)}>{value}</div>
         )}
     </div>
   )

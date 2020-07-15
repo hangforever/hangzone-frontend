@@ -16,6 +16,7 @@ export class AppStore {
     id: '123',
     name: 'xXxTakara89Xx',
     bio: 'Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time.',
+    photo: 'https://a-listzante.com/wp-content/uploads/2019/11/zante-event-tickets-2.jpg',
     email: 'takara89@hotmail.biz'
   })
 
