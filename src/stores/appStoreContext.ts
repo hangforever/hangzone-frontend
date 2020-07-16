@@ -24,10 +24,6 @@ export class AppStore {
     this.profile[key] = val
   })
 
-  updateSettings = action((key: keyof ISettings, val: any) => {
-    this.settings[key] = val
-  })
-
   addHangzone = action((name: string, description: string, isPrivate: boolean = true) => {
     const hangzone = { id: this.hangzones.length.toString(), name, description, isPrivate }
     this.hangzones.push(hangzone)
