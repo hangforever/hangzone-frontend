@@ -55,6 +55,7 @@ const Profile = () => {
       <div className="Profile__photo-area">
         <img className="Profile__profile-photo" src={appStore.profile.photo} alt="user profile"/>
         <button onClick={() => {
+          // TODO: add functionality for uploads from hard disk 
           const newURL = prompt('', 'enter img url here')
           appStore.updateProfile('photo', newURL)
         }}>change photo</button>
