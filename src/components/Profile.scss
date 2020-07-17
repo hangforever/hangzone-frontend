@@ -1,12 +1,13 @@
 @import 'styles/colors';
 
 .Profile {
-  .Profile__profile-photo {
-    display: block;
-    width: 400px;
-  }
 
   button a {
     color: white;
   }
+}
+
+.Profile__profile-photo {
+  display: block;
+  width: 400px;
 }

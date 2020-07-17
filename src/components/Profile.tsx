@@ -12,7 +12,6 @@ const Profile = () => {
   const appStore = useContext(appStoreContext)
   const firebase = useContext(firebaseContext)
   const user = appStore.user.get()
-  const [profile, updateProfile] = useState<IProfile>({ ...appStore.profile })
   
   return (
     <div className="Profile">
@@ -36,17 +35,17 @@ const Profile = () => {
       <div className="Profile__user-name">
         <Field
           label="user name"
-          initialValue={profile.name}
+          initialValue={appStore.profile.name}
           onSubmit={(value) => {
             appStore.updateProfile('name', value)
           }}
         />
       </div>
-      <div>user id:{profile.id}</div>
+      <div>user id:{appStore.profile.id}</div>
       <div className="Profile__bio">
         <Field
           label="bio"
-          initialValue={profile.bio}
+          initialValue={appStore.profile.bio}
           onSubmit={(value) => {
             appStore.updateProfile('bio', value)
           }}
@@ -60,8 +59,12 @@ const Profile = () => {
           appStore.updateProfile('photo', newURL)
         }}>change photo</button>
       </div>
-      <div>email: {profile.email}</div>
-      <button><NavLink activeClassName='active' to={Routes.SignUp}>SignUp</NavLink></button>
+      <div>email: {appStore.profile.email}</div>
+      {appStore.profile.anonymous === 'yes' ? (
+      <button>
+        <NavLink activeClassName='active' to={Routes.SignUp}>SignUp</NavLink>
+      </button>
+      ): null}
     </div>
   )
 }

@@ -12,16 +12,19 @@ export class AppStore {
     notifications: true,
   })
 
-  profile = observable.object<IProfile>({
+  profile = observable.box<IProfile>({
     id: '123',
+    anonymous: 'no',
     name: 'xXxTakara89Xx',
-    bio: 'Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time.',
+    bio: 'Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time. Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time. Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time. Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time.',
     photo: 'https://a-listzante.com/wp-content/uploads/2019/11/zante-event-tickets-2.jpg',
     email: 'takara89@hotmail.biz'
   })
 
   updateProfile = action((key: keyof IProfile, val: any) => {
-    this.profile[key] = val
+    const curProf = this.profile.get()
+    const newProfile = {...curProf, key:val}
+    this.profile.set(newProfile)
   })
 
   updateSettings = action((key: keyof ISettings, val: any) => {

@@ -15,6 +15,7 @@ export interface ISettings {
 
 export interface IProfile {
   id: string
+  anonymous: string
   name: string
   bio: string
   photo?: string
