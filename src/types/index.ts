@@ -20,6 +20,7 @@ export interface IProfile {
   bio: string
   photo?: string
   email: string
+  isWeakSauce: boolean
 }
 
 export {

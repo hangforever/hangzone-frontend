@@ -37,7 +37,7 @@ const Profile = () => {
           label="user name"
           initialValue={appStore.profile.name}
           onSubmit={(value) => {
-            appStore.updateProfile('name', value)
+            appStore.profile.name = value
           }}
         />
       </div>
@@ -47,7 +47,7 @@ const Profile = () => {
           label="bio"
           initialValue={appStore.profile.bio}
           onSubmit={(value) => {
-            appStore.updateProfile('bio', value)
+            appStore.profile.bio = value
           }}
         />
       </div>
@@ -57,15 +57,21 @@ const Profile = () => {
         <button onClick={() => {
           // TODO: add functionality for uploads from hard disk 
           const newURL = prompt('', 'enter img url here')
-          appStore.updateProfile('photo', newURL)
+          appStore.profile.photo = newURL || ''
         }}>change photo</button>
       </div>
       <div>email: {appStore.profile.email}</div>
       {appStore.profile.anonymous === 'yes' ? (
-      <button>
-        <NavLink activeClassName='active' to={Routes.SignUp}>SignUp</NavLink>
-      </button>
-      ): null}
+        <button>
+          <NavLink activeClassName='active' to={Routes.SignUp}>SignUp</NavLink>
+        </button>
+      ) : null}
+      
+      <div>
+        is weak sauce: <input type="checkbox" name="" id="" checked={appStore.profile.isWeakSauce} onChange={(e) => {
+          appStore.profile.isWeakSauce = e.target.checked
+        }}/>
+      </div>
     </div>
   )
 }
