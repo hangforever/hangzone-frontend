@@ -37,7 +37,7 @@ const Profile = () => {
           label="user name"
           initialValue={appStore.profile.name}
           onSubmit={(value) => {
-            appStore.updateProfile('name', value)
+            appStore.profile.updateProfile('name', value)
           }}
         />
       </div>
@@ -47,7 +47,7 @@ const Profile = () => {
           label="bio"
           initialValue={appStore.profile.bio}
           onSubmit={(value) => {
-            appStore.updateProfile('bio', value)
+            appStore.profile.updateProfile('bio', value)
           }}
         />
       </div>
@@ -57,7 +57,7 @@ const Profile = () => {
         <button onClick={() => {
           // TODO: add functionality for uploads from hard disk 
           const newURL = prompt('', 'enter img url here')
-          appStore.updateProfile('photo', newURL)
+          appStore.profile.updateProfile('photo', newURL || '')
         }}>change photo</button>
       </div>
       <div>email: {appStore.profile.email}</div>
