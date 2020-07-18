@@ -12,20 +12,22 @@ export class AppStore {
     notifications: true,
   })
 
-  profile = observable.box<IProfile>({
+  profile = observable.object<IProfile>({
     id: '123',
     anonymous: 'no',
     name: 'xXxTakara89Xx',
     bio: 'Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time. Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time. Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time. Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time.',
     photo: 'https://a-listzante.com/wp-content/uploads/2019/11/zante-event-tickets-2.jpg',
-    email: 'takara89@hotmail.biz'
-  })
-
-  updateProfile = action((key: keyof IProfile, val: any) => {
-    const curProf = this.profile.get()
-    const newProfile = {...curProf, key:val}
-    this.profile.set(newProfile)
-  })
+    email: 'takara89@hotmail.biz',
+    updateProfile(key: string, val: any){
+      console.log('ran updateProfile')
+      this[key] = val
+      return null
+     }
+    },
+    {
+      updateProfile: action
+    })
 
   addHangzone = action((name: string, description: string, isPrivate: boolean = true) => {
     const hangzone = { id: this.hangzones.length.toString(), name, description, isPrivate }
