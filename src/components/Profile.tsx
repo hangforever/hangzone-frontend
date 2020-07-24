@@ -1,5 +1,5 @@
 import './Profile.scss'
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import { observer } from 'mobx-react-lite'
 import { appStoreContext } from 'stores'
 import firebaseContext from 'firebaseContext'
@@ -36,9 +36,7 @@ const Profile = () => {
         <Field
           label="user name"
           initialValue={appStore.profile.name}
-          onSubmit={(value) => {
-            appStore.profile.updateProfile('name', value)
-          }}
+          onSubmit={(value) => appStore.profile.name = value }
         />
       </div>
       <div>user id:{appStore.profile.id}</div>
@@ -46,9 +44,7 @@ const Profile = () => {
         <Field
           label="bio"
           initialValue={appStore.profile.bio}
-          onSubmit={(value) => {
-            appStore.profile.updateProfile('bio', value)
-          }}
+          onSubmit={(value) => appStore.profile.bio = value}
         />
       </div>
       <div>profile photo:</div>
@@ -57,11 +53,11 @@ const Profile = () => {
         <button onClick={() => {
           // TODO: add functionality for uploads from hard disk 
           const newURL = prompt('', 'enter img url here')
-          appStore.profile.updateProfile('photo', newURL || '')
+          appStore.profile.photo = newURL || ''
         }}>change photo</button>
       </div>
       <div>email: {appStore.profile.email}</div>
-      {appStore.profile.anonymous === 'yes' ? (
+      {appStore.profile.anonymous === true ? (
       <button>
         <NavLink activeClassName='active' to={Routes.SignUp}>SignUp</NavLink>
       </button>

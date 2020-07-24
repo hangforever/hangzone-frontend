@@ -15,9 +15,9 @@ const Field: React.SFC<FieldProps> = ({
   const [active, updateActive] = useState(false)
   return (
     <div className="Field">
-      <label htmlFor={label}>{label}</label>
+      <label className="Field__label" htmlFor={label}>{label}</label>
       {active ? (
-        <form onSubmit={(e) => {
+        <form className="Field__form" onSubmit={(e) => {
           e.preventDefault()
           onSubmit(value)
           updateActive(false)

@@ -20,7 +20,6 @@ export interface IProfile {
   bio: string
   photo?: string
   email: string
-  updateProfile(key: string, val: any):null
 }
 
 export {

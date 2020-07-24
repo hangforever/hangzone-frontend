@@ -18,15 +18,8 @@ export class AppStore {
     name: 'xXxTakara89Xx',
     bio: 'Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time. Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time. Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time. Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time.',
     photo: 'https://a-listzante.com/wp-content/uploads/2019/11/zante-event-tickets-2.jpg',
-    email: 'takara89@hotmail.biz',
-    updateProfile(key: keyof IProfile, val: any){
-      this[key] = val
-      return null
-     }
-    },
-    {
-      updateProfile: action
-    })
+    email: 'takara89@hotmail.biz'
+     })
 
   addHangzone = action((name: string, description: string, isPrivate: boolean = true) => {
     const hangzone = { id: this.hangzones.length.toString(), name, description, isPrivate }
