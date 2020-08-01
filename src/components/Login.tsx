@@ -38,48 +38,54 @@ const Login: React.SFC = () => {
   return (
     <div className="Login">
       <div>
-        <form
-          onSubmit={handleLogin}
-        >
-          <div className="form__inner">
-            <input
-              type="text"
-              name="email"
-              placeholder="hanger@zone.com"
-              value={email}
-              onChange={e => updateEmail(e.target.value)} 
-            />
-            <input type="password" name="password" value={password} onChange={e => updatePassword(e.target.value)} />
-          </div>
-          <input className="btn--no-border" type="submit" value="LOG IN >>" />
-          <button
-            className="btn--no-border"
-            onClick={() => history.push(Routes.SignUp)}
-          >
-            Create Account >>
-          </button>
-          <button
-            className="btn--no-border"
-            onClick={handleGmailLogin}
-          >
-            Gmail >>
-          </button>
-        </form>
         <div className="container">
           <div className="row">
-            <div className="message">continue without logging in using this name:</div>
-            <form onSubmit={handleAnonLogin}>
+            <form
+              onSubmit={handleLogin}
+            >
               <div className="form__inner">
-                <input 
-                  type="text" 
-                  name="anon_username"
-                  placeholder="Username"
-                  value={anonUsername} 
-                  onChange={e => updateAnonUsername(e.target.value)}
+                <input
+                  type="text"
+                  name="email"
+                  placeholder="hanger@zone.com"
+                  value={email}
+                  onChange={e => updateEmail(e.target.value)} 
                 />
+                <input type="password" name="password" value={password} onChange={e => updatePassword(e.target.value)} />
               </div>
-              <input className="btn--no-border" type="submit" value="CONTINUE >>" />
+              <input className="btn--no-border" type="submit" value="LOG IN >>" />
+              <button
+                className="btn--no-border"
+                onClick={() => history.push(Routes.SignUp)}
+              >
+                Create Account >>
+              </button>
+              <button
+                className="btn--no-border"
+                onClick={handleGmailLogin}
+              >
+                Gmail >>
+              </button>
             </form>
+          </div>
+        </div>
+        <div className="container">
+          <div className="row">
+            
+              <form onSubmit={handleAnonLogin} className="form__anon">
+                <div className="form__inner">
+                  <span>continue without logging in using this name:</span>
+                  <input 
+                    type="text" 
+                    name="anon_username"
+                    placeholder="Username"
+                    value={anonUsername} 
+                    onChange={e => updateAnonUsername(e.target.value)}
+                  />
+                </div>
+                <input className="btn--no-border" type="submit" value="CONTINUE >>" />
+              </form>
+              
           </div>
         </div>
       </div>
