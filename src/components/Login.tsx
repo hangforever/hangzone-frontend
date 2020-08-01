@@ -7,6 +7,7 @@ import './Login.scss'
 const Login: React.SFC = () => {
   const [email, updateEmail] = useState('')
   const [password, updatePassword] = useState('')
+  const [anonUsername, updateAnonUsername] = useState('')
   const history = useHistory()
   const firebase = useContext(firebaseContext)
 
@@ -28,6 +29,11 @@ const Login: React.SFC = () => {
         console.error(error.code, error.message)
       })
   }
+
+  function handleAnonLogin(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    alert('Not implemented!')
+  }
   
   return (
     <div className="Login">
@@ -36,7 +42,13 @@ const Login: React.SFC = () => {
           onSubmit={handleLogin}
         >
           <div className="form__inner">
-            <input type="text" name="email" value={email} onChange={e => updateEmail(e.target.value)} />
+            <input
+              type="text"
+              name="email"
+              placeholder="hanger@zone.com"
+              value={email}
+              onChange={e => updateEmail(e.target.value)} 
+            />
             <input type="password" name="password" value={password} onChange={e => updatePassword(e.target.value)} />
           </div>
           <input className="btn--no-border" type="submit" value="LOG IN >>" />
@@ -53,6 +65,23 @@ const Login: React.SFC = () => {
             Gmail >>
           </button>
         </form>
+        <div className="container">
+          <div className="row">
+            <div className="message">continue without logging in using this name:</div>
+            <form onSubmit={handleAnonLogin}>
+              <div className="form__inner">
+                <input 
+                  type="text" 
+                  name="anon_username"
+                  placeholder="Username"
+                  value={anonUsername} 
+                  onChange={e => updateAnonUsername(e.target.value)}
+                />
+              </div>
+              <input className="btn--no-border" type="submit" value="CONTINUE >>" />
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   )
