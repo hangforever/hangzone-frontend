@@ -36,13 +36,15 @@ function App() {
             <Route path={Routes.Map} component={Map} />
             <Route path={Routes.Settings} component={Settings} />
             <Route path={Routes.Profile} component={Profile} />
-            <Route path={Routes.SignUp} component={SignUp} />
           </div>
 
           <Navigation />
         </>
       ) : (
-        <Route path={Routes.Login} component={Login} />
+        <>
+          <Route path={Routes.Login} component={Login} />
+          <Route path={Routes.SignUp} component={SignUp} />
+        </>
       )}
     </div>
   );
