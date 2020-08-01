@@ -1,0 +1,38 @@
+@import 'styles/colors';
+
+.Login {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+
+    .form__inner {
+      border: 1px solid black;
+  
+      input {
+        display: block;
+        border-radius: 0;
+        background: black;
+        color: white;
+        border: none;
+        height: 30px;
+        margin: 1.5rem;
+      }
+    }
+  }
+
+  .btn--no-border {
+    display: block;
+    margin: 0;
+    padding: 0 10px 0 10px;
+    border: 1px solid transparent;
+    font-size: inherit;
+    font-weight: bold;
+    &:focus {
+      border: 1px solid $border-primary;
+    }
+  }
+}
