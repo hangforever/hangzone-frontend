@@ -3,7 +3,6 @@ import React, { useContext } from 'react'
 import { observer } from 'mobx-react-lite'
 import { appStoreContext } from 'stores'
 import firebaseContext from 'firebaseContext'
-import { IProfile } from 'types'
 import Field from 'components/Field'
 import { NavLink } from 'react-router-dom';
 import Routes from '../types/Routes'
