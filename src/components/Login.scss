@@ -11,6 +11,7 @@
 
     .form__inner {
       border: 1px solid black;
+      padding: 1.5rem;
   
       input {
         display: block;
@@ -19,7 +20,7 @@
         color: white;
         border: none;
         height: 30px;
-        margin: 1.5rem;
+        margin: 1.5rem 0;
       }
     }
   }
