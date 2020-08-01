@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import { observable, action, decorate } from 'mobx'
+import { observable, decorate } from 'mobx'
 import { Hangzone, ISettings, IProfile } from 'types'
 
 export class AppStore {
@@ -20,19 +20,19 @@ export class AppStore {
     email: 'takara89@hotmail.biz'
   }
 
-  addHangzone = action((name: string, description: string, isPrivate: boolean = true) => {
+  addHangzone(name: string, description: string, isPrivate: boolean = true) {
     const hangzone = { id: this.hangzones.length.toString(), name, description, isPrivate }
     this.hangzones.push(hangzone)
-  })
+  }
 
-  removeHangzone = action((id: string) => {
+  removeHangzone(id: string) {
     this.hangzones = this.hangzones.filter(h => h.id !== id)
-  })
+  }
 
-  updateHangzone = action((id: string, diff: Partial<Hangzone>) => {
+  updateHangzone(id: string, diff: Partial<Hangzone>) {
     const newHangzones = this.hangzones.map(h => h.id === id ? { ...h, ...diff } : h)
     this.hangzones = newHangzones
-  })
+  }
 
   setWordOfTheDay(newWord: string) {
     this.wordOfTheDay = newWord
