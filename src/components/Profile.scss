@@ -1,9 +1,10 @@
 @import 'styles/colors';
 
-.Field {
-  .field-value {
-    &:hover {
-      border: 1px solid $bg-secondary;
-    }
-  }
+.Profile {
+
+}
+
+.Profile__profile-photo {
+  display: block;
+  width: 400px;
 }

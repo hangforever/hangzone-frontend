@@ -1,48 +1,49 @@
 import { createContext } from 'react'
-import { observable, action } from 'mobx'
+import { observable, decorate } from 'mobx'
 import { Hangzone, ISettings, IProfile } from 'types'
 
 export class AppStore {
-  user = observable.box<null | firebase.User>(null)
-  hangzones = observable.array<Hangzone>([]) // https://mobx.js.org/refguide/array.html
-  wordOfTheDay = observable.box('FARTS') // https://mobx.js.org/refguide/boxed.html
-  settings = observable.object<ISettings>({
+  wordOfTheDay: string = 'FARTS'
+  user: null | firebase.User = null
+  hangzones: Hangzone[] = [] // https://mobx.js.org/refguide/array.html
+  settings: ISettings = {
     gpsOn: true,
     emailOnFriendHang: true,
     notifications: true,
-  })
-
-  profile = observable.object<IProfile>({
+  }
+  profile: IProfile = {
     id: '123',
+    anonymous: true,
     name: 'xXxTakara89Xx',
-    bio: 'Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time.',
+    bio: 'Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time. Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time. Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time. Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time.',
+    photo: 'https://a-listzante.com/wp-content/uploads/2019/11/zante-event-tickets-2.jpg',
     email: 'takara89@hotmail.biz'
-  })
+  }
 
-  updateProfile = action((key: keyof IProfile, val: any) => {
-    this.profile[key] = val
-  })
-
-  updateSettings = action((key: keyof ISettings, val: any) => {
-    this.settings[key] = val
-  })
-
-  addHangzone = action((name: string, description: string, isPrivate: boolean = true) => {
+  addHangzone(name: string, description: string, isPrivate: boolean = true) {
     const hangzone = { id: this.hangzones.length.toString(), name, description, isPrivate }
     this.hangzones.push(hangzone)
-  })
+  }
 
-  removeHangzone = action((id: string) => {
-    this.hangzones.replace(this.hangzones.filter(h => h.id !== id))
-  })
+  removeHangzone(id: string) {
+    this.hangzones = this.hangzones.filter(h => h.id !== id)
+  }
 
-  updateHangzone = action((id: string, diff: Partial<Hangzone>) => {
-    this.hangzones.replace(this.hangzones.map(h => h.id === id ? { ...h, ...diff } : h))
-  })
+  updateHangzone(id: string, diff: Partial<Hangzone>) {
+    const newHangzones = this.hangzones.map(h => h.id === id ? { ...h, ...diff } : h)
+    this.hangzones = newHangzones
+  }
 
-  updateWordOfTheDay = action((newWord: string) => {
-    this.wordOfTheDay.set(newWord)
-  })
+  setWordOfTheDay(newWord: string) {
+    this.wordOfTheDay = newWord
+  }
 }
+decorate(AppStore, {
+  wordOfTheDay: observable,
+  user: observable,
+  hangzones: observable,
+  settings: observable,
+  profile: observable,
+})
 
 export default createContext(new AppStore())

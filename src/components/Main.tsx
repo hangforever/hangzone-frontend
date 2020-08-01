@@ -6,19 +6,19 @@ import appStoreContext from '../stores/appStoreContext'
 // it's just to demonstrate routing
 function Main() {
   const appStore = useContext(appStoreContext)
-  const [newWord, updateNewWord] = useState(appStore.wordOfTheDay.get())
+  const [newWord, updateNewWord] = useState(appStore.wordOfTheDay)
   return (
     <div className="Main">
       <h1>Hangzonessss</h1>
       
       <div>
         <h2>The word of the day is</h2>
-        <h3>{appStore.wordOfTheDay.get()}</h3>
+        <h3>{appStore.wordOfTheDay}</h3>
 
         <div>But hey, you could always change it...</div>
         <form onSubmit={e => {
           e.preventDefault()
-          appStore.updateWordOfTheDay(newWord)
+          appStore.setWordOfTheDay(newWord)
         }}>
           <input type="text" value={newWord} onChange={e => updateNewWord(e.target.value)} />
         </form>

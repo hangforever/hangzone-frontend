@@ -15,17 +15,17 @@ const Field: React.SFC<FieldProps> = ({
   const [active, updateActive] = useState(false)
   return (
     <div className="Field">
-      <label htmlFor={label}>{label}</label>
+      <label className="Field__label" htmlFor={label}>{label}</label>
       {active ? (
-        <form onSubmit={(e) => {
+        <form className="Field__form" onSubmit={(e) => {
           e.preventDefault()
           onSubmit(value)
           updateActive(false)
         }}>
-          <input type="text" name={label} value={value} onChange={(e) => updateValue(e.target.value)} />
+          <input className="Field__input" type="text" name={label} value={value} onChange={(e) => updateValue(e.target.value)} />
         </form>
       ) : (
-          <div className="field-value" onClick={() => updateActive(true)}>{value}</div>
+          <div className="Field__value" onClick={() => updateActive(true)}>{value}</div>
         )}
     </div>
   )
