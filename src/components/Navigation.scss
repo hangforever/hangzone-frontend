@@ -1,0 +1,42 @@
+@import 'styles/colors';
+
+.Navigation {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+
+  ul {
+    display: flex;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+    a {
+      background: $bg-btn;
+      height: 100%;
+      width: 100%;
+      color: $font-secondary;
+
+      &.active {
+        background: $bg-btn-active;
+        li { border-right: none; }
+      }
+
+      &:last-child {
+        li { border-right: none; }
+      }
+
+      li {
+        height: calc(100% - 10px);
+        margin: 5px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        text-align: center;
+        border-right: 2px solid $border-primary;
+      }
+    }
+  }
+}

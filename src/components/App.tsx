@@ -1,38 +1,51 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { observer } from 'mobx-react-lite'
 import './App.scss';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Route, useHistory } from 'react-router-dom';
 import Navigation from 'components/Navigation';
 import Main from 'components/Main'
 import Login from 'components/Login'
 import Map from 'components/Map'
-import Routes from 'types/Routes'
+import Settings from 'components/Settings'
+import Profile from 'components/Profile'
+import SignUp from 'components/SignUp'
+import { Routes } from 'types'
+import firebaseContext from 'firebaseContext'
+import { appStoreContext } from 'stores'
+
 
 function App() {
-  const [user, setUser] = useState({} as firebase.User)
+  const firebase = useContext(firebaseContext)
+  const appStore = useContext(appStoreContext)
+  const history = useHistory()
+  const user = appStore.user && appStore.user
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) appStore.user = user
+      else history.push(Routes.Login)
+    });
+  }, [appStore.user, firebase, history, user])
 
   return (
     <div className="App">
-      {user.email && (
-        <div>
-          <div><img src={user.photoURL || ''} alt="" style={{ width: '50px', height: '50px', borderRadius: '50%' }} /></div>
-          <div>logged in as: {user.email}</div>
-        </div>
-      )}
-      <Router>
-        <div className="navigation">
+      {user ? (
+        <>
+          <div className="body">
+            <Route exact path={Routes.Main} component={Main} />
+            <Route path={Routes.Map} component={Map} />
+            <Route path={Routes.Settings} component={Settings} />
+            <Route path={Routes.Profile} component={Profile} />
+            <Route path={Routes.SignUp} component={SignUp} />
+          </div>
+
           <Navigation />
-        </div>
-
-        <hr />
-
-        <div className="body">
-          <Route exact path={Routes.Main} component={Main} />
-          <Route path={Routes.Login} component={() => <Login setUser={setUser} />} />
-          <Route path={Routes.Map} component={Map} />
-        </div>
-      </Router>
+        </>
+      ) : (
+        <Route path={Routes.Login} component={Login} />
+      )}
     </div>
   );
 }
 
-export default App;
+export default observer(App);
