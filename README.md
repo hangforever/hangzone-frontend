@@ -105,6 +105,11 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 This application uses mobx for state management. Since the project was bootstrapped with create-react-app and CRA doesn't support decorators, we are using this guide for creating our stores:
 [https://mobx.js.org/best/decorators.html](https://mobx.js.org/best/decorators.html)
 
+## On Styles
+
+This project uses Skeleton as a lightweight CSS framework
+http://getskeleton.com/
+
 ## More Info
 
 - [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
