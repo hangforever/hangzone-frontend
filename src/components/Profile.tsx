@@ -11,7 +11,7 @@ import Routes from '../types/Routes'
 const Profile = () => {
   const appStore = useContext(appStoreContext)
   const firebase = useContext(firebaseContext)
-  const user = appStore.user.get()
+  const user = appStore.user
   
   return (
     <div className="Profile">
@@ -23,7 +23,7 @@ const Profile = () => {
             onClick={() => {
               firebase.auth().signOut()
                 .then(() => {
-                  appStore.user.set(null)
+                  appStore.user = null
                 })
                 .catch(() => alert('whoops'))
             }}

@@ -18,11 +18,11 @@ function App() {
   const firebase = useContext(firebaseContext)
   const appStore = useContext(appStoreContext)
   const history = useHistory()
-  const user = appStore.user.get()
+  const user = appStore.user && appStore.user
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function (user) {
-      if (user) appStore.user.set(user)
+      if (user) appStore.user = user
       else history.push(Routes.Login)
     });
   }, [appStore.user, firebase, history, user])
