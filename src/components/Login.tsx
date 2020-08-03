@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react'
 import { useHistory } from 'react-router'
 import firebaseContext from 'firebaseContext'
 import { Routes } from 'types'
+import { createHangzoneUser } from 'db/users'
 import './Login.scss'
 
 const Login: React.SFC = () => {
@@ -34,6 +35,15 @@ const Login: React.SFC = () => {
     e.preventDefault()
     firebase.auth()
       .signInAnonymously()
+      .then(({ user }) => {
+        if (user) {
+          const newUser = createHangzoneUser(user.uid, anonUsername)
+          const key = firebase.database().ref('users').push().key
+          return firebase.database().ref('users/' + key).set(newUser)
+        } else {
+          throw new Error('Anonymous Login failed!')
+        }
+      })
       .then(() => history.push('/'))
       .catch(function(error) {
         console.error(error.code, error.message)
@@ -88,7 +98,12 @@ const Login: React.SFC = () => {
                     onChange={e => updateAnonUsername(e.target.value)}
                   />
                 </div>
-                <input className="btn--no-border" type="submit" value="CONTINUE >>" />
+                <input
+                  className="btn--no-border"
+                  type="submit"
+                  value="CONTINUE >>"
+                  disabled={!anonUsername}
+                />
               </form>
               
           </div>
