@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import { observable, decorate } from 'mobx'
+import { observable, action, decorate } from 'mobx'
 import { Hangzone, ISettings, IProfile } from 'types'
 
 export class AppStore {
@@ -44,6 +44,10 @@ decorate(AppStore, {
   hangzones: observable,
   settings: observable,
   profile: observable,
+  addHangzone: action,
+  removeHangzone: action,
+  updateHangzone: action,
+  setWordOfTheDay: action
 })
 
 export default createContext(new AppStore())
