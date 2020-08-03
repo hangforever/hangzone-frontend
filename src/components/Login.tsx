@@ -32,7 +32,12 @@ const Login: React.SFC = () => {
 
   function handleAnonLogin(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    alert('Not implemented!')
+    firebase.auth()
+      .signInAnonymously()
+      .then(() => history.push('/'))
+      .catch(function(error) {
+        console.error(error.code, error.message)
+      });
   }
   
   return (
