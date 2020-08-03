@@ -11,13 +11,27 @@ const Profile = () => {
   const appStore = useContext(appStoreContext)
   const firebase = useContext(firebaseContext)
   const user = appStore.user
+
+  function handleUpgradeAccount() {
+    alert('Unimplemented')
+    console.log('Docs for upgrading here: https://firebase.google.com/docs/auth/web/anonymous-auth#convert-an-anonymous-account-to-a-permanent-account')
+  }
   
   return (
     <div className="Profile">
-      {user && user.email && (
+      {user && (
         <div>
           <div><img src={user.photoURL || ''} alt="" style={{ width: '50px', height: '50px', borderRadius: '50%' }} /></div>
-          <div>logged in as: {user.email}</div>
+          <div>
+            {user.isAnonymous ? (
+              <div>
+                Anonomous User <br />
+                <button onClick={handleUpgradeAccount}>Upgrade Account</button>
+              </div>
+            ) : (
+              <div>Email: {user.email}</div>
+            )}
+          </div>
           <button
             onClick={() => {
               firebase.auth().signOut()
