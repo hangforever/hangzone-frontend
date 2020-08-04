@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { observer } from 'mobx-react-lite'
 import appStoreContext from '../stores/appStoreContext'
+import NewZoneModal from './NewZone'
 
 // This is just a fake route that can be deleted whenever
 // it's just to demonstrate routing
@@ -26,6 +27,7 @@ function Main() {
       <div className="farts">
         <p>Now we're cookin with farts - Scott 2020 at the age of a single Willennium<br /><img src="https://upload.wikimedia.org/wikipedia/en/c/c1/WillSmith-Willennium.jpg" /></p>
       </div>
+
     </div>
   )
 }

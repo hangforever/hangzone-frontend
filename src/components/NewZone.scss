@@ -1,0 +1,18 @@
+@import 'styles/colors';
+
+.NewZone__modal {
+  background: #00000075;;
+  width: 100vw;
+  height: 90vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.NewZone__modal-container {
+  background: white;
+  position: absolute;
+  top: 30vh;
+  width: 95vw;
+  height: 55vh;
+}
