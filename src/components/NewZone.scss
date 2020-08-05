@@ -1,6 +1,8 @@
 @import 'styles/colors';
 
 .NewZone__modal {
+  display: flex;
+  justify-content: center;
   background: #00000075;;
   width: 100vw;
   height: 90vh;
@@ -12,7 +14,18 @@
 .NewZone__modal-container {
   background: white;
   position: absolute;
+  margin: 0 10px 0 10px;
   top: 30vh;
   width: 95vw;
   height: 55vh;
+}
+
+.NewZone__modal-content {
+  margin: 2rem
+}
+
+.NewZone__modal-close {
+  padding: 0px 15px 15px 15px;
+  border-radius: 100%;
+  margin: 1rem; 
 }
