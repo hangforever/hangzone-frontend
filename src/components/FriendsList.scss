@@ -1,0 +1,11 @@
+.FriendsList__friend * {
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.FriendsList__friend-photo {
+  width: 2rem;
+    img {
+      width: 100%;
+  }
+}

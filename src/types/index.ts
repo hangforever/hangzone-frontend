@@ -22,6 +22,15 @@ export interface IProfile {
   email: string
 }
 
+export enum Status { Active, Inactive, Offline }
+
+export interface IFriend {
+  displayName: string,
+  id: string
+  photoURL: string,
+  status: Status
+}
+
 export {
   Routes
 }
