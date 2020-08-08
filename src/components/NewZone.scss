@@ -21,11 +21,17 @@
 }
 
 .NewZone__modal-content {
-  margin: 2rem
+  padding: 2rem;
+  height: calc(55vh - 4rem);
+  overflow: overlay;
 }
 
-.NewZone__modal-close {
+.NewZone__modal-close-x {
   padding: 0px 15px 15px 15px;
   border-radius: 100%;
   margin: 1rem; 
+  background: white;
+  position: absolute;
+  right: -15px;
+  top: -20px;
 }
