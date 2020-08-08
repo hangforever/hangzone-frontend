@@ -22,7 +22,11 @@ export interface IProfile {
   email: string
 }
 
-export enum Status { Active, Inactive, Offline }
+export enum Status { 
+  Active = 'active',
+  Inactive = 'inactive',
+  Offline = 'offline',
+}
 
 export interface IFriend {
   displayName: string,

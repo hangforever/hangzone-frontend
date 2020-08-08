@@ -1,5 +1,6 @@
 import React from 'react'
 import { IFriend } from '../types'
+import StatusMark from './StatusMark'
 import './FriendsList.scss'
 
 interface Props {
@@ -16,6 +17,7 @@ const FriendsList: React.SFC<Props> = ({ friends }) => (
           </div>
           <div className="FriendsList__friend-display-name">{friend.displayName}</div>
           <div className="FriendsList__friend-status">{friend.status}</div>
+          <StatusMark status={friend.status} />
         </li>)}
     </ul>
   </div>

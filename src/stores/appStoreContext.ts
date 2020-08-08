@@ -43,7 +43,7 @@ export class AppStore {
       displayName: 'Nate Dog',
       id: 'songthing-nate-dog',
       photoURL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Nate_dogg_rapradar.jpg/220px-Nate_dogg_rapradar.jpg',
-      status: Status.Offline 
+      status: Status.Inactive
     }
   ]
 
