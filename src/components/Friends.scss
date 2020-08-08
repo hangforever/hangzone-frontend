@@ -1,6 +1,8 @@
 .Friends {
+  position: relative;
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .Friends__search {
@@ -13,4 +15,10 @@
   ul {
     list-style: none;
   }
+}
+
+.Friends__controls {
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
