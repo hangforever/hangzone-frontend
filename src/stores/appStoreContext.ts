@@ -1,6 +1,6 @@
 import { createContext } from 'react'
 import { observable, action, decorate } from 'mobx'
-import { Hangzone, ISettings, IProfile } from 'types'
+import { Hangzone, ISettings, IProfile, IFriend, Status } from 'types'
 
 export class AppStore {
   wordOfTheDay: string = 'FARTS'
@@ -19,6 +19,33 @@ export class AppStore {
     photo: 'https://a-listzante.com/wp-content/uploads/2019/11/zante-event-tickets-2.jpg',
     email: 'takara89@hotmail.biz'
   }
+
+  friends: IFriend[] = [
+    {
+      displayName: 'daaaaan',
+      id: 'songthing',
+      photoURL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Dan_Stevens_at_Premiere_of_Beauty_and_the_Beast_%28cropped%29.jpg/400px-Dan_Stevens_at_Premiere_of_Beauty_and_the_Beast_%28cropped%29.jpg',
+      status: Status.Active 
+    },
+    {
+      displayName: 'DP',
+      id: 'songthing-dp',
+      photoURL: 'https://d3nt9em9l1urz8.cloudfront.net/media/catalog/product/cache/3/image/9df78eab33525d08d6e5fb8d27136e95/m/o/moudfdmmnmelyel-1.jpg',
+      status: Status.Active 
+    },
+    {
+      displayName: 'Nate Dog',
+      id: 'songthing-nate-dog',
+      photoURL: 'https://d3nt9em9l1urz8.cloudfront.net/media/catalog/product/cache/3/image/9df78eab33525d08d6e5fb8d27136e95/m/o/moudfdmmnmelyel-1.jpg',
+      status: Status.Offline 
+    },
+    {
+      displayName: 'Nate Dog',
+      id: 'songthing-nate-dog',
+      photoURL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Nate_dogg_rapradar.jpg/220px-Nate_dogg_rapradar.jpg',
+      status: Status.Offline 
+    }
+  ]
 
   addHangzone(name: string, description: string, isPrivate: boolean = true) {
     const hangzone = { id: this.hangzones.length.toString(), name, description, isPrivate }
