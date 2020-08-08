@@ -6,12 +6,15 @@
 }
 
 .Friends__search {
-  flex: 1;
+  padding: 1rem;
+  input {
+    margin: 0;
+  }
 }
 
 .Friends__friends-list {
-  flex: 5;
   font-weight: bold;
+  padding: 0 1rem;
 
   ul {
     list-style: none;
