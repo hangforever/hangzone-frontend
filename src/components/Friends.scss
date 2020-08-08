@@ -1,0 +1,16 @@
+.Friends {
+  display: flex;
+  flex-direction: column;
+}
+
+.Friends__search {
+  flex: 1;
+}
+
+.Friends__friends-list {
+  flex: 5;
+
+  ul {
+    list-style: none;
+  }
+}
