@@ -28,7 +28,7 @@ const Friends: React.SFC<Props> = () => {
       </div>
       <div className="Friends__controls">
         <button 
-          className="button__add-friend"
+          className="button__add-friend button-primary"
           onClick={handleAddFriend}
         >
           Add Friend
