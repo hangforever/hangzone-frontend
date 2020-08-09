@@ -33,7 +33,11 @@ const Profile = () => {
             {user.isAnonymous ? (
               <div>
                 Anonomous User <br />
+                {/* TODO: Decide how to handle upgrading */}
                 <button onClick={handleUpgradeAccount}>Upgrade Account</button>
+                <button>
+                  <NavLink activeClassName='active' to={Routes.SignUp}>SignUp</NavLink>
+                </button>
               </div>
             ) : (
               <div>Email: {user.email}</div>
@@ -45,15 +49,15 @@ const Profile = () => {
       <div className="Profile__user-name">
         <Field
           label="user name"
-          initialValue={appStore.profile.name}
-          onSubmit={(value) => appStore.profile.name = value }
+          initialValue={appStore.profile.displayName}
+          onSubmit={(value) => appStore.profile.displayName = value}
         />
       </div>
       <div>user id:{appStore.profile.id}</div>
       <div className="Profile__bio">
         <Field
           label="bio"
-          initialValue={appStore.profile.bio}
+          initialValue={appStore.profile.bio || ''}
           onSubmit={(value) => appStore.profile.bio = value}
         />
       </div>
@@ -66,12 +70,6 @@ const Profile = () => {
           appStore.profile.photo = newURL || ''
         }}>change photo</button>
       </div>
-      <div>email: {appStore.profile.email}</div>
-      {appStore.profile.anonymous === true ? (
-      <button>
-        <NavLink activeClassName='active' to={Routes.SignUp}>SignUp</NavLink>
-      </button>
-      ): null}
     </div>
   )
 }

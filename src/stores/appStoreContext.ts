@@ -13,11 +13,9 @@ export class AppStore {
   }
   profile: IProfile = {
     id: '123',
-    anonymous: true,
-    name: 'xXxTakara89Xx',
+    displayName: 'xXxTakara89Xx',
     bio: 'Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time. Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time. Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time. Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time.',
     photo: 'https://a-listzante.com/wp-content/uploads/2019/11/zante-event-tickets-2.jpg',
-    email: 'takara89@hotmail.biz'
   }
 
   addHangzone(name: string, description: string, isPrivate: boolean = true) {
