@@ -10,12 +10,12 @@ import Settings from 'components/Settings'
 import Profile from 'components/Profile'
 import SignUp from 'components/SignUp'
 import SignUpComplete from 'components/SignUpComplete'
-import { Routes, IProfile } from 'types'
+import Loading from 'components/Loading'
+import { Routes } from 'types'
 import firebaseContext from 'firebaseContext'
 import { appStoreContext } from 'stores'
 
 function App() {
-  const firebase = useContext(firebaseContext)
   const appStore = useContext(appStoreContext)
   const history = useHistory()
 
@@ -26,28 +26,30 @@ function App() {
     history.push(Routes.Main)
   }, [appStore, history, appStore.profile, appStore.firebaseUser])
 
-  return (
-    <div className="App">
-      {appStore.firebaseUser && appStore.profile ? (
-        <>
-          <div className="body">
-            <Route exact path={Routes.Main} component={Main} />
-            <Route path={Routes.Map} component={Map} />
-            <Route path={Routes.Settings} component={Settings} />
-            <Route path={Routes.Profile} component={Profile} />
-          </div>
+  return appStore.loading
+    ? (<Loading />)
+    : (
+      <div className="App">
+        {appStore.firebaseUser && appStore.profile ? (
+          <>
+            <div className="body">
+              <Route exact path={Routes.Main} component={Main} />
+              <Route path={Routes.Map} component={Map} />
+              <Route path={Routes.Settings} component={Settings} />
+              <Route path={Routes.Profile} component={Profile} />
+            </div>
 
-          <Navigation />
-        </>
-      ) : (
-        <>
-          <Route path={Routes.Login} component={Login} />
-          <Route exact path={Routes.SignUp} component={SignUp} />
-          <Route path={Routes.SignUpComplete} component={SignUpComplete} />
-        </>
-      )}
-    </div>
-  );
+            <Navigation />
+          </>
+        ) : (
+          <>
+            <Route path={Routes.Login} component={Login} />
+            <Route exact path={Routes.SignUp} component={SignUp} />
+            <Route path={Routes.SignUpComplete} component={SignUpComplete} />
+          </>
+        )}
+      </div>
+    );
 }
 
 export default observer(App);

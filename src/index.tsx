@@ -9,7 +9,10 @@ import { IProfile } from 'types'
 import * as serviceWorker from './serviceWorker';
 
 firebase.auth().onAuthStateChanged(async function (firebaseUser) {
-  if (!firebaseUser) return
+  if (!firebaseUser) { 
+    appStore.loading = false
+    return
+  }
   appStore.firebaseUser = firebaseUser
 
   const profile = await firebase.firestore()
@@ -18,8 +21,12 @@ firebase.auth().onAuthStateChanged(async function (firebaseUser) {
     .get()
     .then(doc => doc.data()) as IProfile | null
 
-  if (!profile) return
+  if (!profile) {
+    appStore.loading = false
+    return
+  }
   appStore.profile = profile
+  appStore.loading = false
 });
 
 ReactDOM.render(

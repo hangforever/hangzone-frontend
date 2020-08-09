@@ -3,6 +3,7 @@ import { observable, action, decorate, computed } from 'mobx'
 import { Hangzone, ISettings, IProfile } from 'types'
 
 export class AppStore {
+  loading: boolean = true
   firebaseUser: firebase.User | null = null
   profile: IProfile | null = null
   wordOfTheDay: string = 'FARTS'
@@ -36,6 +37,7 @@ export class AppStore {
   }
 }
 decorate(AppStore, {
+  loading: observable,
   wordOfTheDay: observable,
   firebaseUser: observable,
   profile: observable,
