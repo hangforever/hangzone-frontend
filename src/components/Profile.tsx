@@ -27,22 +27,22 @@ const Profile = () => {
   return user ? (
     <div className="Profile">
       <div>
-        <div><img src={user.firebaseUser.photoURL || ''} alt="" style={{ width: '50px', height: '50px', borderRadius: '50%' }} /></div>
-        <div>
-          {user.firebaseUser.isAnonymous ? (
-            <div>
-              Anonomous User <br />
-              {/* TODO: Decide how to handle upgrading */}
-              <button onClick={handleUpgradeAccount}>Upgrade Account</button>
-              <button>
-                <NavLink activeClassName='active' to={Routes.SignUp}>SignUp</NavLink>
-              </button>
-            </div>
-          ) : (
-              <div>Email: {user.firebaseUser.email}</div>
-            )}
-        </div>
-        <button onClick={handleSignOut}>Sign Out</button>
+        {user.firebaseUser.isAnonymous ? (
+          <div>
+            Anonomous User <br />
+            {/* TODO: Decide how to handle upgrading */}
+            <button onClick={handleUpgradeAccount}>Upgrade Account</button>
+            <button>
+              <NavLink activeClassName='active' to={Routes.SignUp}>SignUp</NavLink>
+            </button>
+          </div>
+        ) : (
+            <Field
+              label="email"
+              initialValue={user.firebaseUser.email || ''}
+              disabled
+            />
+          )}
       </div>
       <div className="Profile__user-name">
         <Field
@@ -60,13 +60,14 @@ const Profile = () => {
       </div>
       <div>profile photo:</div>
       <div className="Profile__photo-area">
-        <img className="Profile__profile-photo" src={user.profile.photoURL} alt="user profile"/>
+        <img className="Profile__profile-photo" src={appStore.profilePhoto} alt="user profile"/>
         <button onClick={() => {
           // TODO: add functionality for uploads from hard disk 
           const newURL = prompt('', 'enter img url here')
           user.profile.photoURL = newURL || ''
         }}>change photo</button>
       </div>
+      <button onClick={handleSignOut}>Sign Out</button>
     </div>
   ) : null
 }

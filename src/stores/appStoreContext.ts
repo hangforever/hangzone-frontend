@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import { observable, action, decorate } from 'mobx'
+import { observable, action, decorate, computed } from 'mobx'
 import { Hangzone, ISettings, IUser } from 'types'
 
 export class AppStore {
@@ -29,6 +29,10 @@ export class AppStore {
   setWordOfTheDay(newWord: string) {
     this.wordOfTheDay = newWord
   }
+
+  get profilePhoto() {
+    return this.user?.profile.photoURL || this.user?.firebaseUser.photoURL || ''
+  }
 }
 decorate(AppStore, {
   wordOfTheDay: observable,
@@ -38,7 +42,8 @@ decorate(AppStore, {
   addHangzone: action,
   removeHangzone: action,
   updateHangzone: action,
-  setWordOfTheDay: action
+  setWordOfTheDay: action,
+  profilePhoto: computed,
 })
 
 export default createContext(new AppStore())
