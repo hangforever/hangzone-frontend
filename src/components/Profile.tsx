@@ -58,16 +58,22 @@ const Profile = () => {
           onSubmit={(value) => user.profile.bio = value}
         />
       </div>
-      <div>profile photo:</div>
-      <div className="Profile__photo-area">
-        <img className="Profile__profile-photo" src={appStore.profilePhoto} alt="user profile"/>
-        <button onClick={() => {
-          // TODO: add functionality for uploads from hard disk 
-          const newURL = prompt('', 'enter img url here')
-          user.profile.photoURL = newURL || ''
-        }}>change photo</button>
+      <div className="Field">
+        <label htmlFor="profile photo">profile photo</label>
+        <div className="Profile__photo-area">
+          <img className="Profile__profile-photo" src={appStore.profilePhoto} alt="user profile" />
+          <button
+            onClick={() => {
+              // TODO: add functionality for uploads from hard disk 
+              const newURL = prompt('', 'enter img url here')
+              user.profile.photoURL = newURL || ''
+            }}
+          >
+            change photo
+        </button>
+        </div>
       </div>
-      <button onClick={handleSignOut}>Sign Out</button>
+      <button className="button button-primary" onClick={handleSignOut}>Sign Out</button>
     </div>
   ) : null
 }
