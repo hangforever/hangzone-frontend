@@ -26,7 +26,7 @@ const SignUpComplete: React.SFC<{}> = () => {
   }
 
   return (
-    <div className="SignUpComplete">
+    <div className="SignUpComplete Login">
       <div className="row">
         <form onSubmit={handleComplete} className="form__anon">
           <div className="form__inner">

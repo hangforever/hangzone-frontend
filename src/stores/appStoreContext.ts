@@ -1,10 +1,11 @@
 import { createContext } from 'react'
 import { observable, action, decorate, computed } from 'mobx'
-import { Hangzone, ISettings, IUser } from 'types'
+import { Hangzone, ISettings, IProfile } from 'types'
 
 export class AppStore {
+  firebaseUser: firebase.User | null = null
+  profile: IProfile | null = null
   wordOfTheDay: string = 'FARTS'
-  user: null | IUser = null
   hangzones: Hangzone[] = [] // https://mobx.js.org/refguide/array.html
   settings: ISettings = {
     gpsOn: true,
@@ -31,12 +32,13 @@ export class AppStore {
   }
 
   get profilePhoto() {
-    return this.user?.profile.photoURL || this.user?.firebaseUser.photoURL || ''
+    return this.profile?.photoURL || this.firebaseUser?.photoURL || ''
   }
 }
 decorate(AppStore, {
   wordOfTheDay: observable,
-  user: observable,
+  firebaseUser: observable,
+  profile: observable,
   hangzones: observable,
   settings: observable,
   addHangzone: action,
@@ -46,4 +48,7 @@ decorate(AppStore, {
   profilePhoto: computed,
 })
 
-export default createContext(new AppStore())
+const appStore = new AppStore()
+
+export { appStore }
+export default createContext(appStore)

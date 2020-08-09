@@ -20,11 +20,6 @@ export interface IProfile {
   photoURL?: string
 }
 
-export interface IUser {
-  firebaseUser: firebase.User,
-  profile: IProfile,
-}
-
 export {
   Routes
 }

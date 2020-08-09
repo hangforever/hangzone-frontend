@@ -18,30 +18,17 @@ function App() {
   const firebase = useContext(firebaseContext)
   const appStore = useContext(appStoreContext)
   const history = useHistory()
-  const user = appStore.user && appStore.user
 
-  useEffect(() => {
-    async function fetchProfile(firebaseUser: firebase.User) {
-      const profile = await firebase.firestore()
-        .collection('profiles')
-        .doc(firebaseUser.uid)
-        .get()
-        .then(doc => doc.data()) as IProfile | null
-      if (!profile) return history.push(Routes.SignUpComplete + `?uid=${firebaseUser.uid}`)
-
-      appStore.user = { firebaseUser, profile }
-    }
-    
-    firebase.auth().onAuthStateChanged(async function (firebaseUser) {
-      if (!firebaseUser) return history.push(Routes.Login)
-
-      await fetchProfile(firebaseUser)
-    });
-  }, [appStore.user, firebase, history, user])
+  useEffect(() => { 
+    const { profile, firebaseUser } = appStore
+    if (!firebaseUser) return history.push(Routes.Login)
+    if (!profile) return history.push(Routes.SignUpComplete + `?uid=${firebaseUser.uid}`)
+    history.push(Routes.Main)
+  }, [appStore, history, appStore.profile, appStore.firebaseUser])
 
   return (
     <div className="App">
-      {user ? (
+      {appStore.firebaseUser && appStore.profile ? (
         <>
           <div className="body">
             <Route exact path={Routes.Main} component={Main} />
@@ -55,7 +42,7 @@ function App() {
       ) : (
         <>
           <Route path={Routes.Login} component={Login} />
-          <Route path={Routes.SignUp} component={SignUp} />
+          <Route exact path={Routes.SignUp} component={SignUp} />
           <Route path={Routes.SignUpComplete} component={SignUpComplete} />
         </>
       )}

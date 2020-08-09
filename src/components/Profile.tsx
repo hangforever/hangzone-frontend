@@ -10,7 +10,6 @@ import Routes from '../types/Routes'
 const Profile = () => {
   const appStore = useContext(appStoreContext)
   const firebase = useContext(firebaseContext)
-  const user = appStore.user
 
   function handleUpgradeAccount() {
     alert('Unimplemented')
@@ -19,15 +18,18 @@ const Profile = () => {
   function handleSignOut() {
     firebase.auth().signOut()
       .then(() => {
-        appStore.user = null
+        appStore.firebaseUser = null
+        appStore.profile = null
       })
       .catch(() => alert('whoops'))
   }
+
+  const { firebaseUser, profile } = appStore
   
-  return user ? (
+  return firebaseUser && profile ? (
     <div className="Profile">
       <div>
-        {user.firebaseUser.isAnonymous ? (
+        {firebaseUser.isAnonymous ? (
           <div>
             Anonomous User <br />
             {/* TODO: Decide how to handle upgrading */}
@@ -39,7 +41,7 @@ const Profile = () => {
         ) : (
             <Field
               label="email"
-              initialValue={user.firebaseUser.email || ''}
+              initialValue={firebaseUser.email || ''}
               disabled
             />
           )}
@@ -47,15 +49,15 @@ const Profile = () => {
       <div className="Profile__user-name">
         <Field
           label="user name"
-          initialValue={user.profile.displayName}
-          onSubmit={(value) => user.profile.displayName = value}
+          initialValue={profile.displayName}
+          onSubmit={(value) => profile.displayName = value}
         />
       </div>
       <div className="Profile__bio">
         <Field
           label="bio"
-          initialValue={user.profile.bio || ''}
-          onSubmit={(value) => user.profile.bio = value}
+          initialValue={profile.bio || ''}
+          onSubmit={(value) => profile.bio = value}
         />
       </div>
       <div className="Field">
@@ -66,11 +68,11 @@ const Profile = () => {
             onClick={() => {
               // TODO: add functionality for uploads from hard disk 
               const newURL = prompt('', 'enter img url here')
-              user.profile.photoURL = newURL || ''
+              profile.photoURL = newURL || ''
             }}
           >
             change photo
-        </button>
+      </button>
         </div>
       </div>
       <button className="button button-primary" onClick={handleSignOut}>Sign Out</button>
