@@ -1,6 +1,6 @@
 import { createContext } from 'react'
 import { observable, action, decorate } from 'mobx'
-import { Hangzone, ISettings, IProfile, IUser } from 'types'
+import { Hangzone, ISettings, IUser } from 'types'
 
 export class AppStore {
   wordOfTheDay: string = 'FARTS'

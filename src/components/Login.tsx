@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import { useHistory } from 'react-router'
 import firebaseContext from 'firebaseContext'
 import { Routes } from 'types'
-import { createHangzoneUser } from 'db/users'
+import { createProfile } from 'db/profiles'
 import './Login.scss'
 
 const Login: React.SFC = () => {
@@ -37,8 +37,8 @@ const Login: React.SFC = () => {
       .signInAnonymously()
       .then(({ user }) => {
         if (user) {
-          const newUser = createHangzoneUser(user.uid, anonUsername)
-          return firebase.firestore().collection('users').add(newUser)
+          const newProfile = createProfile(user.uid, anonUsername)
+          return firebase.firestore().collection('profiles').add(newProfile)
         } else {
           throw new Error('Anonymous Login failed!')
         }

@@ -9,10 +9,9 @@ import Map from 'components/Map'
 import Settings from 'components/Settings'
 import Profile from 'components/Profile'
 import SignUp from 'components/SignUp'
-import { Routes } from 'types'
+import { Routes, IProfile } from 'types'
 import firebaseContext from 'firebaseContext'
 import { appStoreContext } from 'stores'
-
 
 function App() {
   const firebase = useContext(firebaseContext)
@@ -21,17 +20,15 @@ function App() {
   const user = appStore.user && appStore.user
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged(function (user) {
-      if (user) {
-        appStore.user = {
-          firebaseUser: user,
-          profile: {
-            id: '123',
-            displayName: 'xXxTakara89Xx',
-            bio: 'Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time. Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time. Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time. Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time.',
-            photo: 'https://a-listzante.com/wp-content/uploads/2019/11/zante-event-tickets-2.jpg',
-          }
-        }
+    firebase.auth().onAuthStateChanged(async function (firebaseUser) {
+      if (firebaseUser && firebaseUser.uid) {
+        const profile = await firebase.firestore()
+          .collection('profiles')
+          .doc(firebaseUser.uid)
+          .get()
+          .then(doc => doc.data())
+        // @ts-ignore
+        appStore.user = { firebaseUser, profile }
       } else {
         history.push(Routes.Login)
       }

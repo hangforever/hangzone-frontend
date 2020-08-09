@@ -14,10 +14,11 @@ export interface ISettings {
 }
 
 export interface IProfile {
-  id: string
+  userUID: string
   displayName: string
+  friendIds: { [userId: string]: boolean }
   bio?: string
-  photo?: string
+  photoURL?: string
 }
 
 export interface IUser {

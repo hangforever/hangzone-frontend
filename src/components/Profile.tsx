@@ -51,7 +51,7 @@ const Profile = () => {
           onSubmit={(value) => user.profile.displayName = value}
         />
       </div>
-      <div>user id:{user.profile.id}</div>
+      <div>user id:{user.profile.userUID}</div>
       <div className="Profile__bio">
         <Field
           label="bio"
@@ -61,11 +61,11 @@ const Profile = () => {
       </div>
       <div>profile photo:</div>
       <div className="Profile__photo-area">
-        <img className="Profile__profile-photo" src={user.profile.photo} alt="user profile"/>
+        <img className="Profile__profile-photo" src={user.profile.photoURL} alt="user profile"/>
         <button onClick={() => {
           // TODO: add functionality for uploads from hard disk 
           const newURL = prompt('', 'enter img url here')
-          user.profile.photo = newURL || ''
+          user.profile.photoURL = newURL || ''
         }}>change photo</button>
       </div>
     </div>
