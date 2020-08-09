@@ -1,21 +1,15 @@
 import { createContext } from 'react'
 import { observable, action, decorate } from 'mobx'
-import { Hangzone, ISettings, IProfile } from 'types'
+import { Hangzone, ISettings, IProfile, IUser } from 'types'
 
 export class AppStore {
   wordOfTheDay: string = 'FARTS'
-  user: null | firebase.User = null
+  user: null | IUser = null
   hangzones: Hangzone[] = [] // https://mobx.js.org/refguide/array.html
   settings: ISettings = {
     gpsOn: true,
     emailOnFriendHang: true,
     notifications: true,
-  }
-  profile: IProfile = {
-    id: '123',
-    displayName: 'xXxTakara89Xx',
-    bio: 'Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time. Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time. Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time. Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time.',
-    photo: 'https://a-listzante.com/wp-content/uploads/2019/11/zante-event-tickets-2.jpg',
   }
 
   addHangzone(name: string, description: string, isPrivate: boolean = true) {
@@ -41,7 +35,6 @@ decorate(AppStore, {
   user: observable,
   hangzones: observable,
   settings: observable,
-  profile: observable,
   addHangzone: action,
   removeHangzone: action,
   updateHangzone: action,

@@ -22,8 +22,19 @@ function App() {
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function (user) {
-      if (user) appStore.user = user
-      else history.push(Routes.Login)
+      if (user) {
+        appStore.user = {
+          firebaseUser: user,
+          profile: {
+            id: '123',
+            displayName: 'xXxTakara89Xx',
+            bio: 'Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time. Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time. Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time. Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time.',
+            photo: 'https://a-listzante.com/wp-content/uploads/2019/11/zante-event-tickets-2.jpg',
+          }
+        }
+      } else {
+        history.push(Routes.Login)
+      }
     });
   }, [appStore.user, firebase, history, user])
 

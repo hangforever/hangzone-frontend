@@ -24,54 +24,52 @@ const Profile = () => {
       .catch(() => alert('whoops'))
   }
   
-  return (
+  return user ? (
     <div className="Profile">
-      {user && (
+      <div>
+        <div><img src={user.firebaseUser.photoURL || ''} alt="" style={{ width: '50px', height: '50px', borderRadius: '50%' }} /></div>
         <div>
-          <div><img src={user.photoURL || ''} alt="" style={{ width: '50px', height: '50px', borderRadius: '50%' }} /></div>
-          <div>
-            {user.isAnonymous ? (
-              <div>
-                Anonomous User <br />
-                {/* TODO: Decide how to handle upgrading */}
-                <button onClick={handleUpgradeAccount}>Upgrade Account</button>
-                <button>
-                  <NavLink activeClassName='active' to={Routes.SignUp}>SignUp</NavLink>
-                </button>
-              </div>
-            ) : (
-              <div>Email: {user.email}</div>
+          {user.firebaseUser.isAnonymous ? (
+            <div>
+              Anonomous User <br />
+              {/* TODO: Decide how to handle upgrading */}
+              <button onClick={handleUpgradeAccount}>Upgrade Account</button>
+              <button>
+                <NavLink activeClassName='active' to={Routes.SignUp}>SignUp</NavLink>
+              </button>
+            </div>
+          ) : (
+              <div>Email: {user.firebaseUser.email}</div>
             )}
-          </div>
-          <button onClick={handleSignOut}>Sign Out</button>
         </div>
-      )}
+        <button onClick={handleSignOut}>Sign Out</button>
+      </div>
       <div className="Profile__user-name">
         <Field
           label="user name"
-          initialValue={appStore.profile.displayName}
-          onSubmit={(value) => appStore.profile.displayName = value}
+          initialValue={user.profile.displayName}
+          onSubmit={(value) => user.profile.displayName = value}
         />
       </div>
-      <div>user id:{appStore.profile.id}</div>
+      <div>user id:{user.profile.id}</div>
       <div className="Profile__bio">
         <Field
           label="bio"
-          initialValue={appStore.profile.bio || ''}
-          onSubmit={(value) => appStore.profile.bio = value}
+          initialValue={user.profile.bio || ''}
+          onSubmit={(value) => user.profile.bio = value}
         />
       </div>
       <div>profile photo:</div>
       <div className="Profile__photo-area">
-        <img className="Profile__profile-photo" src={appStore.profile.photo} alt="user profile"/>
+        <img className="Profile__profile-photo" src={user.profile.photo} alt="user profile"/>
         <button onClick={() => {
           // TODO: add functionality for uploads from hard disk 
           const newURL = prompt('', 'enter img url here')
-          appStore.profile.photo = newURL || ''
+          user.profile.photo = newURL || ''
         }}>change photo</button>
       </div>
     </div>
-  )
+  ) : null
 }
 
 export default observer(Profile)
