@@ -5,6 +5,6 @@ export function createProfile(displayName: string, options: Partial<IProfile> = 
     displayName,
     friendIds: {},
     bio: options.bio || '',
-    photoURL: options.photoURL || 'https://a-listzante.com/wp-content/uploads/2019/11/zante-event-tickets-2.jpg',
+    photoURL: options.photoURL || '/blank_hanger.png',
   }
 }

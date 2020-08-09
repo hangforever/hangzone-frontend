@@ -14,7 +14,6 @@ const SignUpComplete: React.SFC<{}> = () => {
     e.preventDefault()
     const urlParams = new URLSearchParams(location.search)
     const uid = urlParams.get('uid')
-    console.log(uid)
     try {
       if (!uid) throw new Error('Params not set correctly. Please login again.')
       const profile = createProfile(displayName)
