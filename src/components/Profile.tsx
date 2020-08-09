@@ -16,6 +16,13 @@ const Profile = () => {
     alert('Unimplemented')
     console.log('Docs for upgrading here: https://firebase.google.com/docs/auth/web/anonymous-auth#convert-an-anonymous-account-to-a-permanent-account')
   }
+  function handleSignOut() {
+    firebase.auth().signOut()
+      .then(() => {
+        appStore.user = null
+      })
+      .catch(() => alert('whoops'))
+  }
   
   return (
     <div className="Profile">
@@ -32,17 +39,7 @@ const Profile = () => {
               <div>Email: {user.email}</div>
             )}
           </div>
-          <button
-            onClick={() => {
-              firebase.auth().signOut()
-                .then(() => {
-                  appStore.user = null
-                })
-                .catch(() => alert('whoops'))
-            }}
-          >
-            Sign Out
-      </button>
+          <button onClick={handleSignOut}>Sign Out</button>
         </div>
       )}
       <div className="Profile__user-name">

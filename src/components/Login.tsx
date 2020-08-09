@@ -38,8 +38,7 @@ const Login: React.SFC = () => {
       .then(({ user }) => {
         if (user) {
           const newUser = createHangzoneUser(user.uid, anonUsername)
-          const key = firebase.database().ref('users').push().key
-          return firebase.database().ref('users/' + key).set(newUser)
+          return firebase.firestore().collection('users').add(newUser)
         } else {
           throw new Error('Anonymous Login failed!')
         }

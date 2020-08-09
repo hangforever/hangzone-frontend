@@ -1,13 +1,13 @@
 export interface HangzoneUser {
   name: string
   friendIds: { [userId: string]: boolean },
-  userId: string,
+  userUID: string,
 }
 
-export function createHangzoneUser(userId: string, name: string): HangzoneUser {
+export function createHangzoneUser(userUID: string, name: string): HangzoneUser {
   return {
     name: name,
     friendIds: {},
-    userId,
+    userUID,
   }
 }
