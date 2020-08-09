@@ -9,6 +9,7 @@ import Map from 'components/Map'
 import Settings from 'components/Settings'
 import Profile from 'components/Profile'
 import SignUp from 'components/SignUp'
+import SignUpComplete from 'components/SignUpComplete'
 import { Routes, IProfile } from 'types'
 import firebaseContext from 'firebaseContext'
 import { appStoreContext } from 'stores'
@@ -20,18 +21,21 @@ function App() {
   const user = appStore.user && appStore.user
 
   useEffect(() => {
+    async function fetchProfile(firebaseUser: firebase.User) {
+      const profile = await firebase.firestore()
+        .collection('profiles')
+        .doc(firebaseUser.uid)
+        .get()
+        .then(doc => doc.data()) as IProfile | null
+      if (!profile) return history.push(Routes.SignUpComplete + `?uid=${firebaseUser.uid}`)
+
+      appStore.user = { firebaseUser, profile }
+    }
+    
     firebase.auth().onAuthStateChanged(async function (firebaseUser) {
-      if (firebaseUser && firebaseUser.uid) {
-        const profile = await firebase.firestore()
-          .collection('profiles')
-          .doc(firebaseUser.uid)
-          .get()
-          .then(doc => doc.data())
-        // @ts-ignore
-        appStore.user = { firebaseUser, profile }
-      } else {
-        history.push(Routes.Login)
-      }
+      if (!firebaseUser) return history.push(Routes.Login)
+
+      await fetchProfile(firebaseUser)
     });
   }, [appStore.user, firebase, history, user])
 
@@ -52,6 +56,7 @@ function App() {
         <>
           <Route path={Routes.Login} component={Login} />
           <Route path={Routes.SignUp} component={SignUp} />
+          <Route path={Routes.SignUpComplete} component={SignUpComplete} />
         </>
       )}
     </div>

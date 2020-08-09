@@ -51,7 +51,6 @@ const Profile = () => {
           onSubmit={(value) => user.profile.displayName = value}
         />
       </div>
-      <div>user id:{user.profile.userUID}</div>
       <div className="Profile__bio">
         <Field
           label="bio"

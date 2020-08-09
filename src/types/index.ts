@@ -14,7 +14,6 @@ export interface ISettings {
 }
 
 export interface IProfile {
-  userUID: string
   displayName: string
   friendIds: { [userId: string]: boolean }
   bio?: string

@@ -37,8 +37,8 @@ const Login: React.SFC = () => {
       .signInAnonymously()
       .then(({ user }) => {
         if (user) {
-          const newProfile = createProfile(user.uid, anonUsername)
-          return firebase.firestore().collection('profiles').add(newProfile)
+          const newProfile = createProfile(anonUsername)
+          return firebase.firestore().collection('profiles').doc(user.uid).set(newProfile)
         } else {
           throw new Error('Anonymous Login failed!')
         }
@@ -85,26 +85,24 @@ const Login: React.SFC = () => {
         </div>
         <div className="container">
           <div className="row">
-            
-              <form onSubmit={handleAnonLogin} className="form__anon">
-                <div className="form__inner">
-                  <span>continue without logging in using this name:</span>
-                  <input 
-                    type="text" 
-                    name="anon_username"
-                    placeholder="Username"
-                    value={anonUsername} 
-                    onChange={e => updateAnonUsername(e.target.value)}
-                  />
-                </div>
-                <input
-                  className="btn--no-border"
-                  type="submit"
-                  value="CONTINUE >>"
-                  disabled={!anonUsername}
+            <form onSubmit={handleAnonLogin} className="form__anon">
+              <div className="form__inner">
+                <span>continue without logging in using this name:</span>
+                <input 
+                  type="text" 
+                  name="anon_username"
+                  placeholder="Username"
+                  value={anonUsername} 
+                  onChange={e => updateAnonUsername(e.target.value)}
                 />
-              </form>
-              
+              </div>
+              <input
+                className="btn--no-border"
+                type="submit"
+                value="CONTINUE >>"
+                disabled={!anonUsername}
+              />
+            </form>
           </div>
         </div>
       </div>
