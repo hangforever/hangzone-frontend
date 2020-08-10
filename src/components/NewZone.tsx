@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { observer } from "mobx-react-lite"
 import appStoreContext from '../stores/appStoreContext'
 import './NewZone.scss'
-import './modifiers.scss'
+import '../styles/modifiers.scss'
 
 const NewZoneModal = () => {
   const appStore = useContext(appStoreContext)
@@ -21,9 +21,7 @@ const NewZoneModal = () => {
       {active &&       
       <div className="NewZone__modal">
         <div className="NewZone__modal-container">
-            {/* <div className="NewZone__modal-close-container"> */}
-              <button className="NewZone__modal-close-x" onClick={() => toggleActive(active ? false : true)}>x</button>
-            {/* </div> */}
+            <div className="NewZone__modal-close-x" onClick={() => toggleActive(false)}>x</div>
             <div className="NewZone__modal-content">
               <div className="form-item">
                 <label htmlFor="name">Name:</label>
@@ -43,7 +41,8 @@ const NewZoneModal = () => {
                 toggleActive(active ? false : true)
               }}>complete</button>
               </div>  
-          </div>      
+          </div>
+          <div className="NewZone__modal-bg" onClick={() => toggleActive(false)}></div>      
       </div>}
       {!active &&
        <button className="NewZoneModal__button" onClick={() => toggleActive(active ? false : true)}>

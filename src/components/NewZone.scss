@@ -1,9 +1,9 @@
 @import 'styles/colors';
+@import 'styles/spacing';
 
 .NewZone__modal {
   display: flex;
   justify-content: center;
-  background: #00000075;;
   width: 100vw;
   height: 90vh;
   position: absolute;
@@ -18,20 +18,38 @@
   top: 30vh;
   width: 95vw;
   height: 55vh;
+  border-radius: $border-radius;
 }
 
 .NewZone__modal-content {
   padding: 2rem;
   height: calc(55vh - 4rem);
   overflow: overlay;
+  -webkit-box-shadow: 0px 0px 1.5rem 0px rgba(0,0,0,0.45);
+  -moz-box-shadow: 0px 0px 1.5rem 0px rgba(0,0,0,0.45);
+  box-shadow: 0px 0px 1.5rem 0px rgba(0,0,0,0.45);
+
+  input[type="text"] , textarea {
+    width: 100%
+  }
 }
 
 .NewZone__modal-close-x {
-  padding: 0px 15px 15px 15px;
+  padding: 0 1rem 0.4rem 1rem;
   border-radius: 100%;
   margin: 1rem; 
   background: white;
+  border: 1px solid #bbb;
   position: absolute;
-  right: -15px;
-  top: -20px;
+  right: -1.5rem;
+  top: -2rem;
+  -webkit-box-shadow: -0.1rem 0.1rem 0.4rem 0px rgba(0,0,0,0.35);
+  -moz-box-shadow: -0.1rem 0.1rem 0.4rem 0px rgba(0,0,0,0.35);
+  box-shadow: -0.1rem 0.1rem 0.4rem 0px rgba(0,0,0,0.35);
+}
+
+.NewZone__modal-bg {
+  height: inherit;
+  width: inherit;
+  background: #00000075;
 }
