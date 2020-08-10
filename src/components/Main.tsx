@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { observer } from 'mobx-react-lite'
 import appStoreContext from '../stores/appStoreContext'
-import NewZoneModal from './NewZone'
 
 // This is just a fake route that can be deleted whenever
 // it's just to demonstrate routing
