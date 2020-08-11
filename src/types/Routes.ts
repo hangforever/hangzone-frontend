@@ -10,6 +10,7 @@ enum Routes {
   Map = '/map',
   Settings = '/settings',
   Profile ='/profile',
+  Friends = '/friends',
 }
 
 export default Routes

@@ -20,6 +20,19 @@ export interface IProfile {
   photoURL?: string
 }
 
+export enum Status { 
+  Active = 'active',
+  Inactive = 'inactive',
+  Offline = 'offline',
+}
+
+export interface IFriend {
+  displayName: string,
+  id: string
+  photoURL: string,
+  status: Status
+}
+
 export {
   Routes
 }

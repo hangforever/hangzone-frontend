@@ -10,7 +10,7 @@
     overflow: auto;
     height: 90vh;
     padding: 1rem;
-    max-width: 600px;
+    width: calc(100vw - 2rem);
   }
 
   .Navigation {

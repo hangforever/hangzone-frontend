@@ -11,8 +11,8 @@ import Profile from 'components/Profile'
 import SignUp from 'components/SignUp'
 import SignUpComplete from 'components/SignUpComplete'
 import Loading from 'components/Loading'
+import Friends from 'components/Friends'
 import { Routes } from 'types'
-import firebaseContext from 'firebaseContext'
 import { appStoreContext } from 'stores'
 
 function App() {
@@ -37,6 +37,7 @@ function App() {
               <Route path={Routes.Map} component={Map} />
               <Route path={Routes.Settings} component={Settings} />
               <Route path={Routes.Profile} component={Profile} />
+              <Route path={Routes.Friends} component={Friends} />
             </div>
 
             <Navigation />
