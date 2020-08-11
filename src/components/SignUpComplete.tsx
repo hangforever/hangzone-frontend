@@ -1,11 +1,9 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { useLocation, useHistory } from 'react-router'
-import firebaseContext from 'firebaseContext'
 import { createProfile } from 'db/profiles'
 import { Routes } from 'types'
 
 const SignUpComplete: React.SFC<{}> = () => {
-  const firebase = useContext(firebaseContext)
   const [displayName, updateDisplayName] = useState('')
   const location = useLocation()
   const history = useHistory()
@@ -16,8 +14,7 @@ const SignUpComplete: React.SFC<{}> = () => {
     const uid = urlParams.get('uid')
     try {
       if (!uid) throw new Error('Params not set correctly. Please login again.')
-      const profile = createProfile(displayName)
-      await firebase.firestore().collection('profiles').doc(uid).set(profile)
+      await createProfile(uid, displayName)
       history.push(Routes.Profile)
     } catch(e) {
       alert(e.message)

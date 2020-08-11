@@ -37,8 +37,7 @@ const Login: React.SFC = () => {
       .signInAnonymously()
       .then(({ user }) => {
         if (user) {
-          const newProfile = createProfile(anonUsername)
-          return firebase.firestore().collection('profiles').doc(user.uid).set(newProfile)
+          return createProfile(user.uid, anonUsername)
         } else {
           throw new Error('Anonymous Login failed!')
         }
