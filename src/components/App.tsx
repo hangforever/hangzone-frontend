@@ -20,6 +20,8 @@ function App() {
   const history = useHistory()
 
   useEffect(() => { 
+    // FIXME: This code that pushes to routes should probably be
+    // handled synchronously in the login handler
     const { profile, firebaseUser } = appStore
     if (!firebaseUser) return history.push(Routes.Login)
     if (!profile) return history.push(Routes.SignUpComplete + `?uid=${firebaseUser.uid}`)

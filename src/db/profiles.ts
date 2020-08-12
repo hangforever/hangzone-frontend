@@ -1,6 +1,11 @@
 import { firebase } from 'firebaseContext'
 import { IProfile } from 'types'
 
+/**
+ * `profiles` collection
+ * Each profile's UID is the UID of the firebaseUser's UID that it is created with
+ */
+
 export async function createProfile(firebaseUserUID: string, displayName: string, options: Partial<IProfile> = {}): Promise<IProfile | undefined> {
   const profile = {
     displayName,

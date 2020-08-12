@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useLocation, useHistory } from 'react-router'
 import { createProfile } from 'db/profiles'
+import appStoreContext from 'stores/appStoreContext'
 import { Routes } from 'types'
 
 const SignUpComplete: React.SFC<{}> = () => {
   const [displayName, updateDisplayName] = useState('')
+  const appStore = useContext(appStoreContext)
   const location = useLocation()
   const history = useHistory()
 
@@ -14,8 +16,12 @@ const SignUpComplete: React.SFC<{}> = () => {
     const uid = urlParams.get('uid')
     try {
       if (!uid) throw new Error('Params not set correctly. Please login again.')
-      await createProfile(uid, displayName)
-      history.push(Routes.Profile)
+      const profile = await createProfile(uid, displayName)
+      if (profile) {
+        appStore.profile = profile
+      } else {
+        throw new Error('Could not create profile.')
+      }
     } catch(e) {
       alert(e.message)
       history.push(Routes.SignUp)
