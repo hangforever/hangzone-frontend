@@ -12,3 +12,12 @@ export async function createProfile(userUID: string, displayName: string, option
   await docRef.set(profile)
   return docRef
 }
+
+export async function getProfile(firebaseUserUID: string): Promise<IProfile | null> {
+  const profile = await firebase.firestore()
+    .collection('profiles')
+    .doc(firebaseUserUID)
+    .get()
+    .then(doc => doc.data()) as IProfile | null
+  return profile
+}
