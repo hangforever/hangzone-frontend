@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react'
 import { useHistory } from 'react-router'
 import firebaseContext from 'firebaseContext'
 import { Routes } from 'types'
+import { createProfile } from 'db/profiles'
 import './Login.scss'
 
 const Login: React.SFC = () => {
@@ -32,7 +33,19 @@ const Login: React.SFC = () => {
 
   function handleAnonLogin(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    alert('Not implemented!')
+    firebase.auth()
+      .signInAnonymously()
+      .then(({ user }) => {
+        if (user) {
+          return createProfile(user.uid, anonUsername)
+        } else {
+          throw new Error('Anonymous Login failed!')
+        }
+      })
+      .then(() => history.push('/'))
+      .catch(function(error) {
+        console.error(error.code, error.message)
+      });
   }
   
   return (
@@ -71,21 +84,24 @@ const Login: React.SFC = () => {
         </div>
         <div className="container">
           <div className="row">
-            
-              <form onSubmit={handleAnonLogin} className="form__anon">
-                <div className="form__inner">
-                  <span>continue without logging in using this name:</span>
-                  <input 
-                    type="text" 
-                    name="anon_username"
-                    placeholder="Username"
-                    value={anonUsername} 
-                    onChange={e => updateAnonUsername(e.target.value)}
-                  />
-                </div>
-                <input className="btn--no-border" type="submit" value="CONTINUE >>" />
-              </form>
-              
+            <form onSubmit={handleAnonLogin} className="form__anon">
+              <div className="form__inner">
+                <span>continue without logging in using this name:</span>
+                <input 
+                  type="text" 
+                  name="anon_username"
+                  placeholder="Username"
+                  value={anonUsername} 
+                  onChange={e => updateAnonUsername(e.target.value)}
+                />
+              </div>
+              <input
+                className="btn--no-border"
+                type="submit"
+                value="CONTINUE >>"
+                disabled={!anonUsername}
+              />
+            </form>
           </div>
         </div>
       </div>

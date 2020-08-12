@@ -14,12 +14,10 @@ export interface ISettings {
 }
 
 export interface IProfile {
-  id: string
-  anonymous: boolean
-  name: string
-  bio: string
-  photo?: string
-  email: string
+  displayName: string
+  friendIds: { [userId: string]: boolean }
+  bio?: string
+  photoURL?: string
 }
 
 export enum Status { 
