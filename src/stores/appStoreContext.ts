@@ -1,23 +1,17 @@
 import { createContext } from 'react'
-import { observable, action, decorate } from 'mobx'
+import { observable, action, decorate, computed } from 'mobx'
 import { Hangzone, ISettings, IProfile, IFriend, Status } from 'types'
 
 export class AppStore {
+  loading: boolean = true
+  firebaseUser: firebase.User | null = null
+  profile: IProfile | null = null
   wordOfTheDay: string = 'FARTS'
-  user: null | firebase.User = null
   hangzones: Hangzone[] = [] // https://mobx.js.org/refguide/array.html
   settings: ISettings = {
     gpsOn: true,
     emailOnFriendHang: true,
     notifications: true,
-  }
-  profile: IProfile = {
-    id: '123',
-    anonymous: true,
-    name: 'xXxTakara89Xx',
-    bio: 'Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time. Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time. Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time. Tokyo\'s number one birthday BITCH. Having a really good time, ALL the time.',
-    photo: 'https://a-listzante.com/wp-content/uploads/2019/11/zante-event-tickets-2.jpg',
-    email: 'takara89@hotmail.biz'
   }
 
   friends: IFriend[] = [
@@ -64,17 +58,26 @@ export class AppStore {
   setWordOfTheDay(newWord: string) {
     this.wordOfTheDay = newWord
   }
+
+  get profilePhoto() {
+    return this.profile?.photoURL || this.firebaseUser?.photoURL || ''
+  }
 }
 decorate(AppStore, {
+  loading: observable,
   wordOfTheDay: observable,
-  user: observable,
+  firebaseUser: observable,
+  profile: observable,
   hangzones: observable,
   settings: observable,
-  profile: observable,
   addHangzone: action,
   removeHangzone: action,
   updateHangzone: action,
-  setWordOfTheDay: action
+  setWordOfTheDay: action,
+  profilePhoto: computed,
 })
 
-export default createContext(new AppStore())
+const appStore = new AppStore()
+
+export { appStore }
+export default createContext(appStore)

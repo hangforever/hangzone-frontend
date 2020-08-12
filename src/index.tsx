@@ -3,7 +3,27 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import App from 'components/App';
+import { firebase } from 'firebaseContext'
+import { appStore } from 'stores/appStoreContext'
+import { getProfile } from 'db/profiles'
 import * as serviceWorker from './serviceWorker';
+
+firebase.auth().onAuthStateChanged(async function (firebaseUser) {
+  if (!firebaseUser) { 
+    appStore.loading = false
+    return
+  }
+  appStore.firebaseUser = firebaseUser
+
+  const profile = await getProfile(firebaseUser.uid)
+
+  if (!profile) {
+    appStore.loading = false
+    return
+  }
+  appStore.profile = profile
+  appStore.loading = false
+});
 
 ReactDOM.render(
   <React.StrictMode>

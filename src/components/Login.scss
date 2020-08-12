@@ -1,0 +1,53 @@
+@import 'styles/colors';
+
+.Login {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+
+    .form__inner {
+      border: 1px solid black;
+      width: 100%;
+      text-align: center;
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+  
+      input {
+        width: 90%;
+        display: inline-block;
+        border-radius: 0;
+        background: black;
+        color: white;
+        border: none;
+        height: 30px;
+        margin: 0;
+        margin-top: 1.5rem;
+        &:first-child {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+
+  .form__anon {
+    .form__inner {
+      border: none;
+    }
+  }
+
+  .btn--no-border {
+    display: block;
+    margin: 0;
+    padding: 0 10px 0 10px;
+    border: 1px solid transparent;
+    font-size: inherit;
+    font-weight: bold;
+    &:focus {
+      border: 1px solid $border-primary;
+    }
+  }
+}

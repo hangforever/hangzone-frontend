@@ -9,45 +9,50 @@ import Map from 'components/Map'
 import Settings from 'components/Settings'
 import Profile from 'components/Profile'
 import SignUp from 'components/SignUp'
+import SignUpComplete from 'components/SignUpComplete'
+import Loading from 'components/Loading'
 import Friends from 'components/Friends'
 import { Routes } from 'types'
-import firebaseContext from 'firebaseContext'
 import { appStoreContext } from 'stores'
 
-
 function App() {
-  const firebase = useContext(firebaseContext)
   const appStore = useContext(appStoreContext)
   const history = useHistory()
-  const user = appStore.user && appStore.user
 
-  useEffect(() => {
-    firebase.auth().onAuthStateChanged(function (user) {
-      if (user) appStore.user = user
-      else history.push(Routes.Login)
-    });
-  }, [appStore.user, firebase, history, user])
+  useEffect(() => { 
+    // FIXME: This code that pushes to routes should probably be
+    // handled synchronously in the login handler
+    const { profile, firebaseUser } = appStore
+    if (!firebaseUser) return history.push(Routes.Login)
+    if (!profile) return history.push(Routes.SignUpComplete + `?uid=${firebaseUser.uid}`)
+    history.push(Routes.Main)
+  }, [appStore, history, appStore.profile, appStore.firebaseUser])
 
-  return (
-    <div className="App">
-      {user ? (
-        <>
-          <div className="body">
-            <Route exact path={Routes.Main} component={Main} />
-            <Route path={Routes.Map} component={Map} />
-            <Route path={Routes.Settings} component={Settings} />
-            <Route path={Routes.Profile} component={Profile} />
-            <Route path={Routes.SignUp} component={SignUp} />
-            <Route path={Routes.Friends} component={Friends} />
-          </div>
+  return appStore.loading
+    ? (<Loading />)
+    : (
+      <div className="App">
+        {appStore.firebaseUser && appStore.profile ? (
+          <>
+            <div className="body">
+              <Route exact path={Routes.Main} component={Main} />
+              <Route path={Routes.Map} component={Map} />
+              <Route path={Routes.Settings} component={Settings} />
+              <Route path={Routes.Profile} component={Profile} />
+              <Route path={Routes.Friends} component={Friends} />
+            </div>
 
-          <Navigation />
-        </>
-      ) : (
-        <Route path={Routes.Login} component={Login} />
-      )}
-    </div>
-  );
+            <Navigation />
+          </>
+        ) : (
+          <>
+            <Route path={Routes.Login} component={Login} />
+            <Route exact path={Routes.SignUp} component={SignUp} />
+            <Route path={Routes.SignUpComplete} component={SignUpComplete} />
+          </>
+        )}
+      </div>
+    );
 }
 
 export default observer(App);

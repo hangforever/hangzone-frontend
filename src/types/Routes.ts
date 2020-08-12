@@ -5,10 +5,11 @@
 enum Routes {
   Main = '/',
   Login = '/login',
+  SignUp = '/sign-up',
+  SignUpComplete = '/sign-up/complete',
   Map = '/map',
   Settings = '/settings',
   Profile ='/profile',
-  SignUp = '/sign-up',
   Friends = '/friends',
 }
 
