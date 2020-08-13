@@ -25,7 +25,13 @@ const Field: React.SFC<FieldProps> = ({
           onSubmit(value)
           updateActive(false)
         }}>
-          <input className="Field__input" type="text" name={label} value={value} onChange={(e) => updateValue(e.target.value)} />
+          <input
+            className="Field__input"
+            type="text"
+            name={label}
+            value={value}
+            onChange={(e) => updateValue(e.target.value)}
+          />
         </form>
       ) : (
           <div
