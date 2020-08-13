@@ -1,16 +1,18 @@
-import './Profile.scss'
-import React, { useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { observer } from 'mobx-react-lite'
 import { appStoreContext } from 'stores'
 import firebaseContext from 'firebaseContext'
-import Field from 'components/Field'
-import { NavLink } from 'react-router-dom'
 import { setProfile } from 'db/profiles'
-import Routes from '../types/Routes'
+import { NavLink } from 'react-router-dom'
+import Field from 'components/Field'
+import Modal from 'components/Modal'
+import Routes from 'types/Routes'
+import './Profile.scss'
 
 const Profile = () => {
   const appStore = useContext(appStoreContext)
   const firebase = useContext(firebaseContext)
+  const [modalActive, updateModalActive] = useState(false)
 
   function handleUpgradeAccount() {
     alert('Unimplemented')
@@ -29,6 +31,22 @@ const Profile = () => {
   
   return firebaseUser && profile ? (
     <div className="Profile">
+      <Modal
+        active={modalActive}
+        onCloseClick={() => updateModalActive(false)}
+      >
+        <Field
+          label="Enter a url"
+          initialActive
+          onSubmit={(newURL) => {
+            profile.photoURL = newURL
+            setProfile(firebaseUser.uid, profile)
+            updateModalActive(false)
+          }}
+        />
+        <div>Or</div>
+        <input type="file" name="" id=""/>
+      </Modal>
       <div>
         {firebaseUser.isAnonymous ? (
           <div>
@@ -71,14 +89,7 @@ const Profile = () => {
         <label htmlFor="profile photo">profile photo</label>
         <div className="Profile__photo-area">
           <img className="Profile__profile-photo" src={appStore.profilePhoto} alt="user profile" />
-          <button
-            onClick={() => {
-              // TODO: add functionality for uploads from hard disk 
-              const newURL = prompt('', 'enter img url here')
-              profile.photoURL = newURL || ''
-              setProfile(firebaseUser.uid, profile)
-            }}
-          >
+          <button onClick={() => updateModalActive(true)}>
             change photo
           </button>
         </div>
