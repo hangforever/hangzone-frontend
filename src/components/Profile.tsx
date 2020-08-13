@@ -6,6 +6,7 @@ import { setProfile } from 'db/profiles'
 import { NavLink } from 'react-router-dom'
 import Field from 'components/Field'
 import Modal from 'components/Modal'
+import ProgressBar from 'components/ProgressBar'
 import Routes from 'types/Routes'
 import './Profile.scss'
 
@@ -72,6 +73,7 @@ const Profile = () => {
           id="profile-upload"
           onChange={handleImageUpload}
         />
+        <ProgressBar progress={uploadProgress} />
       </Modal>
       <div>
         {firebaseUser.isAnonymous ? (
