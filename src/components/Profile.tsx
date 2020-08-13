@@ -4,7 +4,8 @@ import { observer } from 'mobx-react-lite'
 import { appStoreContext } from 'stores'
 import firebaseContext from 'firebaseContext'
 import Field from 'components/Field'
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'
+import { setProfile } from 'db/profiles'
 import Routes from '../types/Routes'
 
 const Profile = () => {
@@ -50,14 +51,20 @@ const Profile = () => {
         <Field
           label="user name"
           initialValue={profile.displayName}
-          onSubmit={(value) => profile.displayName = value}
+          onSubmit={(value) => {
+            profile.displayName = value
+            setProfile(firebaseUser.uid, profile)
+          }}
         />
       </div>
       <div className="Profile__bio">
         <Field
           label="bio"
           initialValue={profile.bio || ''}
-          onSubmit={(value) => profile.bio = value}
+          onSubmit={(value) => {
+            profile.bio = value
+            setProfile(firebaseUser.uid, profile)
+          }}
         />
       </div>
       <div className="Field">
@@ -69,10 +76,11 @@ const Profile = () => {
               // TODO: add functionality for uploads from hard disk 
               const newURL = prompt('', 'enter img url here')
               profile.photoURL = newURL || ''
+              setProfile(firebaseUser.uid, profile)
             }}
           >
             change photo
-      </button>
+          </button>
         </div>
       </div>
       <button className="button button-primary" onClick={handleSignOut}>Sign Out</button>
