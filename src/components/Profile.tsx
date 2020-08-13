@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { observer } from 'mobx-react-lite'
 import { appStoreContext } from 'stores'
-import firebaseContext from 'firebaseContext'
 import { setProfile } from 'db/profiles'
 import { NavLink } from 'react-router-dom'
 import Field from 'components/Field'
@@ -11,21 +10,13 @@ import './Profile.scss'
 
 const Profile = () => {
   const appStore = useContext(appStoreContext)
-  const firebase = useContext(firebaseContext)
   const [modalActive, updateModalActive] = useState(false)
 
   function handleUpgradeAccount() {
     alert('Unimplemented')
     console.log('Docs for upgrading here: https://firebase.google.com/docs/auth/web/anonymous-auth#convert-an-anonymous-account-to-a-permanent-account')
   }
-  function handleSignOut() {
-    firebase.auth().signOut()
-      .then(() => {
-        appStore.firebaseUser = null
-        appStore.profile = null
-      })
-      .catch(() => alert('whoops'))
-  }
+  
 
   const { firebaseUser, profile } = appStore
   
@@ -94,7 +85,7 @@ const Profile = () => {
           </button>
         </div>
       </div>
-      <button className="button button-primary" onClick={handleSignOut}>Sign Out</button>
+      
     </div>
   ) : null
 }
