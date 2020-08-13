@@ -41,6 +41,7 @@ const Profile = () => {
           if (appStore.profile && appStore.firebaseUser) {
             appStore.profile.photoURL = downloadURL
             setProfile(appStore.firebaseUser.uid, appStore.profile)
+            updateUploadProgress(0)
             updateModalActive(false)
           }
         });
