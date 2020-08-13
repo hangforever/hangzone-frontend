@@ -1,7 +1,11 @@
 @import 'styles/colors';
 
 .Profile {
-
+  .Modal {
+    input {
+      width: 100%;
+    }
+  }
 }
 
 .Profile__profile-photo {

@@ -44,7 +44,7 @@ const Profile = () => {
             updateModalActive(false)
           }}
         />
-        <div>Or</div>
+        <div>Or upload a file</div>
         <input type="file" name="" id=""/>
       </Modal>
       <div>
