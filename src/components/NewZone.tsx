@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react' 
 import { observer } from "mobx-react-lite"
-import appStoreContext from 'stores/appStoreContext'
-import Modal from 'components/Modal'
+import appStoreContext from '../stores/appStoreContext'
+import Modal from '../components/Modal'
 import './NewZone.scss'
 import '../styles/modifiers.scss'
 
@@ -25,6 +25,8 @@ const NewZoneModal = () => {
       {active && (
         <Modal
           active={active}
+          className='--bottom'
+          maxHeight='45vh'
           onCloseClick={() => toggleActive(!active)}
         >
           <>
@@ -45,6 +47,46 @@ const NewZoneModal = () => {
                 updateIsPrivate(!isPrivate)
                 updateIsPublic(!isPublic)
               }} />
+            </div>
+            <div className="form-item">
+              <label htmlFor="description">Description:</label>
+              <textarea value={description} placeholder="[optional] write up  to 300 words about this hangzone for others to see" name="description" onChange={e => updateDescription(e.target.value)} />
+            </div>
+            <div className="form-item">
+              <label htmlFor="description">Description:</label>
+              <textarea value={description} placeholder="[optional] write up  to 300 words about this hangzone for others to see" name="description" onChange={e => updateDescription(e.target.value)} />
+            </div>
+            <div className="form-item">
+              <label htmlFor="description">Description:</label>
+              <textarea value={description} placeholder="[optional] write up  to 300 words about this hangzone for others to see" name="description" onChange={e => updateDescription(e.target.value)} />
+            </div>
+            <div className="form-item">
+              <label htmlFor="description">Description:</label>
+              <textarea value={description} placeholder="[optional] write up  to 300 words about this hangzone for others to see" name="description" onChange={e => updateDescription(e.target.value)} />
+            </div>
+            <div className="form-item">
+              <label htmlFor="description">Description:</label>
+              <textarea value={description} placeholder="[optional] write up  to 300 words about this hangzone for others to see" name="description" onChange={e => updateDescription(e.target.value)} />
+            </div>
+            <div className="form-item">
+              <label htmlFor="description">Description:</label>
+              <textarea value={description} placeholder="[optional] write up  to 300 words about this hangzone for others to see" name="description" onChange={e => updateDescription(e.target.value)} />
+            </div>
+            <div className="form-item">
+              <label htmlFor="description">Description:</label>
+              <textarea value={description} placeholder="[optional] write up  to 300 words about this hangzone for others to see" name="description" onChange={e => updateDescription(e.target.value)} />
+            </div>
+            <div className="form-item">
+              <label htmlFor="description">Description:</label>
+              <textarea value={description} placeholder="[optional] write up  to 300 words about this hangzone for others to see" name="description" onChange={e => updateDescription(e.target.value)} />
+            </div>
+            <div className="form-item">
+              <label htmlFor="description">Description:</label>
+              <textarea value={description} placeholder="[optional] write up  to 300 words about this hangzone for others to see" name="description" onChange={e => updateDescription(e.target.value)} />
+            </div>
+            <div className="form-item">
+              <label htmlFor="description">Description:</label>
+              <textarea value={description} placeholder="[optional] write up  to 300 words about this hangzone for others to see" name="description" onChange={e => updateDescription(e.target.value)} />
             </div>
             <div className="form-item">
               <label htmlFor="description">Description:</label>
