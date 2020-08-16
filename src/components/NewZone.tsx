@@ -63,7 +63,7 @@ const NewZoneModal = () => {
         </Modal>
       )}
       {!active &&
-       <button className="NewZoneModal__button" onClick={() => toggleActive(!active)}>
+       <button className="NewZone__modal-button" onClick={() => toggleActive(!active)}>
         add zone +
       </button>}
     </div>
