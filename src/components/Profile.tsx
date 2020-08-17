@@ -28,6 +28,7 @@ const Profile = () => {
   
   return firebaseUser && profile ? (
     <div className="Profile">
+      <p>{firebaseUser.uid}</p>
       <div>
         {firebaseUser.isAnonymous ? (
           <div>

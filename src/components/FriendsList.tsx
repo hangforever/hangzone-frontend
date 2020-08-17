@@ -1,6 +1,4 @@
 import React, { useContext } from 'react'
-import { appStoreContext } from 'stores'
-import firebaseContext from 'firebaseContext'
 import { IFriend } from '../types'
 import StatusMark from './StatusMark'
 import './FriendsList.scss'
@@ -9,11 +7,8 @@ interface Props {
   friends: IFriend[]
 }
 
-const FriendsList: React.SFC<Props> = ({ friends }) => {
-  const appStore = useContext(appStoreContext)
-  const firebase = useContext(firebaseContext)
-  console.log(appStore)
-  return (
+
+const FriendsList: React.SFC<Props> = ({ friends }) => (
     <div className="FriendsList">
       <ul>
         {friends.map(friend => 
@@ -27,6 +22,6 @@ const FriendsList: React.SFC<Props> = ({ friends }) => {
           </li>)}
       </ul>
     </div>
-)}
+)
 
 export default FriendsList

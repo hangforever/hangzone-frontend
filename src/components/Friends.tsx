@@ -1,6 +1,8 @@
 import React, { useState, useContext } from 'react'
-import FriendsList from './FriendsList'
+import observer from 'mobx-react-lite'
 import appStoreContext from '../stores/appStoreContext'
+import firebaseContext from '../firebaseContext'
+import FriendsList from './FriendsList'
 import './Friends.scss'
 
 interface Props {
@@ -10,6 +12,8 @@ interface Props {
 const Friends: React.SFC<Props> = () => {
   const [search, updateSearch] = useState('')
   const appStore = useContext(appStoreContext)
+  const firebase = useContext(firebaseContext)
+  const { firebaseUser, profile } = appStore
   const filteredFriends = appStore.friends.filter((cur) => {
     const searchRegex = new RegExp(`.*${search}.*`, 'i')
     return searchRegex.test(cur.displayName)
@@ -18,8 +22,10 @@ const Friends: React.SFC<Props> = () => {
   function handleAddFriend() {
     alert('Unimplemented!')
   }
-  return (
+
+  return firebaseUser && profile ? (
     <div className="Friends">
+      <p>{firebaseUser.uid}</p>
       <div className="Friends__search">
         <input
           type="text"
@@ -42,7 +48,7 @@ const Friends: React.SFC<Props> = () => {
         </button>
       </div>
     </div>
-  )
+  ) : null
 }
 
 export default Friends
