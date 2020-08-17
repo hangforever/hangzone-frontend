@@ -21,10 +21,10 @@ const Friends: React.SFC<Props> = () => {
     return searchRegex.test(cur.displayName)
   })
 
-  function getFriendProfiles() {
+  async function getFriendProfiles() {
     if (firebaseUser && profile) {
       Object.keys(profile.friendIds).forEach(id => {
-        const friendProfile = getProfile(id)
+        const friendProfile = await getProfile(id)
         updateFriendProfiles([...friendProfiles, friendProfile])
       })
     }
