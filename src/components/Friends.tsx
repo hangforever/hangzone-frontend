@@ -34,14 +34,15 @@ const Friends: React.SFC<Props> = () => {
 
   useEffect(() => {
     if (profile && friendProfiles) {
-      // get all UIDs necessary to contact DB
+      // 1. get all UIDs necessary to contact DB
       const friendUids = Object.keys(profile.friendIds)
 
-      // use those IDs to perform a query for profiles on the DB
-      // forced strings for testing
-      // const friendProfiles = getFriendProfiles(['CqMfzAa07hb16H45UMG3tCxeJAg2', 'I3p7f3fAxoQchzUkdwoUYc3Knsq2'])
-      // take the result and set the friends state of the store 
-      // profile.friendIds = {...profile.friendIds, ...friendProfiles}
+      // 2. use those IDs to perform a query for profiles on the DB
+        // made getFriendProfiles function in db/profiles 
+        // called in index, manually passing string for testing
+
+      // 3. Take that result and set the friends state of the store
+        // attempted to add friendProfiles to appStore
       console.log(friendProfiles)
       console.log(profile.friendIds)
     }
