@@ -27,3 +27,9 @@ export async function getProfile(firebaseUserUID: string): Promise<IProfile | nu
     .then(doc => doc.data()) as IProfile | null
   return profile
 }
+
+export async function getFriendProfiles(friendUserIds) {
+  const refs = await friendUserIds.map(id => firebase.firestore().collection('profiles').doc(id))
+  const friendsListProfiles = await firebase.firestore().getAll(...refs)
+  return friendsListProfiles
+}

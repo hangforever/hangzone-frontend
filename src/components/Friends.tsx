@@ -1,9 +1,9 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import appStoreContext from '../stores/appStoreContext'
 import firebaseContext from '../firebaseContext'
 import FriendsList from './FriendsList'
-import { getProfile } from '../db/profiles'
+import { getProfile, getFriendProfiles } from '../db/profiles'
 import './Friends.scss'
 
 interface Props {
@@ -16,28 +16,29 @@ const Friends: React.SFC<Props> = () => {
   const firebase = useContext(firebaseContext)
   const { firebaseUser, profile } = appStore
   const [friendProfiles, updateFriendProfiles] = useState([])
+
   const filteredFriends = appStore.friends.filter((cur) => {
     const searchRegex = new RegExp(`.*${search}.*`, 'i')
     return searchRegex.test(cur.displayName)
   })
 
-  async function getFriendProfiles() {
-    if (firebaseUser && profile) {
-      Object.keys(profile.friendIds).forEach(id => {
-        const friendProfile = await getProfile(id)
-        updateFriendProfiles([...friendProfiles, friendProfile])
-      })
-    }
-  }
-  
-  getFriendProfiles()
 
   const handleAddFriend = () => {
     if (firebaseUser && profile) { 
       profile.friendIds = {...profile.friendIds, [firebaseUser.uid]: true}
-      console.log(profile.friendIds[firebaseUser.uid])
+      console.log(profile.friendIds)
     }
   }
+
+  useEffect(() => {
+    // get all UIDs necessary to contact DB
+    const friendUids = Object.keys(profile.friendIds)
+    // use those IDs to perform a query for profiles on the DB
+    const friendProfiles = getFriendProfiles(friendUids)
+    // take the result and set the friends state of the store 
+    profile.friendIds = friendProfiles
+
+  }, [firebaseUser, profile])
 
   return firebaseUser && profile ? (
     <div className="Friends">
