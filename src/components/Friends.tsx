@@ -32,11 +32,16 @@ const Friends: React.SFC<Props> = () => {
 
   useEffect(() => {
     // get all UIDs necessary to contact DB
-    const friendUids = Object.keys(profile.friendIds)
+    // const friendUids = Object.keys(profile.friendIds)
+
     // use those IDs to perform a query for profiles on the DB
-    const friendProfiles = getFriendProfiles(friendUids)
+    //const friendProfiles = getFriendProfiles(friendUids)
+
     // take the result and set the friends state of the store 
-    profile.friendIds = friendProfiles
+    // profile.friendIds = friendProfiles
+
+    // testing 
+    const friendProfiles = getFriendProfiles(['CqMfzAa07hb16H45UMG3tCxeJAg2', 'I3p7f3fAxoQchzUkdwoUYc3Knsq2'])
 
   }, [firebaseUser, profile])
 
