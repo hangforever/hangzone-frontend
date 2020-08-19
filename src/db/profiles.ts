@@ -35,9 +35,8 @@ export async function getFriendProfiles(friendUserIds: [string, string]): Promis
     .doc(id)
     .get()
     .then(docRef => docRef.data())
-    return { [id] : docData }
+     return { [id] : docData }
   })
-    console.log(friendProfiles)
     return friendProfiles
   }
 

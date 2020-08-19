@@ -1,10 +1,11 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect, useDebugValue } from 'react'
 import { observer } from 'mobx-react-lite'
 import appStoreContext from '../stores/appStoreContext'
 import firebaseContext from '../firebaseContext'
 import FriendsList from './FriendsList'
-import { getProfile, getFriendProfiles } from '../db/profiles'
+import { getFriendProfiles } from '../db/profiles'
 import './Friends.scss'
+
 
 interface Props {
 
@@ -14,8 +15,8 @@ const Friends: React.SFC<Props> = () => {
   const [search, updateSearch] = useState('')
   const appStore = useContext(appStoreContext)
   const firebase = useContext(firebaseContext)
-  const { firebaseUser, profile } = appStore
-  const [friendProfiles, updateFriendProfiles] = useState([])
+  const { firebaseUser, profile, friendProfiles } = appStore
+  const [friendProfileState, updateFriendProfiles] = useState([])
 
   const filteredFriends = appStore.friends.filter((cur) => {
     const searchRegex = new RegExp(`.*${search}.*`, 'i')
@@ -30,21 +31,21 @@ const Friends: React.SFC<Props> = () => {
     }
   }
 
+
   useEffect(() => {
-    // get all UIDs necessary to contact DB
-    // const friendUids = Object.keys(profile.friendIds)
+    if (profile && friendProfiles) {
+      // get all UIDs necessary to contact DB
+      const friendUids = Object.keys(profile.friendIds)
 
-    // use those IDs to perform a query for profiles on the DB
-    //const friendProfiles = getFriendProfiles(friendUids)
-
-    // take the result and set the friends state of the store 
-    // profile.friendIds = friendProfiles
-
-    // testing 
-    const friendProfiles = getFriendProfiles(['CqMfzAa07hb16H45UMG3tCxeJAg2', 'I3p7f3fAxoQchzUkdwoUYc3Knsq2'])
-    // profile.friendIds = {...profile.friendIds, ...friendProfiles}
-
-  }, [firebaseUser, profile])
+      // use those IDs to perform a query for profiles on the DB
+      // forced strings for testing
+      // const friendProfiles = getFriendProfiles(['CqMfzAa07hb16H45UMG3tCxeJAg2', 'I3p7f3fAxoQchzUkdwoUYc3Knsq2'])
+      // take the result and set the friends state of the store 
+      // profile.friendIds = {...profile.friendIds, ...friendProfiles}
+      console.log(friendProfiles)
+      console.log(profile.friendIds)
+    }
+  }, [profile, friendProfiles])
 
   return firebaseUser && profile ? (
     <div className="Friends">
