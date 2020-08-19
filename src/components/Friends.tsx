@@ -42,6 +42,7 @@ const Friends: React.SFC<Props> = () => {
 
     // testing 
     const friendProfiles = getFriendProfiles(['CqMfzAa07hb16H45UMG3tCxeJAg2', 'I3p7f3fAxoQchzUkdwoUYc3Knsq2'])
+    // profile.friendIds = {...profile.friendIds, ...friendProfiles}
 
   }, [firebaseUser, profile])
 
