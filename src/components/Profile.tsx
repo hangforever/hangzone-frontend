@@ -32,7 +32,7 @@ const Profile = () => {
 
       // https://firebase.google.com/docs/storage/web/upload-files#full_example
       uploadTask.on('state_changed', function (snapshot) {
-        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         updateUploadProgress(progress)
       }, function (error) {
         alert(error.message)
