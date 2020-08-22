@@ -1,10 +1,14 @@
 @import 'styles/colors';
 
 .Profile {
-
+  .Modal {
+    input {
+      width: 100%;
+    }
+  }
 }
 
 .Profile__profile-photo {
   display: block;
-  width: 400px;
+  width: 100%;
 }

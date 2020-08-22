@@ -1,0 +1,11 @@
+@import 'styles/colors';
+
+.ProgressBar {
+  height: 1rem;
+
+  .progress {
+    height: 100%;
+    background-color: $bg-btn-active;
+    transition: all linear 0.1s;
+  }
+}
