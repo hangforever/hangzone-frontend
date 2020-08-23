@@ -29,14 +29,14 @@ export async function getProfile(firebaseUserUID: string): Promise<IProfile | nu
 }
 
 export async function getFriendProfiles(friendUserIds: [string, string]): Promise<any | null> {
-  const friendProfiles =  await friendUserIds.map((id) => {
-    const docData = firebase.firestore()
-    .collection('profiles')
-    .doc(id)
-    .get()
-    .then(docRef => docRef.data())
-     return { [id] : docData }
-  })
+  const friendProfiles =  await Promise.all(friendUserIds.map( async (id) => {
+    const docData = await firebase.firestore()
+      .collection('profiles')
+      .doc(id)
+      .get()
+      .then(docRef => docRef.data())
+      return { [id] : docData }
+    }))
     return friendProfiles
   }
 

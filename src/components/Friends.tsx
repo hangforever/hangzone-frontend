@@ -42,7 +42,7 @@ const Friends: React.SFC<Props> = () => {
         // called in index, manually passing string for testing
 
       // 3. Take that result and set the friends state of the store
-        // attempted to add friendProfiles to appStore
+        // attempted to add friendProfiles to appStor
       console.log(friendProfiles)
       console.log(profile.friendIds)
     }
