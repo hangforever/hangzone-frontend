@@ -28,15 +28,21 @@ export async function getProfile(firebaseUserUID: string): Promise<IProfile | nu
   return profile
 }
 
-export async function getFriendProfiles(friendUserIds: [string, string]): Promise<any | null> {
-  const friendProfiles =  await Promise.all(friendUserIds.map( async (id) => {
-    const docData = await firebase.firestore()
+export async function getFriendProfiles(friendUserIds: [string, string]): Promise<IProfile[]> {
+  const friendProfiles: IProfile[] = await firebase.firestore()
       .collection('profiles')
-      .doc(id)
+      .where(firebase.firestore.FieldPath.documentId(), 'in', friendUserIds)
       .get()
-      .then(docRef => docRef.data())
-      return { [id] : docData }
-    }))
+      .then(res => {
+        let result: IProfile[] = []
+        res.forEach(doc => {
+          const data = doc.data()
+          if (data) {
+            result.push(data as IProfile)
+          }
+        })
+        return result
+      })
     return friendProfiles
   }
 

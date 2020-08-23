@@ -23,7 +23,7 @@ firebase.auth().onAuthStateChanged(async function (firebaseUser) {
     return
   }
   appStore.profile = profile
-  appStore.friendProfiles = friendProfiles
+  // appStore.friendProfiles = friendProfiles
   appStore.loading = false
 });
 
