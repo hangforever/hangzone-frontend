@@ -5,6 +5,7 @@ import firebaseContext from '../firebaseContext'
 import FriendsList from './FriendsList'
 import { getFriendProfiles } from '../db/profiles'
 import './Friends.scss'
+import { IProfile } from 'types'
 
 
 interface Props {
@@ -15,30 +16,34 @@ const Friends: React.SFC<Props> = () => {
   const [search, updateSearch] = useState('')
   const appStore = useContext(appStoreContext)
   const firebase = useContext(firebaseContext)
-  const { firebaseUser, profile, friendProfiles } = appStore
-  const [friendProfileState, updateFriendProfiles] = useState(friendProfiles)
+  const { firebaseUser, profile } = appStore
+  const [friendProfileState, updateFriendProfiles] = useState([{displayName: ''}])
 
   const filteredFriends = friendProfileState.filter((cur) => {
     const searchRegex = new RegExp(`.*${search}.*`, 'i')
     return searchRegex.test(cur.displayName)
   })
 
-  console.log('friiendProfiles', friendProfiles)
   console.log('friendState', friendProfileState)
-  console.log(friendProfileState[1].displayName)
+
 
   const handleAddFriend = () => {
-    if (firebaseUser && profile) { 
-      profile.friendIds = {...profile.friendIds, [firebaseUser.uid]: true}
-      console.log(profile.friendIds)
-    }
+    // if (firebaseUser && profile) { 
+    //   const idToAdd: string | null = prompt('add this friend id')
+    //   profile.friendIds = {...profile.friendIds, [idToAdd]: true}
+    //   console.log(profile.friendIds)
+    // }
   }
 
 
   useEffect(() => {
-    if (profile && friendProfiles) {
+    if (profile) {
       // 1. get all UIDs necessary to contact DB
       const friendUids = Object.keys(profile.friendIds)
+      console.log(friendUids)
+      if(friendUids.length > 0) {
+        getFriendProfiles(friendUids).then(friendProfiles => updateFriendProfiles(friendProfiles))
+      }
 
       // 2. use those IDs to perform a query for profiles on the DB
         // made getFriendProfiles function in db/profiles 
@@ -46,11 +51,11 @@ const Friends: React.SFC<Props> = () => {
 
       // 3. Take that result and set the friends state of the store
         // attempted to add friendProfiles to appStor
-      console.log('friendProfiles:', friendProfiles)
+      console.log('friendProfiles:', friendProfileState)
     }
-  }, [profile, friendProfiles])
+  }, [profile, friendProfileState])
 
-  return firebaseUser && profile && friendProfiles ? (
+  return firebaseUser && profile ? (
     <div className="Friends">
       <p>logged in user id: {firebaseUser.uid}</p>
       <div className="Friends__search">

@@ -16,14 +16,12 @@ firebase.auth().onAuthStateChanged(async function (firebaseUser) {
   appStore.firebaseUser = firebaseUser
 
   const profile = await getProfile(firebaseUser.uid)
-  const friendProfiles = await getFriendProfiles(['CqMfzAa07hb16H45UMG3tCxeJAg2', 'I3p7f3fAxoQchzUkdwoUYc3Knsq2'])
 
   if (!profile) {
     appStore.loading = false
     return
   }
   appStore.profile = profile
-  appStore.friendProfiles = friendProfiles
   appStore.loading = false
 });
 

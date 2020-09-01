@@ -28,7 +28,7 @@ export async function getProfile(firebaseUserUID: string): Promise<IProfile | nu
   return profile
 }
 
-export async function getFriendProfiles(friendUserIds: [string, string]): Promise<IProfile[]> {
+export async function getFriendProfiles(friendUserIds: Array<string>): Promise<IProfile[]> {
   const friendProfiles: IProfile[] = await firebase.firestore()
       .collection('profiles')
       .where(firebase.firestore.FieldPath.documentId(), 'in', friendUserIds)
@@ -45,4 +45,3 @@ export async function getFriendProfiles(friendUserIds: [string, string]): Promis
       })
     return friendProfiles
   }
-
