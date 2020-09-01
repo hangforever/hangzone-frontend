@@ -6,7 +6,7 @@ export class AppStore {
   loading: boolean = true
   firebaseUser: firebase.User | null = null
   profile: IProfile | null = null
-  friendProfiles: IProfile | null = null
+  friendProfiles: IProfile[] = []
   wordOfTheDay: string = 'FARTS'
   hangzones: Hangzone[] = [] // https://mobx.js.org/refguide/array.html
   settings: ISettings = {

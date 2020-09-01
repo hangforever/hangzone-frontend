@@ -16,13 +16,16 @@ const Friends: React.SFC<Props> = () => {
   const appStore = useContext(appStoreContext)
   const firebase = useContext(firebaseContext)
   const { firebaseUser, profile, friendProfiles } = appStore
-  const [friendProfileState, updateFriendProfiles] = useState([])
+  const [friendProfileState, updateFriendProfiles] = useState(friendProfiles)
 
-  const filteredFriends = appStore.friends.filter((cur) => {
+  const filteredFriends = friendProfileState.filter((cur) => {
     const searchRegex = new RegExp(`.*${search}.*`, 'i')
     return searchRegex.test(cur.displayName)
   })
 
+  console.log('friiendProfiles', friendProfiles)
+  console.log('friendState', friendProfileState)
+  console.log(friendProfileState[1].displayName)
 
   const handleAddFriend = () => {
     if (firebaseUser && profile) { 
@@ -39,16 +42,15 @@ const Friends: React.SFC<Props> = () => {
 
       // 2. use those IDs to perform a query for profiles on the DB
         // made getFriendProfiles function in db/profiles 
-        // called in index, manually passing string for testing
+        // called in index.tsx, manually passing string for testing
 
       // 3. Take that result and set the friends state of the store
         // attempted to add friendProfiles to appStor
-      console.log(friendProfiles)
-      console.log(profile.friendIds)
+      console.log('friendProfiles:', friendProfiles)
     }
   }, [profile, friendProfiles])
 
-  return firebaseUser && profile ? (
+  return firebaseUser && profile && friendProfiles ? (
     <div className="Friends">
       <p>logged in user id: {firebaseUser.uid}</p>
       <div className="Friends__search">
