@@ -16,8 +16,8 @@ const Friends: React.SFC<Props> = () => {
   const [search, updateSearch] = useState('')
   const appStore = useContext(appStoreContext)
   const firebase = useContext(firebaseContext)
-  const { firebaseUser, profile } = appStore
-  const [friendProfileState, updateFriendProfiles] = useState([{displayName: ''}])
+  const { firebaseUser, profile, friendProfiles } = appStore
+  const [friendProfileState, updateFriendProfiles] = useState(friendProfiles)
 
   const filteredFriends = friendProfileState.filter((cur) => {
     const searchRegex = new RegExp(`.*${search}.*`, 'i')
@@ -25,6 +25,8 @@ const Friends: React.SFC<Props> = () => {
   })
 
   console.log('friendState', friendProfileState)
+  console.log('friend profiles from store' , friendProfiles)
+  console.log(friendProfiles[0].displayName)
 
 
   const handleAddFriend = () => {
@@ -36,24 +38,24 @@ const Friends: React.SFC<Props> = () => {
   }
 
 
-  useEffect(() => {
-    if (profile) {
-      // 1. get all UIDs necessary to contact DB
-      const friendUids = Object.keys(profile.friendIds)
-      console.log(friendUids)
-      if(friendUids.length > 0) {
-        getFriendProfiles(friendUids).then(friendProfiles => updateFriendProfiles(friendProfiles))
-      }
+  // useEffect(() => {
+  //   if (profile) {
+  //     1. get all UIDs necessary to contact DB
+  //     const friendUids = Object.keys(profile.friendIds)
+  //     console.log(friendUids)
+  //     if(friendUids.length > 0) {
+  //       getFriendProfiles(friendUids).then(friendProfiles => updateFriendProfiles(friendProfiles))
+  //     }
 
-      // 2. use those IDs to perform a query for profiles on the DB
-        // made getFriendProfiles function in db/profiles 
-        // called in index.tsx, manually passing string for testing
+  //     2. use those IDs to perform a query for profiles on the DB
+  //       made getFriendProfiles function in db/profiles 
+  //       called in index.tsx, manually passing string for testing
 
-      // 3. Take that result and set the friends state of the store
-        // attempted to add friendProfiles to appStor
-      console.log('friendProfiles:', friendProfileState)
-    }
-  }, [profile, friendProfileState])
+  //     3. Take that result and set the friends state of the store
+  //       attempted to add friendProfiles to appStor
+  //     console.log('friendProfiles:', friendProfileState)
+  //   }
+  // }, [profile, friendProfileState])
 
   return firebaseUser && profile ? (
     <div className="Friends">
