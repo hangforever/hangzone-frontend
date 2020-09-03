@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { IFriend, IProfile } from '../types'
+import { IProfile } from '../types'
 import StatusMark from './StatusMark'
 import './FriendsList.scss'
 
