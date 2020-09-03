@@ -27,6 +27,7 @@ const Friends: React.SFC<Props> = () => {
   console.log('friendState', friendProfileState)
   console.log('friend profiles from store' , friendProfiles)
   console.log(friendProfiles[0].displayName)
+  console.log('im dumb', profile?.friendIds)
 
 
   const handleAddFriend = () => {
