@@ -13,7 +13,9 @@ export async function createProfile(firebaseUserUID: string, displayName: string
     bio: options.bio || '',
     photoURL: options.photoURL || '/blank_hanger.png',
   }
-  const docRef = await firebase.firestore().collection('profiles').doc(firebaseUserUID)
+  const docRef = await firebase.firestore()
+    .collection('profiles')
+    .doc(firebaseUserUID)
   await docRef.set(profile)
   const createdProfile = await docRef.get()
   return createdProfile.data() as IProfile | undefined
@@ -26,6 +28,15 @@ export async function getProfile(firebaseUserUID: string): Promise<IProfile | nu
     .get()
     .then(doc => doc.data()) as IProfile | null
   return profile
+}
+
+export async function setProfile(firebaseUserUID: string, profile: IProfile): Promise<IProfile | undefined> { 
+  const docRef = await firebase.firestore()
+    .collection('profiles')
+    .doc(firebaseUserUID)
+  await docRef.set(profile)
+  const createdProfile = await docRef.get()
+  return createdProfile.data() as IProfile | undefined
 }
 
 export async function getFriendProfiles(friendUserIds: Array<string>): Promise<IProfile[]> {
