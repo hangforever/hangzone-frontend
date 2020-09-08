@@ -58,9 +58,8 @@ const Friends: React.SFC<Props> = () => {
   //   }
   // }, [profile, friendProfileState])
 
-  return firebaseUser && profile ? (
+  return firebaseUser && profile && friendProfiles ? (
     <div className="Friends">
-      <p>logged in user id: {firebaseUser.uid}</p>
       <div className="Friends__search">
         <input
           type="text"
@@ -83,7 +82,19 @@ const Friends: React.SFC<Props> = () => {
         </button>
       </div>
     </div>
-  ) : null
+  ) : (
+    <div className="Friends">
+      <div className="Friends__message">
+        <p>It seems you have no friends :'(</p>
+      </div>
+      <button 
+        className="button__add-friend button-primary"
+        onClick={handleAddFriend}
+      >
+        Add Friend
+      </button>
+    </div>
+  )
 }
 
 export default observer(Friends)
