@@ -65,12 +65,14 @@ const Friends: React.SFC<Props> = () => {
       <div className="Friends__message">
         <p>It seems you have no friends :'(</p>
       </div>
-      <button 
-        className="button__add-friend button-primary"
-        onClick={handleAddFriend}
-      >
-        Add Friend
-      </button>
+      <div className="Friends__controls">
+        <button 
+          className="button__add-friend button-primary"
+          onClick={handleAddFriend}
+        >
+          Add Friend
+        </button>
+      </div>
     </div>
   )
 }
