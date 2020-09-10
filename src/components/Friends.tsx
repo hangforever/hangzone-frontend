@@ -20,6 +20,7 @@ const Friends: React.SFC<Props> = () => {
   }
   return (
     <div className="Friends">
+      <p>hehehe i'm so good at this</p>
       <div className="Friends__search">
         <input
           type="text"
