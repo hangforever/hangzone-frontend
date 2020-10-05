@@ -1,25 +1,17 @@
-import React, { useState, useContext, useEffect, useDebugValue } from 'react'
+import React, { useState, useContext } from 'react'
 import { observer } from 'mobx-react-lite'
 import appStoreContext from '../stores/appStoreContext'
-import firebaseContext from '../firebaseContext'
 import FriendsList from './FriendsList'
-import { getFriendProfiles } from '../db/profiles'
 import './Friends.scss'
-import { IProfile } from 'types'
 
-
-interface Props {
-
-}
+interface Props {  }
 
 const Friends: React.SFC<Props> = () => {
   const [search, updateSearch] = useState('')
   const appStore = useContext(appStoreContext)
-  const firebase = useContext(firebaseContext)
   const { firebaseUser, profile, friendProfiles } = appStore
-  const [friendProfileState, updateFriendProfiles] = useState(friendProfiles)
 
-  const filteredFriends = friendProfileState.filter((cur) => {
+  const filteredFriends = friendProfiles.filter((cur) => {
     const searchRegex = new RegExp(`.*${search}.*`, 'i')
     return searchRegex.test(cur.displayName)
   })
