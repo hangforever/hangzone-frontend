@@ -1,7 +1,6 @@
 import { createContext } from 'react';
 import { observable, action, decorate, computed } from 'mobx';
-import { Hangzone, ISettings, IProfile, Status } from 'types';
-import { observer } from 'mobx-react-lite';
+import { Hangzone, ISettings, IProfile } from 'types';
 
 export class AppStore {
   loading: boolean = true;
