@@ -36,7 +36,9 @@
     "deploy": "yarn build && firebase deploy",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prettier:check": "prettier --check ./src",
+    "prettier:write": "prettier --write ./src"
   },
   "eslintConfig": {
     "extends": "react-app"
