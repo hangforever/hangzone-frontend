@@ -1,30 +1,31 @@
-import React, { useState, useContext } from 'react'
-import { useLocation, useHistory } from 'react-router'
-import { createProfile } from 'db/profiles'
-import appStoreContext from 'stores/appStoreContext'
-import { Routes } from 'types'
+import React, { useState, useContext } from 'react';
+import { useLocation, useHistory } from 'react-router';
+import { createProfile } from 'db/profiles';
+import appStoreContext from 'stores/appStoreContext';
+import { Routes } from 'types';
 
 const SignUpComplete: React.SFC<{}> = () => {
-  const [displayName, updateDisplayName] = useState('')
-  const appStore = useContext(appStoreContext)
-  const location = useLocation()
-  const history = useHistory()
+  const [displayName, updateDisplayName] = useState('');
+  const appStore = useContext(appStoreContext);
+  const location = useLocation();
+  const history = useHistory();
 
   async function handleComplete(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    const urlParams = new URLSearchParams(location.search)
-    const uid = urlParams.get('uid')
+    e.preventDefault();
+    const urlParams = new URLSearchParams(location.search);
+    const uid = urlParams.get('uid');
     try {
-      if (!uid) throw new Error('Params not set correctly. Please login again.')
-      const profile = await createProfile(uid, displayName)
+      if (!uid)
+        throw new Error('Params not set correctly. Please login again.');
+      const profile = await createProfile(uid, displayName);
       if (profile) {
-        appStore.profile = profile
+        appStore.profile = profile;
       } else {
-        throw new Error('Could not create profile.')
+        throw new Error('Could not create profile.');
       }
-    } catch(e) {
-      alert(e.message)
-      history.push(Routes.SignUp)
+    } catch (e) {
+      alert(e.message);
+      history.push(Routes.SignUp);
     }
   }
 
@@ -39,7 +40,7 @@ const SignUpComplete: React.SFC<{}> = () => {
               name="anon_username"
               placeholder="Username"
               value={displayName}
-              onChange={e => updateDisplayName(e.target.value)}
+              onChange={(e) => updateDisplayName(e.target.value)}
             />
           </div>
           <input
@@ -51,7 +52,7 @@ const SignUpComplete: React.SFC<{}> = () => {
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SignUpComplete
+export default SignUpComplete;

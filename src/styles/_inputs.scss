@@ -1,13 +1,16 @@
-.input.input-primary, input[type="text"].input-primary {
+.input.input-primary,
+input[type='text'].input-primary {
   background-color: $bg-secondary;
   border-color: black;
   color: $font-secondary;
 }
 
-input[placeholder]::placeholder , textarea[placeholder]::placeholder {
+input[placeholder]::placeholder,
+textarea[placeholder]::placeholder {
   font-style: italic;
 }
 
-input, .input {
+input,
+.input {
   margin-bottom: 0;
 }

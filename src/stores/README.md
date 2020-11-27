@@ -11,10 +11,10 @@ React state is good for many small use cases. It is good at number 1, and arguab
 But it is awful for number 3, and number 4 can be impossible depending on the structure of your app
 (the state data will reset as soon as the component disappears from the react tree). The goal here
 is to make a system which is separate from react but that can be used with react that will keep
-track of our important state data. 
+track of our important state data.
 
-We can use regular state when the data doesn't necessarily have the properties listed above. For 
-example, data that doesn't need to be shared (e.g. data that is only used in the react component, 
+We can use regular state when the data doesn't necessarily have the properties listed above. For
+example, data that doesn't need to be shared (e.g. data that is only used in the react component,
 like an input's text or something). Or for example, data that doesn't need to be "persisted",
 which is to say data that doesn't need to live for the entirety of the app's lifetime.
 
@@ -33,7 +33,6 @@ just an observable box, which uses `get` and `set`. More can be found here:
 
 https://mobx.js.org
 
-
 ## Our setup
 
 Our setup uses four parts, which is a bit much, but I think the payoff is quite nice.
@@ -48,6 +47,5 @@ The tradeoff is some amount of complexity.
 3. Share the stores through `React.Context`s, so that we don't have to pass the stores everywhere.
    The alternative would be to initialize our store at the beginning of the app and pass it through
    react props, which would be super annoying. You create a context by using `createContext`.
-3. Use mobx-react-lite to have our react components re-render when there is an update to an
+4. Use mobx-react-lite to have our react components re-render when there is an update to an
    observable. You do this by wrapping the component in the `observer` function.
-

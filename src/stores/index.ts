@@ -1,6 +1,3 @@
-import appStoreContext, { AppStore } from './appStoreContext'
+import appStoreContext, { AppStore } from './appStoreContext';
 
-export {
-  appStoreContext,
-  AppStore,
-}
+export { appStoreContext, AppStore };

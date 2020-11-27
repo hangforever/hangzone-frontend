@@ -1,9 +1,9 @@
-import React from 'react'
-import { Status } from 'types'
-import './StatusMark.scss'
+import React from 'react';
+import { Status } from 'types';
+import './StatusMark.scss';
 
 const StatusMark: React.SFC<{ status: Status }> = ({ status }) => (
   <div className={`StatusMark ${status}`}></div>
-)
+);
 
-export default StatusMark
+export default StatusMark;

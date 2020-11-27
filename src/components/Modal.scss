@@ -24,23 +24,23 @@
   padding: 2rem;
   overflow: overlay;
   max-height: calc(90vh - 7rem);
-  -webkit-box-shadow: 0px 0px 1.5rem 0px rgba(0,0,0,0.45);
-  -moz-box-shadow: 0px 0px 1.5rem 0px rgba(0,0,0,0.45);
-  box-shadow: 0px 0px 1.5rem 0px rgba(0,0,0,0.45);
+  -webkit-box-shadow: 0px 0px 1.5rem 0px rgba(0, 0, 0, 0.45);
+  -moz-box-shadow: 0px 0px 1.5rem 0px rgba(0, 0, 0, 0.45);
+  box-shadow: 0px 0px 1.5rem 0px rgba(0, 0, 0, 0.45);
 }
 
 .Modal__close-x {
   padding: 0 1rem 0.4rem 1rem;
   border-radius: 100%;
-  margin: 1rem; 
+  margin: 1rem;
   background: white;
   border: 1px solid #bbb;
   position: absolute;
   right: -1.5rem;
   top: -2rem;
-  -webkit-box-shadow: -0.1rem 0.1rem 0.4rem 0px rgba(0,0,0,0.35);
-  -moz-box-shadow: -0.1rem 0.1rem 0.4rem 0px rgba(0,0,0,0.35);
-  box-shadow: -0.1rem 0.1rem 0.4rem 0px rgba(0,0,0,0.35);
+  -webkit-box-shadow: -0.1rem 0.1rem 0.4rem 0px rgba(0, 0, 0, 0.35);
+  -moz-box-shadow: -0.1rem 0.1rem 0.4rem 0px rgba(0, 0, 0, 0.35);
+  box-shadow: -0.1rem 0.1rem 0.4rem 0px rgba(0, 0, 0, 0.35);
 }
 
 .Modal__bg {
@@ -49,6 +49,10 @@
   background: #00000075;
 }
 
-.--top { top: 1.5rem }
+.--top {
+  top: 1.5rem;
+}
 
-.--bottom { bottom: 1.5rem }
+.--bottom {
+  bottom: 1.5rem;
+}

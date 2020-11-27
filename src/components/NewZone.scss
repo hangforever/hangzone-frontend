@@ -3,14 +3,14 @@
 
 .NewZone {
   .Modal__content {
-    input[type="text"] , textarea {
+    input[type='text'],
+    textarea {
       width: 100%;
       margin-bottom: 1.5rem;
     }
-  
-    input[type="checkbox"] {
+
+    input[type='checkbox'] {
       margin: 0 1.5rem 1.5rem 0.3rem;
     }
-  
   }
 }

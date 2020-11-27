@@ -5,7 +5,13 @@
   width: 10px;
   border-radius: 50%;
 
-  &.active { background-color: $status-active; }
-  &.inactive { background-color: $status-inactive; }
-  &.offline { background-color: $status-offline; }
+  &.active {
+    background-color: $status-active;
+  }
+  &.inactive {
+    background-color: $status-inactive;
+  }
+  &.offline {
+    background-color: $status-offline;
+  }
 }
