@@ -32,7 +32,7 @@ function App() {
   return appStore.loading ? (
     <Loading />
   ) : (
-    <div className="App">
+    <div className="App" data-testid="App">
       {appStore.firebaseUser && appStore.profile ? (
         <>
           <div className="body">
