@@ -9,8 +9,8 @@ enum Routes {
   SignUpComplete = '/sign-up/complete',
   Map = '/map',
   Settings = '/settings',
-  Profile ='/profile',
+  Profile = '/profile',
   Friends = '/friends',
 }
 
-export default Routes
+export default Routes;

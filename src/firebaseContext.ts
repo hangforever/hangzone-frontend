@@ -1,10 +1,10 @@
-import { createContext } from 'react'
-import * as firebase from "firebase/app";
+import { createContext } from 'react';
+import * as firebase from 'firebase/app';
 
 // Add the Firebase products that you want to use
-import "firebase/auth";
-import "firebase/firestore";
-import "firebase/storage"
+import 'firebase/auth';
+import 'firebase/firestore';
+import 'firebase/storage';
 
 // TODO: add potentially multiple configs for addition of STG/PRD servers
 var firebaseConfig = {
@@ -16,13 +16,11 @@ var firebaseConfig = {
   appId: process.env.REACT_APP_APP_ID,
 };
 
-firebase.initializeApp(firebaseConfig)
+firebase.initializeApp(firebaseConfig);
 
 const gAuthProvider = new firebase.auth.GoogleAuthProvider();
 gAuthProvider.addScope('https://www.googleapis.com/auth/contacts.readonly');
 
-export {
-  firebase
-}
+export { firebase };
 
 export default createContext(firebase);

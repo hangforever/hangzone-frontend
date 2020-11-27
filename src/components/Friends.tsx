@@ -1,20 +1,20 @@
-import React, { useState, useContext } from 'react'
-import { observer } from 'mobx-react-lite'
-import appStoreContext from '../stores/appStoreContext'
-import FriendsList from './FriendsList'
-import './Friends.scss'
+import React, { useState, useContext } from 'react';
+import { observer } from 'mobx-react-lite';
+import appStoreContext from '../stores/appStoreContext';
+import FriendsList from './FriendsList';
+import './Friends.scss';
 
-interface Props {  }
+interface Props {}
 
 const Friends: React.SFC<Props> = () => {
-  const [search, updateSearch] = useState('')
-  const appStore = useContext(appStoreContext)
-  const { firebaseUser, profile, friendProfiles } = appStore
+  const [search, updateSearch] = useState('');
+  const appStore = useContext(appStoreContext);
+  const { firebaseUser, profile, friendProfiles } = appStore;
 
   const filteredFriends = friendProfiles.filter((cur) => {
-    const searchRegex = new RegExp(`.*${search}.*`, 'i')
-    return searchRegex.test(cur.displayName)
-  })
+    const searchRegex = new RegExp(`.*${search}.*`, 'i');
+    return searchRegex.test(cur.displayName);
+  });
 
   const handleAddFriend = () => {
     /***
@@ -26,7 +26,7 @@ const Friends: React.SFC<Props> = () => {
       console.log(profile.friendIds)
     }
      */
-  }
+  };
 
   return firebaseUser && profile && friendProfiles.length > 0 ? (
     <div className="Friends">
@@ -37,14 +37,14 @@ const Friends: React.SFC<Props> = () => {
           className="input__search input-primary"
           name="search"
           value={search}
-          onChange={e => updateSearch(e.target.value)} 
+          onChange={(e) => updateSearch(e.target.value)}
         />
       </div>
       <div className="Friends__friends-list">
-        <FriendsList friends={filteredFriends}/>
+        <FriendsList friends={filteredFriends} />
       </div>
       <div className="Friends__controls">
-        <button 
+        <button
           className="button__add-friend button-primary"
           onClick={handleAddFriend}
         >
@@ -58,7 +58,7 @@ const Friends: React.SFC<Props> = () => {
         <p>It seems you have no friends :'(</p>
       </div>
       <div className="Friends__controls">
-        <button 
+        <button
           className="button__add-friend button-primary"
           onClick={handleAddFriend}
         >
@@ -66,7 +66,7 @@ const Friends: React.SFC<Props> = () => {
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default observer(Friends)
+export default observer(Friends);

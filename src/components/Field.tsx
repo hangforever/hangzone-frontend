@@ -1,32 +1,37 @@
-import React, { useState } from 'react'
-import './Field.scss'
+import React, { useState } from 'react';
+import './Field.scss';
 
 interface FieldProps {
-  label: string
-  initialValue?: string
-  initialActive?: boolean
-  onSubmit?: (value: string) => void
-  disabled?: boolean
+  label: string;
+  initialValue?: string;
+  initialActive?: boolean;
+  onSubmit?: (value: string) => void;
+  disabled?: boolean;
 }
 
 const Field: React.SFC<FieldProps> = ({
   label,
   initialValue = '',
   initialActive = false,
-  onSubmit = () => { },
+  onSubmit = () => {},
   disabled = false,
 }) => {
-  const [value, updateValue] = useState(initialValue)
-  const [active, updateActive] = useState(initialActive)
+  const [value, updateValue] = useState(initialValue);
+  const [active, updateActive] = useState(initialActive);
   return (
     <div className="Field">
-      <label className="Field__label" htmlFor={label}>{label}</label>
+      <label className="Field__label" htmlFor={label}>
+        {label}
+      </label>
       {active ? (
-        <form className="Field__form" onSubmit={(e) => {
-          e.preventDefault()
-          onSubmit(value)
-          updateActive(false)
-        }}>
+        <form
+          className="Field__form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            onSubmit(value);
+            updateActive(false);
+          }}
+        >
           <input
             className="Field__input"
             type="text"
@@ -36,15 +41,15 @@ const Field: React.SFC<FieldProps> = ({
           />
         </form>
       ) : (
-          <div
-            className="Field__value"
-            onClick={disabled ? () => { } : () => updateActive(true)}
-          >
-            {value}
-          </div>
-        )}
+        <div
+          className="Field__value"
+          onClick={disabled ? () => {} : () => updateActive(true)}
+        >
+          {value}
+        </div>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default Field
+export default Field;

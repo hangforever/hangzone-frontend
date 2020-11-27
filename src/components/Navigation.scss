@@ -20,11 +20,15 @@
 
       &.active {
         background: $bg-btn-active;
-        li { border-right: none; }
+        li {
+          border-right: none;
+        }
       }
 
       &:last-child {
-        li { border-right: none; }
+        li {
+          border-right: none;
+        }
       }
 
       li {

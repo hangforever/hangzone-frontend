@@ -1,7 +1,7 @@
-##  Description
+## Description
 
 An app that enables hangers from all over the world to discover and share zones
-in which to hang 
+in which to hang
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 Bootstrapped, but there is some extra stuff in there to make it play nicely with firebase, etc.
@@ -33,8 +33,9 @@ yarn
 This file is in .gitignore so it will not be tracked
 
 `.env`
+
 ```
-REACT_APP_API_KEY=AIzaSyCRi1Xpc3e0HR9g66H0Mtkn8VzvTmU3U4Y 
+REACT_APP_API_KEY=AIzaSyCRi1Xpc3e0HR9g66H0Mtkn8VzvTmU3U4Y
 REACT_APP_AUTH_DOMAIN=hangzone-494fc.firebaseapp.com
 REACT_APP_DATABASE_URL=https://hangzone-494fc.firebaseio.com
 REACT_APP_PROJECT_ID=hangzone-494fc
@@ -77,7 +78,6 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 This will build any assets necessary and then upload them to firebase.
 
-
 ## Other scripts
 
 ### `yarn build`
@@ -99,6 +99,10 @@ If you aren’t satisfied with the build tool and configuration choices, you can
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+### prettier:\*
+
+Please see the [prettier](https://github.com/prettier/eslint-config-prettier) repo for info. This will only run on ./src/\* files.
 
 ## On MobX
 
