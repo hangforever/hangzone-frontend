@@ -38,3 +38,21 @@ export async function setProfile(firebaseUserUID: string, profile: IProfile): Pr
   const createdProfile = await docRef.get()
   return createdProfile.data() as IProfile | undefined
 }
+
+export async function getFriendProfiles(friendUserIds: Array<string>): Promise<IProfile[]> {
+  const friendProfiles: IProfile[] = await firebase.firestore()
+      .collection('profiles')
+      .where(firebase.firestore.FieldPath.documentId(), 'in', friendUserIds)
+      .get()
+      .then(res => {
+        let result: IProfile[] = []
+        res.forEach(doc => {
+          const data = doc.data()
+          if (data) {
+            result.push(data as IProfile)
+          }
+        })
+        return result
+      })
+    return friendProfiles
+  }

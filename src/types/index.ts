@@ -26,13 +26,6 @@ export enum Status {
   Offline = 'offline',
 }
 
-export interface IFriend {
-  displayName: string,
-  id: string
-  photoURL: string,
-  status: Status
-}
-
 export {
   Routes
 }
