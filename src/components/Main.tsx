@@ -34,7 +34,10 @@ function Main() {
           Now we're cookin with farts - Scott 2020 at the age of a single
           Willennium
           <br />
-          <img src="https://upload.wikimedia.org/wikipedia/en/c/c1/WillSmith-Willennium.jpg" />
+          <img
+            src="https://upload.wikimedia.org/wikipedia/en/c/c1/WillSmith-Willennium.jpg"
+            alt="Will smith gettin' down"
+          />
         </p>
       </div>
     </div>

@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { IProfile } from '../types';
-import StatusMark from './StatusMark';
 import './FriendsList.scss';
 
 interface Props {

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { observer } from 'mobx-react-lite';
 import appStoreContext from '../stores/appStoreContext';
 import HangzoneItem from './HangzoneItem';
