@@ -35,7 +35,8 @@
     "dev:react": "react-scripts start",
     "deploy": "yarn build && firebase deploy",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --watchAll=false",
+    "test:watch": "react-scripts test",
     "eject": "react-scripts eject",
     "prettier:check": "prettier --check ./src",
     "prettier:write": "prettier --write ./src"
