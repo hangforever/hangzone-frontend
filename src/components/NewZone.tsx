@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react' 
 import { observer } from "mobx-react-lite"
-import appStoreContext from 'stores/appStoreContext'
-import Modal from 'components/Modal'
+import appStoreContext from '../stores/appStoreContext'
+import Modal from '../components/Modal'
 import './NewZone.scss'
 import '../styles/modifiers.scss'
 
@@ -25,6 +25,8 @@ const NewZoneModal = () => {
       {active && (
         <Modal
           active={active}
+          className='--bottom'
+          maxHeight='45vh'
           onCloseClick={() => toggleActive(!active)}
         >
           <>
@@ -61,7 +63,7 @@ const NewZoneModal = () => {
         </Modal>
       )}
       {!active &&
-       <button className="NewZoneModal__button" onClick={() => toggleActive(!active)}>
+       <button className="NewZone__modal-button" onClick={() => toggleActive(!active)}>
         add zone +
       </button>}
     </div>

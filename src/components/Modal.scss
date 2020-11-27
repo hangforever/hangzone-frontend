@@ -3,7 +3,9 @@
 
 .Modal {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   width: 100vw;
   height: 90vh;
   position: absolute;
@@ -14,16 +16,14 @@
 .Modal__container {
   background: white;
   position: absolute;
-  margin: 0 1rem 0 1rem;
-  width: 95vw;
-  bottom: 1.5rem;
+  width: calc(100vw - 2rem);
   border-radius: $border-radius;
 }
 
 .Modal__content {
   padding: 2rem;
   overflow: overlay;
-  max-height: 45vh;
+  max-height: calc(90vh - 7rem);
   -webkit-box-shadow: 0px 0px 1.5rem 0px rgba(0,0,0,0.45);
   -moz-box-shadow: 0px 0px 1.5rem 0px rgba(0,0,0,0.45);
   box-shadow: 0px 0px 1.5rem 0px rgba(0,0,0,0.45);
@@ -48,3 +48,7 @@
   width: inherit;
   background: #00000075;
 }
+
+.--top { top: 1.5rem }
+
+.--bottom { bottom: 1.5rem }
