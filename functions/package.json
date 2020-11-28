@@ -2,11 +2,10 @@
   "name": "functions",
   "scripts": {
     "lint": "./node_modules/.bin/tslint --project ./tsconfig.json",
-    "watch": "tsc -w",
     "build": "yarn lint && tsc -w",
-    "serve:all": "npm run build | firebase emulators:start",
-    "serve": "npm run build | firebase emulators:start --only functions",
-    "shell": "npm run build && firebase functions:shell",
+    "serve:all": "concurrently --kill-others 'yarn build' 'firebase emulators:start'",
+    "serve": "concurrently --kill-others 'yarn build' 'firebase emulators:start --only functions'",
+    "shell": "firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log"
@@ -16,11 +15,13 @@
   },
   "main": "lib/index.js",
   "dependencies": {
+    "express": "^4.17.1",
     "firebase-admin": "^8.9.0",
     "firebase-functions": "^3.3.0"
   },
   "devDependencies": {
     "@types/testing-library__dom": "^7.5.0",
+    "concurrently": "^5.3.0",
     "firebase-functions-test": "^0.1.6",
     "tslint": "^5.12.0",
     "typescript": "^3.2.2"
