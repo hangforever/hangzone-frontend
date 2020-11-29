@@ -2,9 +2,10 @@
   "name": "functions",
   "scripts": {
     "lint": "./node_modules/.bin/tslint --project ./tsconfig.json",
-    "build": "yarn lint && tsc -w",
-    "serve:all": "concurrently --kill-others 'yarn build' 'firebase emulators:start'",
-    "serve": "concurrently --kill-others 'yarn build' 'firebase emulators:start --only functions'",
+    "watch": "yarn lint && tsc -w",
+    "build": "yarn lint && tsc",
+    "serve:all": "concurrently --kill-others 'yarn watch' 'firebase emulators:start'",
+    "serve": "concurrently --kill-others 'yarn watch' 'firebase emulators:start --only functions'",
     "shell": "firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",

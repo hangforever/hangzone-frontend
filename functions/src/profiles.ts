@@ -36,9 +36,9 @@ router.get('/friends', async (req: IGetUserAuthInfoRequest, res) => {
     .collection('profiles')
     .where(admin.firestore.FieldPath.documentId(), 'in', friendUserIds)
     .get()
-    .then((res) => {
-      let result: IProfile[] = [];
-      res.forEach((doc) => {
+    .then((snap) => {
+      const result: IProfile[] = [];
+      snap.forEach((doc) => {
         const data = doc.data();
         if (data) {
           result.push(data as IProfile);
