@@ -1,7 +1,8 @@
 import { Router } from 'express';
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
-import { IProfile } from './types';
+import { IGetUserAuthInfoRequest, IProfile } from './types';
+import * as utils from './apiUtils';
 
 const router = Router();
 
@@ -11,33 +12,47 @@ router.get('/:id', (req, res) => {
   res.send('OK');
 });
 
-router.post('/', async (req, res) => {
-  const { id, name } = req.body;
-  if (!(id || name)) {
-    return res.send('Error');
-  }
+router.post('/', async (req: IGetUserAuthInfoRequest, res) => {
+  const { profile: profileData } = req.body;
+  // check required params
+  const paramErr = utils.requiredParameterChecker({
+    profile: profileData,
+  });
+  if (paramErr) return res.json(utils.errorData(422, paramErr));
 
-  await createProfile(id, name);
-  return res.send('OK');
+  try {
+    const profile = await createProfile(
+      req.user?.uidfirebaseUserUID,
+      profileData
+    );
+    if (!profile) throw new Error('Firestore did not return data');
+
+    return res.json(utils.successData(profile));
+  } catch (e) {
+    functions.logger.log(`Error creating profile: ${e}`);
+    return res.json(utils.errorData(500, e.message));
+  }
 });
 
 // Firestore Code
 async function createProfile(
   firebaseUserUID: string,
-  displayName: string,
-  options: Partial<IProfile> = {}
+  profile: Partial<IProfile> = {}
 ): Promise<IProfile | undefined> {
-  const profile = {
-    displayName,
+  if (!profile.displayName) {
+    throw Error('Display name is required');
+  }
+  const newProfile = {
+    displayName: profile.displayName,
     friendIds: {},
-    bio: options.bio || '',
-    photoURL: options.photoURL || '/blank_hanger.png',
+    bio: profile.bio || '',
+    photoURL: profile.photoURL || '/blank_hanger.png',
   };
   const docRef = await admin
     .firestore()
     .collection('profiles')
     .doc(firebaseUserUID);
-  await docRef.set(profile);
+  await docRef.set(newProfile);
   const createdProfile = await docRef.get();
   return createdProfile.data() as IProfile | undefined;
 }
