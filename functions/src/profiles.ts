@@ -7,9 +7,40 @@ import * as utils from './apiUtils';
 const router = Router();
 
 // Route Code
-router.get('/:id', (req, res) => {
-  functions.logger.log('User requested the profile with ID:', req.params.id);
-  res.send('OK');
+router.get('/', async (req: IGetUserAuthInfoRequest, res) => {
+  const profile = await getOwnProfile(req);
+  return res.json(utils.successData({ profile }));
+});
+
+router.get('/friends', async (req: IGetUserAuthInfoRequest, res) => {
+  const firebaseUserUID = req.user?.uid;
+  if (!firebaseUserUID) throw new Error('Not a valid user');
+
+  const profile = await getOwnProfile(req);
+  if (!profile) throw new Error('User does not have profile');
+
+  const friendUserIds = Object.keys(profile.friendIds);
+  if (!friendUserIds.length) {
+    return res.json(utils.successData({ friendProfiles: [] }));
+  }
+
+  const friendProfiles: IProfile[] = await admin
+    .firestore()
+    .collection('profiles')
+    .where(admin.firestore.FieldPath.documentId(), 'in', friendUserIds)
+    .get()
+    .then((res) => {
+      let result: IProfile[] = [];
+      res.forEach((doc) => {
+        const data = doc.data();
+        if (data) {
+          result.push(data as IProfile);
+        }
+      });
+      return result;
+    });
+
+  return res.json(utils.successData({ friendProfiles }));
 });
 
 router.post('/', async (req: IGetUserAuthInfoRequest, res) => {
@@ -33,6 +64,27 @@ router.post('/', async (req: IGetUserAuthInfoRequest, res) => {
   }
 });
 
+router.put('/', async (req: IGetUserAuthInfoRequest, res) => {
+  const firebaseUserUID = req.user?.uid;
+  if (!firebaseUserUID) throw new Error('Not a valid user');
+
+  const { profile: profileData } = req.body;
+  // check required params
+  const paramErr = utils.requiredParameterChecker({
+    profile: profileData,
+  });
+  if (paramErr) return res.status(422).json(utils.errorData(422, paramErr));
+
+  const docRef = await admin
+    .firestore()
+    .collection('profiles')
+    .doc(firebaseUserUID);
+  await docRef.set(profileData);
+  const createdProfile = await docRef.get();
+
+  return res.json(utils.successData({ profile: createdProfile }));
+});
+
 // Firestore Code
 async function createProfile(
   firebaseUserUID: string,
@@ -54,6 +106,20 @@ async function createProfile(
   await docRef.set(newProfile);
   const createdProfile = await docRef.get();
   return createdProfile.data() as IProfile | undefined;
+}
+
+async function getOwnProfile(req: IGetUserAuthInfoRequest) {
+  const firebaseUserUID = req.user?.uid;
+  if (!firebaseUserUID) throw new Error('Not a valid user');
+
+  const profile = (await admin
+    .firestore()
+    .collection('profiles')
+    .doc(firebaseUserUID)
+    .get()
+    .then((doc) => doc.data())) as IProfile | null;
+
+  return profile;
 }
 
 export default router;
