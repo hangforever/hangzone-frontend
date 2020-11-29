@@ -7,7 +7,7 @@ import 'firebase/firestore';
 import 'firebase/storage';
 
 // TODO: add potentially multiple configs for addition of STG/PRD servers
-var firebaseConfig = {
+let firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
   databaseURL: process.env.REACT_APP_DATABASE_URL,
@@ -17,6 +17,9 @@ var firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+if (process.env.NODE_ENV === 'development') {
+  // TODO: Use auth emulator when firebase fixes auth
+}
 
 const gAuthProvider = new firebase.auth.GoogleAuthProvider();
 gAuthProvider.addScope('https://www.googleapis.com/auth/contacts.readonly');
