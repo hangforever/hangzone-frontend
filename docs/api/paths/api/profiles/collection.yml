@@ -1,0 +1,153 @@
+get:
+  tags:
+    - profiles
+  operationId: getProfile
+  description: Get own profile
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: number
+                example: 200
+              message:
+                type: string
+                example: ''
+              data:
+                type: object
+                properties:
+                  profile:
+                    $ref: '../../../schemas/profile.yml'
+    '403':
+      description: Could not authenticate
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: number
+                example: 403
+              message:
+                type: string
+                example: Unauthorized
+post:
+  tags:
+    - profiles
+  operationId: createProfile
+  description: Create a profile for a firebase authenticated user
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            profile:
+              $ref: '../../../schemas/profile.yml'
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: number
+                example: 200
+              message:
+                type: string
+                example: ''
+              data:
+                type: object
+                properties:
+                  profile:
+                    $ref: '../../../schemas/profile.yml'
+    '403':
+      description: Could not authenticate
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: number
+                example: 403
+              message:
+                type: string
+                example: Unauthorized
+    '422':
+      description: Malformed User Creation Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: number
+                example: 422
+              message:
+                type: string
+                example: Missing 'displayName' property
+put:
+  tags:
+    - profiles
+  operationId: updateProfile
+  description: Update a profile for a firebase authenticated user
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            profile:
+              $ref: '../../../schemas/profile.yml'
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: number
+                example: 200
+              message:
+                type: string
+                example: ''
+              data:
+                type: object
+                properties:
+                  profile:
+                    $ref: '../../../schemas/profile.yml'
+    '403':
+      description: Could not authenticate
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: number
+                example: 403
+              message:
+                type: string
+                example: Unauthorized
+    '422':
+      description: Malformed User Creation Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: number
+                example: 422
+              message:
+                type: string
+                example: Missing 'displayName' property

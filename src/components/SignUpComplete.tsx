@@ -1,23 +1,18 @@
 import React, { useState, useContext } from 'react';
-import { useLocation, useHistory } from 'react-router';
-import { createProfile } from 'db/profiles';
+import { useHistory } from 'react-router';
+import * as profileApi from 'api/profiles';
 import appStoreContext from 'stores/appStoreContext';
 import { Routes } from 'types';
 
-const SignUpComplete: React.SFC<{}> = () => {
+const SignUpComplete: React.FC<{}> = () => {
   const [displayName, updateDisplayName] = useState('');
   const appStore = useContext(appStoreContext);
-  const location = useLocation();
   const history = useHistory();
 
   async function handleComplete(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const urlParams = new URLSearchParams(location.search);
-    const uid = urlParams.get('uid');
     try {
-      if (!uid)
-        throw new Error('Params not set correctly. Please login again.');
-      const profile = await createProfile(uid, displayName);
+      const profile = await profileApi.create({ displayName });
       if (profile) {
         appStore.profile = profile;
       } else {

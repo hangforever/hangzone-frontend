@@ -5,7 +5,8 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import App from 'components/App';
 import { firebase } from 'firebaseContext';
 import { appStore } from 'stores/appStoreContext';
-import { getProfile, getFriendProfiles } from 'db/profiles';
+import * as profileApi from 'api/profiles';
+import API from 'api/axios';
 import * as serviceWorker from './serviceWorker';
 
 firebase.auth().onAuthStateChanged(async function (firebaseUser) {
@@ -14,23 +15,17 @@ firebase.auth().onAuthStateChanged(async function (firebaseUser) {
     return;
   }
   appStore.firebaseUser = firebaseUser;
+  const token = await firebaseUser.getIdToken();
+  API.defaults.headers['Authorization'] = `Bearer ${token}`;
 
-  const profile = await getProfile(firebaseUser.uid);
-
-  if (profile) {
-    if (Object.keys(profile.friendIds).length > 0) {
-      const friendProfiles = await getFriendProfiles(
-        Object.keys(profile.friendIds)
-      );
-      appStore.friendProfiles = friendProfiles;
-    }
-  }
-
+  const profile = await profileApi.get();
   if (!profile) {
     appStore.loading = false;
     return;
   }
 
+  const friendProfiles = await profileApi.getFriends();
+  appStore.friendProfiles = friendProfiles;
   appStore.profile = profile;
   appStore.loading = false;
 });

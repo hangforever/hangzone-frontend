@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { observer } from 'mobx-react-lite';
 import { appStoreContext } from 'stores';
 import firebaseContext from 'firebaseContext';
-import { setProfile } from 'db/profiles';
+import * as profileApi from 'api/profiles';
 import { NavLink } from 'react-router-dom';
 import Field from 'components/Field';
 import Modal from 'components/Modal';
@@ -50,7 +50,7 @@ const Profile = () => {
           uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
             if (appStore.profile && appStore.firebaseUser) {
               appStore.profile.photoURL = downloadURL;
-              setProfile(appStore.firebaseUser.uid, appStore.profile);
+              profileApi.set(appStore.profile);
               updateUploadProgress(0);
               updateModalActive(false);
             }
@@ -70,7 +70,7 @@ const Profile = () => {
           initialActive
           onSubmit={(newURL) => {
             profile.photoURL = newURL;
-            setProfile(firebaseUser.uid, profile);
+            profileApi.set(profile);
             updateModalActive(false);
           }}
         />
@@ -110,7 +110,7 @@ const Profile = () => {
           initialValue={profile.displayName}
           onSubmit={(value) => {
             profile.displayName = value;
-            setProfile(firebaseUser.uid, profile);
+            profileApi.set(profile);
           }}
         />
       </div>
@@ -120,7 +120,7 @@ const Profile = () => {
           initialValue={profile.bio || ''}
           onSubmit={(value) => {
             profile.bio = value;
-            setProfile(firebaseUser.uid, profile);
+            profileApi.set(profile);
           }}
         />
       </div>
