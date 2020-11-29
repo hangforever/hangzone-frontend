@@ -6,6 +6,7 @@ import App from 'components/App';
 import { firebase } from 'firebaseContext';
 import { appStore } from 'stores/appStoreContext';
 import { getProfile, getFriendProfiles } from 'db/profiles';
+import API from 'api';
 import * as serviceWorker from './serviceWorker';
 
 firebase.auth().onAuthStateChanged(async function (firebaseUser) {
@@ -14,6 +15,8 @@ firebase.auth().onAuthStateChanged(async function (firebaseUser) {
     return;
   }
   appStore.firebaseUser = firebaseUser;
+  const token = await firebaseUser.getIdToken();
+  API.defaults.headers['Authorization'] = `Bearer ${token}`;
 
   const profile = await getProfile(firebaseUser.uid);
 
