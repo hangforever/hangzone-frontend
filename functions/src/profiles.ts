@@ -18,19 +18,18 @@ router.post('/', async (req: IGetUserAuthInfoRequest, res) => {
   const paramErr = utils.requiredParameterChecker({
     profile: profileData,
   });
-  if (paramErr) return res.json(utils.errorData(422, paramErr));
+  if (paramErr) return res.status(422).json(utils.errorData(422, paramErr));
 
   try {
-    const profile = await createProfile(
-      req.user?.uidfirebaseUserUID,
-      profileData
-    );
+    if (!req.user?.uid) throw new Error('Not a valid user');
+
+    const profile = await createProfile(req.user?.uid, profileData);
     if (!profile) throw new Error('Firestore did not return data');
 
-    return res.json(utils.successData(profile));
+    return res.json(utils.successData({ profile }));
   } catch (e) {
     functions.logger.log(`Error creating profile: ${e}`);
-    return res.json(utils.errorData(500, e.message));
+    return res.status(500).json(utils.errorData(500, e.message));
   }
 });
 
