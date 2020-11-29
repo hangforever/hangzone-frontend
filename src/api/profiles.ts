@@ -1,4 +1,3 @@
-import { firebase } from 'firebaseContext';
 import { IProfile } from 'types';
 import API from './axios';
 
@@ -7,7 +6,7 @@ import API from './axios';
  * Each profile's UID is the UID of the firebaseUser's UID that it is created with
  */
 
-export async function fetchCreateProfile(
+export async function create(
   profile: Partial<IProfile> = {}
 ): Promise<IProfile> {
   const { data, status } = await API.post('/api/profiles', {
@@ -22,21 +21,19 @@ export async function fetchCreateProfile(
   return data.data.profile;
 }
 
-export async function getProfile(): Promise<IProfile | null> {
+export async function get(): Promise<IProfile | null> {
   const { data, status } = await API.get('/api/profiles');
   if (status !== 200) throw new Error(data.message);
   return data.data.profile;
 }
 
-export async function setProfile(
-  profile: IProfile
-): Promise<IProfile | undefined> {
+export async function set(profile: IProfile): Promise<IProfile | undefined> {
   const { data, status } = await API.put('/api/profiles', { profile });
   if (status !== 200) throw new Error(data.message);
   return data.data.profile;
 }
 
-export async function getFriendProfiles(): Promise<IProfile[]> {
+export async function getFriends(): Promise<IProfile[]> {
   const { data, status } = await API.get('/api/profiles/friends');
   if (status !== 200) throw new Error(data.message);
   return data.data.friendProfiles;
