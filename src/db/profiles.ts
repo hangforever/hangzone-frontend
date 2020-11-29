@@ -1,5 +1,6 @@
 import { firebase } from 'firebaseContext';
 import { IProfile } from 'types';
+import API from 'api';
 
 /**
  * `profiles` collection
@@ -7,23 +8,19 @@ import { IProfile } from 'types';
  */
 
 export async function createProfile(
-  firebaseUserUID: string,
-  displayName: string,
-  options: Partial<IProfile> = {}
-): Promise<IProfile | undefined> {
-  const profile = {
-    displayName,
+  profile: Partial<IProfile> = {}
+): Promise<IProfile> {
+  const newProfile = {
+    displayName: profile.displayName,
     friendIds: {},
-    bio: options.bio || '',
-    photoURL: options.photoURL || '/blank_hanger.png',
+    bio: profile.bio || '',
+    photoURL: profile.photoURL || '/blank_hanger.png',
   };
-  const docRef = await firebase
-    .firestore()
-    .collection('profiles')
-    .doc(firebaseUserUID);
-  await docRef.set(profile);
-  const createdProfile = await docRef.get();
-  return createdProfile.data() as IProfile | undefined;
+  const { data, status } = await API.post('api/profiles', {
+    profile: newProfile,
+  });
+  if (status !== 200) throw new Error(data.message);
+  return data.data.profile;
 }
 
 export async function getProfile(

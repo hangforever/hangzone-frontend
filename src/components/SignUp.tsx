@@ -3,7 +3,7 @@ import { useHistory } from 'react-router';
 import firebaseContext from 'firebaseContext';
 import './Login.scss';
 
-const SignUp: React.SFC = () => {
+const SignUp: React.FC = () => {
   const [email, updateEmail] = useState('');
   const [password, updatePassword] = useState('');
   const history = useHistory();

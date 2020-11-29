@@ -24,8 +24,8 @@ function App() {
     // handled synchronously in the login handler
     const { profile, firebaseUser } = appStore;
     if (!firebaseUser) return history.push(Routes.Login);
-    if (!profile)
-      return history.push(Routes.SignUpComplete + `?uid=${firebaseUser.uid}`);
+    if (!profile) return history.push(Routes.SignUpComplete);
+
     history.push(Routes.Main);
   }, [appStore, history, appStore.profile, appStore.firebaseUser]);
 
