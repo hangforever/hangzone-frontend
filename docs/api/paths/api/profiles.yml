@@ -34,8 +34,8 @@ post:
                 properties:
                   profile:
                     $ref: '../../schemas/profile.yml'
-    '404':
-      description: Firebase User Not Found
+    '403':
+      description: Could not authenticate
       content:
         application/json:
           schema:
@@ -43,10 +43,10 @@ post:
             properties:
               status:
                 type: number
-                example: 404
+                example: 403
               message:
                 type: string
-                example: Firebase User with id of 'foo' does not exist
+                example: Unauthorized
     '422':
       description: Malformed User Creation Error
       content:
@@ -56,7 +56,7 @@ post:
             properties:
               status:
                 type: number
-                example: 404
+                example: 422
               message:
                 type: string
                 example: Missing 'displayName' property
