@@ -16,9 +16,13 @@ info:
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
 
 tags:
-  - name: attribute answers
-    description: Also referred to as "tags". Belong to attribute questions.
+  - name: profiles
+    description: Having to do with profiles
+  - name: friends
+    description: Having to do with friends
 
 paths:
   /api/profiles:
-    $ref: './paths/api/profiles.yml'
+    $ref: './paths/api/profiles/collection.yml'
+  /api/profiles/friends:
+    $ref: './paths/api/profiles/friends.yml'

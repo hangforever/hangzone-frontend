@@ -1,0 +1,27 @@
+get:
+  tags:
+    - profiles
+    - friends
+  operationId: getProfileFriends
+  description: Get profiles of friends on own profile
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: number
+                example: 200
+              message:
+                type: string
+                example: ''
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    friendProfiles:
+                      $ref: '../../../schemas/profile.yml'
