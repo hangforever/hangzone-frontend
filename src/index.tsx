@@ -18,22 +18,14 @@ firebase.auth().onAuthStateChanged(async function (firebaseUser) {
   const token = await firebaseUser.getIdToken();
   API.defaults.headers['Authorization'] = `Bearer ${token}`;
 
-  const profile = await getProfile(firebaseUser.uid);
-
-  if (profile) {
-    if (Object.keys(profile.friendIds).length > 0) {
-      const friendProfiles = await getFriendProfiles(
-        Object.keys(profile.friendIds)
-      );
-      appStore.friendProfiles = friendProfiles;
-    }
-  }
-
+  const profile = await getProfile();
   if (!profile) {
     appStore.loading = false;
     return;
   }
 
+  const friendProfiles = await getFriendProfiles();
+  appStore.friendProfiles = friendProfiles;
   appStore.profile = profile;
   appStore.loading = false;
 });

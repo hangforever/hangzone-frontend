@@ -10,61 +10,34 @@ import API from './axios';
 export async function fetchCreateProfile(
   profile: Partial<IProfile> = {}
 ): Promise<IProfile> {
-  const newProfile = {
-    displayName: profile.displayName,
-    friendIds: {},
-    bio: profile.bio || '',
-    photoURL: profile.photoURL || '/blank_hanger.png',
-  };
-  const { data, status } = await API.post('api/profiles', {
-    profile: newProfile,
+  const { data, status } = await API.post('/api/profiles', {
+    profile: {
+      displayName: profile.displayName,
+      friendIds: {},
+      bio: profile.bio || '',
+      photoURL: profile.photoURL || '/blank_hanger.png',
+    },
   });
   if (status !== 200) throw new Error(data.message);
   return data.data.profile;
 }
 
-export async function getProfile(
-  firebaseUserUID: string
-): Promise<IProfile | null> {
-  const profile = (await firebase
-    .firestore()
-    .collection('profiles')
-    .doc(firebaseUserUID)
-    .get()
-    .then((doc) => doc.data())) as IProfile | null;
-  return profile;
+export async function getProfile(): Promise<IProfile | null> {
+  const { data, status } = await API.get('/api/profiles');
+  if (status !== 200) throw new Error(data.message);
+  return data.data.profile;
 }
 
 export async function setProfile(
-  firebaseUserUID: string,
   profile: IProfile
 ): Promise<IProfile | undefined> {
-  const docRef = await firebase
-    .firestore()
-    .collection('profiles')
-    .doc(firebaseUserUID);
-  await docRef.set(profile);
-  const createdProfile = await docRef.get();
-  return createdProfile.data() as IProfile | undefined;
+  const { data, status } = await API.put('/api/profiles', { profile });
+  if (status !== 200) throw new Error(data.message);
+  return data.data.profile;
 }
 
-export async function getFriendProfiles(
-  friendUserIds: Array<string>
-): Promise<IProfile[]> {
-  const friendProfiles: IProfile[] = await firebase
-    .firestore()
-    .collection('profiles')
-    .where(firebase.firestore.FieldPath.documentId(), 'in', friendUserIds)
-    .get()
-    .then((res) => {
-      let result: IProfile[] = [];
-      res.forEach((doc) => {
-        const data = doc.data();
-        if (data) {
-          result.push(data as IProfile);
-        }
-      });
-      return result;
-    });
-  return friendProfiles;
+export async function getFriendProfiles(): Promise<IProfile[]> {
+  const { data, status } = await API.get('/api/profiles/friends');
+  if (status !== 200) throw new Error(data.message);
+  return data.data.friendProfiles;
 }
