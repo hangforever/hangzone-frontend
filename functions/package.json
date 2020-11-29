@@ -16,11 +16,13 @@
   },
   "main": "lib/index.js",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "firebase-admin": "^8.9.0",
     "firebase-functions": "^3.3.0"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.8",
     "@types/testing-library__dom": "^7.5.0",
     "concurrently": "^5.3.0",
     "firebase-functions-test": "^0.1.6",
