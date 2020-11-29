@@ -1,6 +1,7 @@
 import * as express from 'express';
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
+import * as cors from 'cors';
 import profilesRouter from './profiles';
 import { IGetUserAuthInfoRequest } from './types';
 import * as utils from './apiUtils';
@@ -37,6 +38,8 @@ const authenticate = async (
     return;
   }
 };
+
+app.use(cors({ origin: true }));
 
 app.use('/profiles', authenticate, profilesRouter);
 
