@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router';
 import firebaseContext from 'firebaseContext';
+import API from 'api/axios';
 import './Login.scss';
 
 const SignUp: React.FC = () => {
@@ -14,7 +15,11 @@ const SignUp: React.FC = () => {
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
-      .then(() => history.push('/'))
+      .then(async (userCredential) => {
+        const token = await userCredential.user?.getIdToken();
+        API.defaults.headers['Authorization'] = `Bearer ${token}`;
+        history.push('/');
+      })
       .catch(function (error) {
         console.error(error.code, error.message);
       });

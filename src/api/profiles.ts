@@ -1,13 +1,13 @@
 import { firebase } from 'firebaseContext';
 import { IProfile } from 'types';
-import API from 'api';
+import API from './axios';
 
 /**
  * `profiles` collection
  * Each profile's UID is the UID of the firebaseUser's UID that it is created with
  */
 
-export async function createProfile(
+export async function fetchCreateProfile(
   profile: Partial<IProfile> = {}
 ): Promise<IProfile> {
   const newProfile = {

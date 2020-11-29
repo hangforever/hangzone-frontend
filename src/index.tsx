@@ -5,8 +5,8 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import App from 'components/App';
 import { firebase } from 'firebaseContext';
 import { appStore } from 'stores/appStoreContext';
-import { getProfile, getFriendProfiles } from 'db/profiles';
-import API from 'api';
+import { getProfile, getFriendProfiles } from 'api/profiles';
+import API from 'api/axios';
 import * as serviceWorker from './serviceWorker';
 
 firebase.auth().onAuthStateChanged(async function (firebaseUser) {

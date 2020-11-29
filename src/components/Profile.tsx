@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { observer } from 'mobx-react-lite';
 import { appStoreContext } from 'stores';
 import firebaseContext from 'firebaseContext';
-import { setProfile } from 'db/profiles';
+import { setProfile } from 'api/profiles';
 import { NavLink } from 'react-router-dom';
 import Field from 'components/Field';
 import Modal from 'components/Modal';

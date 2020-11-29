@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router';
 import firebaseContext from 'firebaseContext';
 import { Routes } from 'types';
-import { createProfile } from 'db/profiles';
+import { fetchCreateProfile } from 'api/profiles';
 import './Login.scss';
 
 const Login: React.SFC = () => {
@@ -41,7 +41,7 @@ const Login: React.SFC = () => {
       .signInAnonymously()
       .then(({ user }) => {
         if (user) {
-          return createProfile({ displayName: anonUsername });
+          return fetchCreateProfile({ displayName: anonUsername });
         } else {
           throw new Error('Anonymous Login failed!');
         }

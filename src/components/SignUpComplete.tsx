@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router';
-import { createProfile } from 'db/profiles';
+import { fetchCreateProfile } from 'api/profiles';
 import appStoreContext from 'stores/appStoreContext';
 import { Routes } from 'types';
 
@@ -12,7 +12,7 @@ const SignUpComplete: React.FC<{}> = () => {
   async function handleComplete(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     try {
-      const profile = await createProfile({ displayName });
+      const profile = await fetchCreateProfile({ displayName });
       if (profile) {
         appStore.profile = profile;
       } else {
