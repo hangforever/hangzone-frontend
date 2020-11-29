@@ -6,12 +6,19 @@ import * as utils from './apiUtils';
 
 const router = Router();
 
-// Route Code
+// ROUTE CODE
+
+/**
+ * Get ones own profile
+ */
 router.get('/', async (req: IGetUserAuthInfoRequest, res) => {
   const profile = await getOwnProfile(req);
   return res.json(utils.successData({ profile }));
 });
 
+/**
+ * Get all profiles of ones friends
+ */
 router.get('/friends', async (req: IGetUserAuthInfoRequest, res) => {
   const firebaseUserUID = req.user?.uid;
   if (!firebaseUserUID) throw new Error('Not a valid user');
@@ -43,6 +50,10 @@ router.get('/friends', async (req: IGetUserAuthInfoRequest, res) => {
   return res.json(utils.successData({ friendProfiles }));
 });
 
+/**
+ * Create a new profile attached to ones firebase auth account
+ * @param profile: IProfile
+ */
 router.post('/', async (req: IGetUserAuthInfoRequest, res) => {
   const { profile: profileData } = req.body;
   // check required params
@@ -64,6 +75,10 @@ router.post('/', async (req: IGetUserAuthInfoRequest, res) => {
   }
 });
 
+/**
+ * Update ones own profile
+ * @param profile: IProfile
+ */
 router.put('/', async (req: IGetUserAuthInfoRequest, res) => {
   const firebaseUserUID = req.user?.uid;
   if (!firebaseUserUID) throw new Error('Not a valid user');
@@ -85,7 +100,6 @@ router.put('/', async (req: IGetUserAuthInfoRequest, res) => {
   return res.json(utils.successData({ profile: createdProfile }));
 });
 
-// Firestore Code
 async function createProfile(
   firebaseUserUID: string,
   profile: Partial<IProfile> = {}
