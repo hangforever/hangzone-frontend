@@ -5,6 +5,7 @@ import { IProfile } from './types';
 
 const router = Router();
 
+// Route Code
 router.get('/:id', (req, res) => {
   functions.logger.log('User requested the profile with ID:', req.params.id);
   res.send('OK');
@@ -20,7 +21,8 @@ router.post('/', async (req, res) => {
   return res.send('OK');
 });
 
-export async function createProfile(
+// Firestore Code
+async function createProfile(
   firebaseUserUID: string,
   displayName: string,
   options: Partial<IProfile> = {}

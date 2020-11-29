@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  swagger-redoc:
+    image: redocly/redoc:v2.0.0-rc.47
+    healthcheck: &healthcheck
+      test: ['CMD', 'curl', 'http://swagger-redoc']
+      interval: 10s
+      timeout: 30s
+      retries: 30
+    ports:
+      - '27427:80'
+    environment:
+      - SPEC_URL=swagger/api/main.yml
+    volumes:
+      - ./docs:/usr/share/nginx/html/swagger/
