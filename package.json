@@ -31,7 +31,8 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "dev": "run-p --race dev:firebase dev:react",
+    "bootstrap": "yarn && cd ./functions && yarn && cd ../",
+    "dev": "concurrently --kill-others 'run-p --race dev:firebase dev:react' 'cd ./functions && yarn serve'",
     "dev:firebase": "NODE_ENV=development firebase serve -p 4000",
     "dev:react": "NODE_ENV=development react-scripts start",
     "deploy": "yarn build && firebase deploy",
@@ -60,6 +61,7 @@
   },
   "devDependencies": {
     "@types/react-router-dom": "^5.1.5",
+    "concurrently": "^5.3.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.2.0"
   }
