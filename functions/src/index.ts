@@ -2,12 +2,15 @@ import * as express from 'express';
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import * as cors from 'cors';
+import seedAll from '../seed';
 import authRouter from './auth';
 import profilesRouter from './profiles';
 import { IGetUserAuthInfoRequest } from './types';
 import * as utils from './apiUtils';
 
 admin.initializeApp();
+
+seedAll().catch(functions.logger.error);
 
 // https://firebase.google.com/docs/functions/typescript
 const app = express();

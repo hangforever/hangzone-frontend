@@ -21,8 +21,7 @@ router.post('/signup', async (req: IGetUserAuthInfoRequest, res) => {
   });
   if (paramErr) return res.status(422).json(utils.errorData(422, paramErr));
 
-  console.log('cool', email, password);
-  let user = await admin
+  const user = await admin
     .auth()
     .createUser({
       email,
@@ -34,7 +33,6 @@ router.post('/signup', async (req: IGetUserAuthInfoRequest, res) => {
       console.error(error.code, error.message);
     });
 
-  console.log('user', user);
   if (user) {
     return res.json(
       utils.successData({
