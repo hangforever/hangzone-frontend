@@ -2,6 +2,7 @@ import * as express from 'express';
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import * as cors from 'cors';
+import authRouter from './auth';
 import profilesRouter from './profiles';
 import { IGetUserAuthInfoRequest } from './types';
 import * as utils from './apiUtils';
@@ -41,6 +42,7 @@ const authenticate = async (
 
 app.use(cors({ origin: true }));
 
+app.use('/auth', authRouter);
 app.use('/profiles', authenticate, profilesRouter);
 
 export const api = functions.https.onRequest(app);
