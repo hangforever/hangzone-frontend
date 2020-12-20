@@ -6,7 +6,7 @@ interface Props {
   friends: IProfile[];
 }
 
-const FriendsList: React.SFC<Props> = ({ friends }) => (
+const FriendsList: React.FC<Props> = ({ friends }) => (
   <div className="FriendsList">
     <ul>
       {friends.map((friend) => (

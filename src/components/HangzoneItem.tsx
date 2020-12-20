@@ -4,7 +4,7 @@ import { appStoreContext } from 'stores';
 
 interface Props extends Hangzone {}
 
-const HangzoneItem: React.SFC<Props> = ({
+const HangzoneItem: React.FC<Props> = ({
   id,
   name,
   description,
