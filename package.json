@@ -12,7 +12,7 @@
   "private": true,
   "scripts": {
     "bootstrap": "yarn && cd ./functions && yarn && cd ../",
-    "dev": "concurrently --kill-others 'run-p --race dev:firebase dev:react' 'cd ./functions && yarn serve:all'",
+    "dev": "concurrently --kill-others 'yarn dev:react' 'cd ./functions && yarn serve:all'",
     "dev:firebase": "NODE_ENV=development firebase serve -p 4000",
     "dev:react": "NODE_ENV=development react-scripts start",
     "deploy": "yarn build && firebase deploy",
