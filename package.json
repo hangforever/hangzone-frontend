@@ -15,6 +15,7 @@
     "dev": "concurrently --kill-others 'yarn dev:react' 'cd ./functions && yarn serve:all'",
     "dev:firebase": "NODE_ENV=development firebase serve -p 4000",
     "dev:react": "NODE_ENV=development react-scripts start",
+    "backup": "firebase emulators:export ./emulators.backup",
     "deploy": "yarn build && firebase deploy",
     "build": "NODE_ENV=production react-scripts build",
     "test": "react-scripts test --watchAll=false",

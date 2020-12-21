@@ -6,6 +6,7 @@
     "watch": "NODE_ENV=development yarn lint && tsc -w",
     "build": "yarn lint && tsc",
     "serve:all": "concurrently --kill-others 'yarn watch' 'firebase emulators:start'",
+    "serve:all:backup": "concurrently --kill-others 'yarn watch' 'firebase emulators:start --import=../emulators.backup'",
     "serve": "concurrently --kill-others 'yarn watch' 'firebase emulators:start --only functions'",
     "shell": "firebase functions:shell",
     "start": "npm run shell",
