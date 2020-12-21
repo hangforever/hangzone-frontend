@@ -32,9 +32,8 @@ $ yarn bootstrap
 
 ### `yarn dev`
 
-Runs the app in the development mode.<br />
-The CLI will tell you what port it's running locally on, if it doesn't already invasively open a tab on you.
-(help I'm being acosted by react-script tho)
+Runs the app in the development mode, as well as all the firebase emulators. Data will not be persisted between runs.<br />
+The CLI will tell you what port it's running locally on.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
