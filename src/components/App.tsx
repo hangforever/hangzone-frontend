@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import './App.scss';
-import { Link, Route, useHistory } from 'react-router-dom';
+import { Route, useHistory } from 'react-router-dom';
 import Navigation from 'components/Navigation';
 import Main from 'components/Main';
 import Login from 'components/Login';
