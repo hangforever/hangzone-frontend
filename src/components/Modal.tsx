@@ -9,7 +9,7 @@ interface Props {
   onCloseClick: () => void;
 }
 
-const Modal: React.SFC<Props> = ({
+const Modal: React.FC<Props> = ({
   active,
   className = '',
   maxHeight = '',

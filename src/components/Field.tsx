@@ -9,7 +9,7 @@ interface FieldProps {
   disabled?: boolean;
 }
 
-const Field: React.SFC<FieldProps> = ({
+const Field: React.FC<FieldProps> = ({
   label,
   initialValue = '',
   initialActive = false,

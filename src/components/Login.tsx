@@ -5,7 +5,7 @@ import { Routes } from 'types';
 import * as profileApi from 'api/profiles';
 import './Login.scss';
 
-const Login: React.SFC = () => {
+const Login: React.FC = () => {
   const [email, updateEmail] = useState('');
   const [password, updatePassword] = useState('');
   const [anonUsername, updateAnonUsername] = useState('');

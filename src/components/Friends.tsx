@@ -6,7 +6,7 @@ import './Friends.scss';
 
 interface Props {}
 
-const Friends: React.SFC<Props> = () => {
+const Friends: React.FC<Props> = () => {
   const [search, updateSearch] = useState('');
   const appStore = useContext(appStoreContext);
   const { firebaseUser, profile, friendProfiles } = appStore;

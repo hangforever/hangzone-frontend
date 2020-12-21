@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import * as firebase from 'firebase/app';
+import firebase from 'firebase/app';
 
 // Add the Firebase products that you want to use
 import 'firebase/auth';
@@ -19,6 +19,7 @@ let firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 if (process.env.NODE_ENV === 'development') {
   // TODO: Use auth emulator when firebase fixes auth
+  firebase.auth().useEmulator('http://localhost:9099/');
 }
 
 const gAuthProvider = new firebase.auth.GoogleAuthProvider();

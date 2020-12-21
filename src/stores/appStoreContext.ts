@@ -1,4 +1,5 @@
 import { createContext } from 'react';
+import firebase from 'firebase';
 import { observable, action, decorate, computed } from 'mobx';
 import { Hangzone, ISettings, IProfile } from 'types';
 
