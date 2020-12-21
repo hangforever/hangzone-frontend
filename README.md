@@ -38,6 +38,9 @@ The CLI will tell you what port it's running locally on.
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
+**NOTE**
+Changing the `.env` file's REACT_APP_DEBUG_MODE var to "true" will cause the app to open to the "DebugZone".
+
 ### `yarn test`
 
 Launches the test runner in the interactive watch mode.<br />
