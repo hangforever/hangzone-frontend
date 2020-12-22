@@ -38,8 +38,17 @@ The CLI will tell you what port it's running locally on.
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
-**NOTE**
+**Debug**
 Changing the `.env` file's REACT_APP_DEBUG_MODE var to "true" will cause the app to open to the "DebugZone".
+
+### `yarn backup`
+
+**Backup**
+If you would like to persist the data you have in your emulated firebase, while the project is running, run `yarn backup`
+
+### `yarn dev:backup`
+
+To start the project with that data you have saved, run the dev server with this command.
 
 ### `yarn test`
 
