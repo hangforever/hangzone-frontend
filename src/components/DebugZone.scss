@@ -1,7 +1,9 @@
+@import 'styles/colors';
+
 .DebugZone {
   padding: 3rem;
   text-align: center;
   height: 100vh;
   width: 100vw;
-  background: #351431;
+  background: $bg-primary;
 }

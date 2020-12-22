@@ -3,6 +3,7 @@ import { useHistory } from 'react-router';
 import firebaseContext from 'firebaseContext';
 import { Routes } from 'types';
 import * as profileApi from 'api/profiles';
+import InputText from './InputText';
 import './Login.scss';
 
 const Login: React.FC = () => {
@@ -59,19 +60,23 @@ const Login: React.FC = () => {
           <div className="row">
             <form onSubmit={handleLogin}>
               <div className="form__inner">
-                <input
-                  type="text"
-                  name="email"
-                  placeholder="hanger@zone.com"
-                  value={email}
-                  onChange={(e) => updateEmail(e.target.value)}
-                />
-                <input
-                  type="password"
-                  name="password"
-                  value={password}
-                  onChange={(e) => updatePassword(e.target.value)}
-                />
+                <div className="form-group">
+                  <InputText
+                    type="text"
+                    name="email"
+                    placeholder="hanger@zone.com"
+                    value={email}
+                    onChange={(e) => updateEmail(e.target.value)}
+                  />
+                </div>
+                <div className="form-group">
+                  <InputText
+                    type="password"
+                    name="password"
+                    value={password}
+                    onChange={(e) => updatePassword(e.target.value)}
+                  />
+                </div>
               </div>
               <input
                 className="btn--no-border"
