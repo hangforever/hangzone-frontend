@@ -1,0 +1,28 @@
+@import 'styles/colors';
+
+$border-size: 4px;
+
+.InputText {
+  color: $turquoise;
+  width: 50%;
+  margin: auto;
+
+  > input {
+    width: 100%;
+    margin-right: 5px;
+    background: rgba(0, 0, 0, 0);
+    border: none;
+    border-bottom: $border-size solid $turquoise;
+    border-radius: 0;
+    &:focus {
+      outline: none;
+      border: none;
+    }
+  }
+
+  .border-bottom {
+    margin-left: 5px;
+    background: #000;
+    height: $border-size;
+  }
+}
