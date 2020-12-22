@@ -62,7 +62,6 @@ const Login: React.FC = () => {
               <div className="form__inner">
                 <div className="form-group">
                   <InputText
-                    type="text"
                     name="email"
                     placeholder="hanger@zone.com"
                     value={email}
@@ -100,8 +99,7 @@ const Login: React.FC = () => {
             <form onSubmit={handleAnonLogin} className="form__anon">
               <div className="form__inner">
                 <span>continue without logging in using this name:</span>
-                <input
-                  type="text"
+                <InputText
                   name="anon_username"
                   placeholder="Username"
                   value={anonUsername}
