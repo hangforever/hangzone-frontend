@@ -7,7 +7,7 @@ export default function InputText({ ...rest }: Props) {
   return (
     <div className="InputText">
       <input type="text" {...rest} />
-      <div className="border-bottom"></div>
+      <div className="shadow"></div>
     </div>
   );
 }

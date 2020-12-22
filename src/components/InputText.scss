@@ -3,26 +3,49 @@
 $border-size: 4px;
 
 .InputText {
+  position: relative;
   color: $turquoise;
   width: 50%;
   margin: auto;
 
   > input {
+    position: relative;
+    z-index: 1;
+    color: $turquoise;
     width: 100%;
     margin-right: 5px;
     background: rgba(0, 0, 0, 0);
     border: none;
     border-bottom: $border-size solid $turquoise;
     border-radius: 0;
+    transition: all 0.3s;
+    &::placeholder {
+      color: $turquoise;
+      font-style: normal;
+    }
     &:focus {
+      color: $font-primary;
+      background: #fff;
       outline: none;
       border: none;
+      &::placeholder {
+        color: rgba(0, 0, 0, 0.2);
+      }
+      & + .shadow {
+        background: #000;
+        top: $border-size;
+        border-bottom: none;
+      }
     }
   }
 
-  .border-bottom {
-    margin-left: 5px;
-    background: #000;
-    height: $border-size;
+  .shadow {
+    position: absolute;
+    border-bottom: $border-size solid #000;
+    top: 0;
+    left: $border-size;
+    height: 100%;
+    width: 100%;
+    z-index: 0;
   }
 }

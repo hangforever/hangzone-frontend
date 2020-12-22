@@ -11,7 +11,7 @@ export default function DebugZone() {
     <div className="DebugZone">
       {/* <h1>The freedom to do anything isn't freedom at all!</h1> */}
       <div className="DebugZone-body">
-        <InputText value={'Hello'} />
+        <InputText placeholder="Username" />
       </div>
     </div>
   );
