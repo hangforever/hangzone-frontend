@@ -1,4 +1,6 @@
 import React from 'react';
+import InputText from './InputText';
+import './DebugZone.scss';
 
 /**
  * A General debug sandbox that only shows up in local development
@@ -7,8 +9,10 @@ import React from 'react';
 export default function DebugZone() {
   return (
     <div className="DebugZone">
-      <h1>The freedom to do anything isn't freedom at all!</h1>
-      <div className="DebugZone-body">The body</div>
+      {/* <h1>The freedom to do anything isn't freedom at all!</h1> */}
+      <div className="DebugZone-body">
+        <InputText value={'Hello'} />
+      </div>
     </div>
   );
 }
