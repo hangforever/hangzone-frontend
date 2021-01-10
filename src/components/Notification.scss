@@ -2,13 +2,17 @@
 
 .Notification {
   position: relative;
+  z-index: 100;
   .oi[data-glyph='x'] {
+    cursor: pointer;
+    z-index: 101;
     position: absolute;
     font-size: 12px;
     top: 3px;
     right: 8px;
   }
   .inner {
+    padding: 1.5rem;
     position: relative;
     z-index: 1;
     border-radius: $border-radius;

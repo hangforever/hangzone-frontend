@@ -9,6 +9,8 @@ interface Props {
   shadowColor?: ToolColor;
   iconGlyph?: string;
   children: React.ReactNode;
+  onClose?: (e: React.MouseEvent<HTMLSpanElement>) => void;
+  onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 export default function Notification({
@@ -17,12 +19,14 @@ export default function Notification({
   faceColor = 'black',
   shadowColor = 'green',
   children,
+  onClose = (e) => console.log('On close', e),
+  onClick = (e) => console.log('On click', e),
 }: Props) {
   return (
-    <div className={`Notification ${className}`}>
+    <div className={`Notification ${className}`} onClick={onClick}>
+      {iconGlyph && <span className="icon oi" data-glyph={iconGlyph} />}
       <div className={`inner ${backgroundColor(faceColor)}`}>
-        <span className="oi" data-glyph="x" />
-        {iconGlyph && <span className="icon oi" data-glyph={iconGlyph} />}
+        <span className="oi" data-glyph="x" onClick={onClose} />
         {children}
       </div>
       <div className={`shadow ${backgroundColor(shadowColor)}`} />
