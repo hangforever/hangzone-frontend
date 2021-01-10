@@ -16,7 +16,7 @@
 }
 
 @mixin focused-shadow() {
-  @include height-weight(100%);
+  @include height-width(100%);
   @include top-left-offset($border-size);
   background: #000;
   border-radius: $border-radius;
