@@ -2,11 +2,37 @@
 
 $border-size: 4px;
 
+@mixin focused() {
+  color: $font-primary;
+  background: #fff;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  &::placeholder {
+    color: rgba(0, 0, 0, 0.2);
+  }
+  & + .shadow {
+    background: #000;
+    border-radius: 10px;
+    top: $border-size;
+    border-bottom: none;
+  }
+  & + .shadow + .icon.oi {
+    color: $font-primary;
+  }
+}
+
 .InputText {
   position: relative;
   color: $turquoise;
   width: 100%;
   margin: auto;
+
+  &.solid {
+    > input {
+      @include focused;
+    }
+  }
 
   > input {
     position: relative;
@@ -24,18 +50,10 @@ $border-size: 4px;
       font-style: normal;
     }
     &:focus {
-      color: $font-primary;
-      background: #fff;
-      outline: none;
-      border: none;
-      &::placeholder {
-        color: rgba(0, 0, 0, 0.2);
-      }
-      & + .shadow {
-        background: #000;
-        top: $border-size;
-        border-bottom: none;
-      }
+      @include focused;
+    }
+    &.has-icon {
+      padding-left: 3rem;
     }
   }
 
@@ -47,5 +65,12 @@ $border-size: 4px;
     height: 100%;
     width: 100%;
     z-index: 0;
+  }
+
+  .icon {
+    position: absolute;
+    top: 7px;
+    left: 10px;
+    z-index: 100;
   }
 }
