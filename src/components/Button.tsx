@@ -3,6 +3,7 @@ import { ToolColor } from 'types';
 import './Button.scss';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  className?: string;
   faceColor?: ToolColor;
   shadowColor?: ToolColor;
   iconGlyph?: string;
@@ -10,6 +11,7 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export default function Button({
+  className = '',
   iconGlyph,
   faceColor = 'black',
   shadowColor = 'green',
@@ -18,7 +20,7 @@ export default function Button({
 }: Props) {
   const backgroundColor = (color: ToolColor) => `background-${color}`;
   return (
-    <div className={`Button`}>
+    <div className={`Button ${className}`}>
       <button
         className={`${iconGlyph ? 'has-icon' : ''} ${backgroundColor(
           faceColor

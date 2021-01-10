@@ -4,7 +4,10 @@
   display: inline-block;
   position: relative;
   color: $font-secondary;
+  margin: $border-size / 2;
+
   > button {
+    width: 100%;
     color: $font-secondary;
     position: relative;
     z-index: 1;
