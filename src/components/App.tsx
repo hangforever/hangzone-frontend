@@ -12,14 +12,20 @@ import SignUp from 'components/SignUp';
 import SignUpComplete from 'components/SignUpComplete';
 import Loading from 'components/Loading';
 import Friends from 'components/Friends';
+import DebugZone from 'components/DebugZone';
 import { Routes } from 'types';
 import { appStoreContext } from 'stores';
+import { isDevelopment } from '../util';
 
 function App() {
   const appStore = useContext(appStoreContext);
   const history = useHistory();
 
   useEffect(() => {
+    if (process.env.REACT_APP_DEBUG_MODE === 'true') {
+      history.push(Routes.DebugZone);
+      return;
+    }
     // FIXME: This code that pushes to routes should probably be
     // handled synchronously in the login handler
     const { profile, firebaseUser } = appStore;
@@ -50,6 +56,9 @@ function App() {
           <Route path={Routes.Login} component={Login} />
           <Route exact path={Routes.SignUp} component={SignUp} />
           <Route path={Routes.SignUpComplete} component={SignUpComplete} />
+          {isDevelopment() && (
+            <Route path={Routes.DebugZone} component={DebugZone} />
+          )}
         </>
       )}
     </div>

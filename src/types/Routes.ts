@@ -11,6 +11,7 @@ enum Routes {
   Settings = '/settings',
   Profile = '/profile',
   Friends = '/friends',
+  DebugZone = '/debug-zone',
 }
 
 export default Routes;

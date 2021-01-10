@@ -10,26 +10,10 @@
     align-items: flex-end;
 
     .form__inner {
-      border: 1px solid black;
       width: 100%;
       text-align: center;
       padding-top: 1.5rem;
       padding-bottom: 1.5rem;
-
-      input {
-        width: 90%;
-        display: inline-block;
-        border-radius: 0;
-        background: black;
-        color: white;
-        border: none;
-        height: 30px;
-        margin: 0;
-        margin-top: 1.5rem;
-        &:first-child {
-          margin-top: 0;
-        }
-      }
     }
   }
 
