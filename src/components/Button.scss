@@ -12,6 +12,10 @@
     position: relative;
     z-index: 1;
 
+    &.has-icon {
+      padding-left: 45px;
+    }
+
     &:active {
       @include top-left-offset($border-size);
     }
@@ -20,7 +24,7 @@
   .icon {
     position: absolute;
     top: 7px;
-    left: 10px;
+    left: 23px;
     z-index: 100;
   }
 }
