@@ -10,7 +10,7 @@ import './DebugZone.scss';
  */
 export default function DebugZone() {
   return (
-    <div className="DebugZone">
+    <div className="DebugZone bg-fresh">
       {/* <h1>The freedom to do anything isn't freedom at all!</h1> */}
       <div className="container">
         <div className="DebugZone-body">
@@ -29,7 +29,11 @@ export default function DebugZone() {
           </div>
           <div className="form-group">
             <Button>Create a new zone!</Button>
+          </div>
+          <div className="form-group">
             <Button iconGlyph="magnifying-glass">Search</Button>
+          </div>
+          <div className="form-group">
             <Button faceColor="green" shadowColor="black" className="hw-100">
               Search
             </Button>
