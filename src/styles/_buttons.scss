@@ -10,4 +10,6 @@ input[type='button'].button-primary {
 button,
 .button {
   margin-bottom: 0;
+  border-radius: $border-radius;
+  text-transform: capitalize;
 }
