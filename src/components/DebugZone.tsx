@@ -3,7 +3,7 @@ import InputText from './InputText';
 import Button from './Button';
 import Notification from './Notification';
 import Portal from './Portal';
-import { Map } from './icons';
+import { User, Notebook, Map } from './icons';
 import './DebugZone.scss';
 
 /**
@@ -60,7 +60,9 @@ export default function DebugZone() {
             </Button>
           </div>
           <div className="form-group">
-            <Map className="fill-red"></Map>
+            <User className="fill-white" />
+            <Notebook className="fill-red" />
+            <Map className="fill-white" />
           </div>
         </div>
       </div>
