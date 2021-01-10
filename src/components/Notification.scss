@@ -16,4 +16,24 @@
     z-index: 1;
     border-radius: $border-radius;
   }
+  .Arrow {
+    position: absolute;
+    z-index: 99;
+    &.down {
+      bottom: -20px;
+    }
+    &.up {
+      top: -20px;
+    }
+    &.left {
+      left: -20px;
+    }
+    &.right {
+      right: -20px;
+    }
+    &.left,
+    &.right {
+      top: calc(50% - 10px);
+    }
+  }
 }

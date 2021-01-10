@@ -48,7 +48,7 @@ export default function DebugZone() {
             </Button>
           </div>
           <div className="form-group">
-            <Notification>
+            <Notification arrowDirection="right">
               TIP: Join an existing hang, or create your own zone!
               <br />
               Let’s hangzone!
