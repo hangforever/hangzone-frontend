@@ -3,28 +3,19 @@
 .Button {
   display: inline-block;
   position: relative;
-  color: $font-secondary;
   margin: $border-size / 2;
 
   > button {
     width: 100%;
-    color: $font-secondary;
     position: relative;
     z-index: 1;
-
-    &.has-icon {
-      padding-left: 45px;
-    }
 
     &:active {
       @include top-left-offset($border-size);
     }
-  }
 
-  .icon {
-    position: absolute;
-    top: 7px;
-    left: 23px;
-    z-index: 100;
+    .icon {
+      margin-right: $border-size;
+    }
   }
 }

@@ -1,5 +1,7 @@
 import React from 'react';
 import InputText from './InputText';
+import Button from './Button';
+import Notification from './Notification';
 import './DebugZone.scss';
 
 /**
@@ -24,6 +26,20 @@ export default function DebugZone() {
               placeholder="Username"
               solid
             />
+          </div>
+          <div className="form-group">
+            <Button>Create a new zone!</Button>
+            <Button iconGlyph="magnifying-glass">Search</Button>
+            <Button faceColor="green" shadowColor="black" className="hw-100">
+              Search
+            </Button>
+          </div>
+          <div className="form-group">
+            <Notification>
+              TIP: Join an existing hang, or create your own zone!
+              <br />
+              Let’s hangzone!
+            </Notification>
           </div>
         </div>
       </div>

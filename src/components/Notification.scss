@@ -1,0 +1,8 @@
+.Notification {
+  position: relative;
+  .oi[data-glyph='x'] {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+}

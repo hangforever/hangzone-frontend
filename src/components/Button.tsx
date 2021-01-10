@@ -1,4 +1,5 @@
 import React from 'react';
+import { backgroundColor } from 'util/colors';
 import { ToolColor } from 'types';
 import './Button.scss';
 
@@ -18,7 +19,6 @@ export default function Button({
   children,
   ...rest
 }: Props) {
-  const backgroundColor = (color: ToolColor) => `background-${color}`;
   return (
     <div className={`Button ${className}`}>
       <button
@@ -27,10 +27,10 @@ export default function Button({
         )}`}
         {...rest}
       >
+        {iconGlyph && <span className="icon oi" data-glyph={iconGlyph} />}
         {children}
       </button>
       <div className={`shadow ${backgroundColor(shadowColor)}`}></div>
-      {iconGlyph && <span className="icon oi" data-glyph={iconGlyph} />}
     </div>
   );
 }

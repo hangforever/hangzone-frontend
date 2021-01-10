@@ -4,7 +4,7 @@ $red: #ff1469;
 $white: #fff;
 $black: #000;
 
-$font-primary: #333;
+$font-primary: $black;
 $font-secondary: $white;
 $bg-primary: #351431;
 $bg-secondary: #444444;
@@ -17,16 +17,21 @@ $status-offline: red;
 
 .background-red {
   background-color: $red;
+  color: $font-secondary;
 }
 .background-green {
   background-color: $green;
+  color: $font-primary;
 }
 .background-turquoise {
   background-color: $turquoise;
+  color: $font-primary;
 }
 .background-white {
   background-color: $white;
+  color: $font-primary;
 }
 .background-black {
   background-color: $black;
+  color: $font-secondary;
 }
