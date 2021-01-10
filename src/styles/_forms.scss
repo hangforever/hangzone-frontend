@@ -1,25 +1,25 @@
-$border-radius-normal: 10px;
-
 .form-group {
   margin-bottom: 1rem;
 }
 
+@mixin unfocused-shadow() {
+  background: none;
+  border-bottom: $border-size solid #000;
+  top: 0;
+  z-index: 0;
+  border-radius: 0;
+}
+
 @mixin focused-shadow() {
+  @include height-weight(100%);
   background: #000;
-  border-radius: $border-radius-normal;
+  border-radius: $border-radius;
   top: $border-size;
+  left: $border-size;
   border-bottom: none;
+  position: absolute;
 }
 
 .shadow {
-  @include height-weight(100%);
-  position: absolute;
-  border-bottom: $border-size solid #000;
-  top: 0;
-  left: $border-size;
-  z-index: 0;
-}
-
-input:focus + .shadow {
   @include focused-shadow;
 }

@@ -1,7 +1,4 @@
-@import 'styles/colors';
-@import 'styles/inputs';
-@import 'styles/mixins';
-@import 'styles/forms';
+@import 'styles/main';
 
 .InputText {
   position: relative;
@@ -33,11 +30,20 @@
       color: $turquoise;
       font-style: normal;
     }
-    &:focus {
-      @include focused;
-    }
     &.has-icon {
       padding-left: 3rem;
+    }
+    &:focus {
+      @include focused;
+
+      & + .shadow {
+        @include focused-shadow;
+      }
+    }
+    &:not(&:focused) {
+      & + .shadow {
+        @include unfocused-shadow;
+      }
     }
   }
 
