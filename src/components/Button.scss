@@ -1,9 +1,23 @@
+@import 'styles/main';
+
 .Button {
   display: inline-block;
   position: relative;
+  color: $font-secondary;
   > button {
-    background-color: white;
+    color: $font-secondary;
     position: relative;
     z-index: 1;
+
+    &:active {
+      @include top-left-offset($border-size);
+    }
+  }
+
+  .icon {
+    position: absolute;
+    top: 7px;
+    left: 10px;
+    z-index: 100;
   }
 }

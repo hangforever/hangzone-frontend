@@ -10,16 +10,27 @@
   border-radius: 0;
 }
 
+@mixin top-left-offset($offset) {
+  top: $offset;
+  left: $offset;
+}
+
 @mixin focused-shadow() {
   @include height-weight(100%);
+  @include top-left-offset($border-size);
   background: #000;
   border-radius: $border-radius;
-  top: $border-size;
-  left: $border-size;
   border-bottom: none;
   position: absolute;
 }
 
 .shadow {
   @include focused-shadow;
+
+  &.green {
+    background-color: $green;
+  }
+  &.red {
+    background-color: $red;
+  }
 }

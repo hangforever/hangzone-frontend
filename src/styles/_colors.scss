@@ -1,14 +1,32 @@
+$turquoise: #47e5bc;
+$green: #75ff44;
+$red: #ff1469;
+$white: #fff;
+$black: #000;
+
 $font-primary: #333;
-$font-secondary: #fff;
+$font-secondary: $white;
 $bg-primary: #351431;
 $bg-secondary: #444444;
-$bg-btn: #141414;
+$bg-btn: $black;
 $bg-btn-active: #871a1a;
 $border-primary: #444444;
 $status-active: green;
 $status-inactive: orange;
 $status-offline: red;
 
-$turquoise: #47e5bc;
-$green: #75ff44;
-$red: #ff1469;
+.background-red {
+  background-color: $red;
+}
+.background-green {
+  background-color: $green;
+}
+.background-turquoise {
+  background-color: $turquoise;
+}
+.background-white {
+  background-color: $white;
+}
+.background-black {
+  background-color: $black;
+}
