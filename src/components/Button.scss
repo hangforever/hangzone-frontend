@@ -1,0 +1,9 @@
+.Button {
+  display: inline-block;
+  position: relative;
+  > button {
+    background-color: white;
+    position: relative;
+    z-index: 1;
+  }
+}
