@@ -1,14 +1,67 @@
-$font-primary: #333;
-$font-secondary: #fff;
+$turquoise: #47e5bc;
+$green: #75ff44;
+$red: #ff1469;
+$white: #fff;
+$black: #000;
+
+$font-primary: $black;
+$font-secondary: $white;
 $bg-primary: #351431;
 $bg-secondary: #444444;
-$bg-btn: #141414;
+$bg-btn: $black;
 $bg-btn-active: #871a1a;
 $border-primary: #444444;
 $status-active: green;
 $status-inactive: orange;
 $status-offline: red;
 
-$turquoise: #47e5bc;
-$green: #75ff44;
-$red: #ff1469;
+.background-red {
+  background-color: $red;
+  color: $font-secondary;
+}
+
+.background-green {
+  background-color: $green;
+  color: $font-primary;
+}
+
+.background-turquoise {
+  background-color: $turquoise;
+  color: $font-primary;
+}
+
+.background-white {
+  background-color: $white;
+  color: $font-primary;
+}
+
+.background-black {
+  background-color: $black;
+  color: $font-secondary;
+}
+
+.fill-red {
+  path {
+    fill: $red;
+  }
+}
+.fill-green {
+  path {
+    fill: $green;
+  }
+}
+.fill-turquoise {
+  path {
+    fill: $turquoise;
+  }
+}
+.fill-white {
+  path {
+    fill: $white;
+  }
+}
+.fill-black {
+  path {
+    fill: $black;
+  }
+}

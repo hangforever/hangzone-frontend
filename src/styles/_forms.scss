@@ -1,3 +1,29 @@
 .form-group {
   margin-bottom: 1rem;
 }
+
+@mixin unfocused-shadow() {
+  background: none;
+  border-bottom: $border-size solid #000;
+  top: 0;
+  z-index: 0;
+  border-radius: 0;
+}
+
+@mixin top-left-offset($offset) {
+  top: $offset;
+  left: $offset;
+}
+
+@mixin focused-shadow() {
+  @include height-width(100%);
+  @include top-left-offset($border-size);
+  background: #000;
+  border-radius: $border-radius;
+  border-bottom: none;
+  position: absolute;
+}
+
+.shadow {
+  @include focused-shadow;
+}

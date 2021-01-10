@@ -35,7 +35,7 @@ function App() {
     history.push(Routes.Main);
   }, [appStore, history, appStore.profile, appStore.firebaseUser]);
 
-  return appStore.loading ? (
+  const appContent = appStore.loading ? (
     <Loading />
   ) : (
     <div className="App" data-testid="App">
@@ -62,6 +62,13 @@ function App() {
         </>
       )}
     </div>
+  );
+
+  return (
+    <>
+      <div id="portal-root" />
+      {appContent}
+    </>
   );
 }
 

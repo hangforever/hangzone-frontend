@@ -1,12 +1,19 @@
-@import 'styles/colors';
-
-$border-size: 4px;
+@import 'styles/main';
 
 .InputText {
   position: relative;
   color: $turquoise;
   width: 100%;
   margin: auto;
+
+  &.solid {
+    > input {
+      @include focused;
+    }
+    .shadow {
+      @include focused-shadow;
+    }
+  }
 
   > input {
     position: relative;
@@ -23,29 +30,27 @@ $border-size: 4px;
       color: $turquoise;
       font-style: normal;
     }
+    &.has-icon {
+      padding-left: 3rem;
+    }
     &:focus {
-      color: $font-primary;
-      background: #fff;
-      outline: none;
-      border: none;
-      &::placeholder {
-        color: rgba(0, 0, 0, 0.2);
-      }
+      @include focused;
+
       & + .shadow {
-        background: #000;
-        top: $border-size;
-        border-bottom: none;
+        @include focused-shadow;
+      }
+    }
+    &:not(&:focused) {
+      & + .shadow {
+        @include unfocused-shadow;
       }
     }
   }
 
-  .shadow {
+  .icon {
     position: absolute;
-    border-bottom: $border-size solid #000;
-    top: 0;
-    left: $border-size;
-    height: 100%;
-    width: 100%;
-    z-index: 0;
+    top: 7px;
+    left: 10px;
+    z-index: 100;
   }
 }

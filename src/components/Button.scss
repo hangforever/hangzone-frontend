@@ -1,0 +1,21 @@
+@import 'styles/main';
+
+.Button {
+  display: inline-block;
+  position: relative;
+  margin: $border-size / 2;
+
+  > button {
+    width: 100%;
+    position: relative;
+    z-index: 1;
+
+    &:active {
+      @include top-left-offset($border-size);
+    }
+
+    .icon {
+      margin-right: $border-size;
+    }
+  }
+}
