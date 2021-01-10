@@ -1,3 +1,25 @@
+$border-radius-normal: 10px;
+
 .form-group {
   margin-bottom: 1rem;
+}
+
+@mixin focused-shadow() {
+  background: #000;
+  border-radius: $border-radius-normal;
+  top: $border-size;
+  border-bottom: none;
+}
+
+.shadow {
+  @include height-weight(100%);
+  position: absolute;
+  border-bottom: $border-size solid #000;
+  top: 0;
+  left: $border-size;
+  z-index: 0;
+}
+
+input:focus + .shadow {
+  @include focused-shadow;
 }

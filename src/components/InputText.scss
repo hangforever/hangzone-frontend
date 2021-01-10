@@ -1,26 +1,7 @@
 @import 'styles/colors';
-
-$border-size: 4px;
-
-@mixin focused() {
-  color: $font-primary;
-  background: #fff;
-  outline: none;
-  border: none;
-  border-radius: 10px;
-  &::placeholder {
-    color: rgba(0, 0, 0, 0.2);
-  }
-  & + .shadow {
-    background: #000;
-    border-radius: 10px;
-    top: $border-size;
-    border-bottom: none;
-  }
-  & + .shadow + .icon.oi {
-    color: $font-primary;
-  }
-}
+@import 'styles/inputs';
+@import 'styles/mixins';
+@import 'styles/forms';
 
 .InputText {
   position: relative;
@@ -31,6 +12,9 @@ $border-size: 4px;
   &.solid {
     > input {
       @include focused;
+    }
+    .shadow {
+      @include focused-shadow;
     }
   }
 
@@ -55,16 +39,6 @@ $border-size: 4px;
     &.has-icon {
       padding-left: 3rem;
     }
-  }
-
-  .shadow {
-    position: absolute;
-    border-bottom: $border-size solid #000;
-    top: 0;
-    left: $border-size;
-    height: 100%;
-    width: 100%;
-    z-index: 0;
   }
 
   .icon {

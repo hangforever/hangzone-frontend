@@ -14,3 +14,19 @@ input,
 .input {
   margin-bottom: 0;
 }
+
+$border-size: 4px;
+
+@mixin focused() {
+  color: $font-primary;
+  background: #fff;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  &::placeholder {
+    color: rgba(0, 0, 0, 0.2);
+  }
+  & + .shadow + .icon.oi {
+    color: $font-primary;
+  }
+}
