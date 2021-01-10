@@ -26,11 +26,4 @@
 
 .shadow {
   @include focused-shadow;
-
-  &.green {
-    background-color: $green;
-  }
-  &.red {
-    background-color: $red;
-  }
 }

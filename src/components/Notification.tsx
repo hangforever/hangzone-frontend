@@ -19,11 +19,13 @@ export default function Notification({
   children,
 }: Props) {
   return (
-    <div className={`Notification ${className} ${backgroundColor(faceColor)}`}>
-      <span className="oi" data-glyph="x" />
-      {children}
-      <div className={`shadow ${backgroundColor(shadowColor)}`}></div>
-      {iconGlyph && <span className="icon oi" data-glyph={iconGlyph} />}
+    <div className={`Notification ${className}`}>
+      <div className={`inner ${backgroundColor(faceColor)}`}>
+        <span className="oi" data-glyph="x" />
+        {iconGlyph && <span className="icon oi" data-glyph={iconGlyph} />}
+        {children}
+      </div>
+      <div className={`shadow ${backgroundColor(shadowColor)}`} />
     </div>
   );
 }
