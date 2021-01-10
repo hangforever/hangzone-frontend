@@ -19,19 +19,49 @@ $status-offline: red;
   background-color: $red;
   color: $font-secondary;
 }
+
 .background-green {
   background-color: $green;
   color: $font-primary;
 }
+
 .background-turquoise {
   background-color: $turquoise;
   color: $font-primary;
 }
+
 .background-white {
   background-color: $white;
   color: $font-primary;
 }
+
 .background-black {
   background-color: $black;
   color: $font-secondary;
+}
+
+.fill-red {
+  path {
+    fill: $red;
+  }
+}
+.fill-green {
+  path {
+    fill: $green;
+  }
+}
+.fill-turquoise {
+  path {
+    fill: $turquoise;
+  }
+}
+.fill-white {
+  path {
+    fill: $white;
+  }
+}
+.fill-black {
+  path {
+    fill: $black;
+  }
 }

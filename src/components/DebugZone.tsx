@@ -3,6 +3,7 @@ import InputText from './InputText';
 import Button from './Button';
 import Notification from './Notification';
 import Portal from './Portal';
+import { Map } from './icons';
 import './DebugZone.scss';
 
 /**
@@ -13,7 +14,13 @@ export default function DebugZone() {
   const [isNotificationShown, setIsNotificationShown] = useState(false);
   return (
     <div className="DebugZone bg-fresh">
-      {/* <h1>The freedom to do anything isn't freedom at all!</h1> */}
+      {isNotificationShown && (
+        <Portal>
+          <Notification onClose={() => setIsNotificationShown(false)}>
+            I am a hidden notification!
+          </Notification>
+        </Portal>
+      )}
       <div className="container">
         <div className="DebugZone-body">
           <div className="form-group">
@@ -52,13 +59,9 @@ export default function DebugZone() {
               Click on me to reveal a notification
             </Button>
           </div>
-          {isNotificationShown && (
-            <Portal>
-              <Notification onClose={() => setIsNotificationShown(false)}>
-                I am a hidden notification!
-              </Notification>
-            </Portal>
-          )}
+          <div className="form-group">
+            <Map className="fill-red"></Map>
+          </div>
         </div>
       </div>
     </div>
