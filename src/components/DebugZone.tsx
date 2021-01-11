@@ -4,6 +4,10 @@ import Button from './Button';
 import Notification from './Notification';
 import Portal from './Portal';
 import { User, Notebook, Map } from './icons';
+import mapPin from 'assets/images/map_pin.svg';
+import mapPinShine from 'assets/images/map_pin_shine.svg';
+import unfocusedPin from 'assets/images/unfocused_pin.svg';
+import unfocusedPinPulse from 'assets/images/unfocused_pin_pulse.svg';
 import './DebugZone.scss';
 
 /**
@@ -63,6 +67,14 @@ export default function DebugZone() {
             <User className="fill-white" />
             <Notebook className="fill-red" />
             <Map className="fill-white" />
+          </div>
+          <div className="form-group">
+            <img className="icon" src={mapPin} alt="" />
+            <img className="icon" src={mapPinShine} alt="" />
+          </div>
+          <div className="form-group">
+            <img className="icon" src={unfocusedPin} alt="" />
+            <img className="icon" src={unfocusedPinPulse} alt="" />
           </div>
         </div>
       </div>
