@@ -69,12 +69,12 @@ export default function DebugZone() {
             <Map className="fill-white" />
           </div>
           <div className="form-group">
-            <img className="icon" src={mapPin} alt="" />
-            <img className="icon" src={mapPinShine} alt="" />
+            <img className="w50" src={mapPin} alt="" />
+            <img className="w50" src={mapPinShine} alt="" />
           </div>
           <div className="form-group">
-            <img className="icon" src={unfocusedPin} alt="" />
-            <img className="icon" src={unfocusedPinPulse} alt="" />
+            <img className="w50" src={unfocusedPin} alt="" />
+            <img className="w50" src={unfocusedPinPulse} alt="" />
           </div>
         </div>
       </div>
