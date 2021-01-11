@@ -5,6 +5,7 @@ import { Hangzone, ISettings, IProfile } from 'types';
 
 export class AppStore {
   loading: boolean = true;
+  signedIn: boolean = false;
   firebaseUser: firebase.User | null = null;
   profile: IProfile | null = null;
   friendProfiles: IProfile[] = [];
