@@ -15,7 +15,7 @@ export default function Button({
   className = '',
   iconGlyph,
   faceColor = 'black',
-  shadowColor = 'green',
+  shadowColor = 'turquoise',
   children,
   ...rest
 }: Props) {
