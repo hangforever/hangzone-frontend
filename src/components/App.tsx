@@ -71,7 +71,7 @@ function App() {
   const appStore = useContext(appStoreContext);
   const history = useHistory();
 
-  useEffect(() => handleAuthChange(history));
+  useEffect(() => handleAuthChange(history), [history]);
 
   const appContent = appStore.loading ? (
     <Loading />
