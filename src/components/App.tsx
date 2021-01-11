@@ -22,7 +22,11 @@ import { appStore } from 'stores/appStoreContext';
 import * as profileApi from 'api/profiles';
 import API from 'api/axios';
 
-function handleAuthChange(history: History) {
+/**
+ * This function handles auth change for Firebase Auth
+ * Mainly, it's responsible for settings the firebaseUser and profile state
+ */
+function handleAuthChange(history: History): void {
   async function checkFirebaseUser(firebaseUser: firebase.User | null) {
     if (!firebaseUser) {
       appStore.loading = false;
@@ -67,7 +71,7 @@ function App() {
   const appStore = useContext(appStoreContext);
   const history = useHistory();
 
-  useEffect(() => handleAuthChange(history), []);
+  useEffect(() => handleAuthChange(history));
 
   const appContent = appStore.loading ? (
     <Loading />
