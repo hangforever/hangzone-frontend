@@ -5,8 +5,6 @@ body {
     'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: $font-primary;
-  background: $bg-primary;
 }
 
 code {
@@ -15,7 +13,17 @@ code {
 }
 
 .bg-fresh {
-  background: $bg-primary;
+  background: $bg-secondary;
   background-image: url(../assets/images/background.svg);
   background-size: cover;
+  color: $font-secondary;
+}
+
+.bg-main {
+  background: $bg-primary;
+  color: $font-primary;
+}
+
+.has-error {
+  color: $red;
 }

@@ -1,11 +1,11 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import './App.scss';
 import { Route, useHistory } from 'react-router-dom';
 import Navigation from 'components/Navigation';
 import Main from 'components/Main';
 import Login from 'components/Login';
-import Map from 'components/Map';
+import MapPage from 'components/MapPage';
 import Settings from 'components/Settings';
 import Profile from 'components/Profile';
 import SignUp from 'components/SignUp';
@@ -20,6 +20,9 @@ import { isDevelopment } from '../util';
 function App() {
   const appStore = useContext(appStoreContext);
   const history = useHistory();
+  const [pathname, setPathname] = useState('');
+
+  useEffect(() => setPathname(window.location.pathname), []);
 
   useEffect(() => {
     if (process.env.REACT_APP_DEBUG_MODE === 'true') {
@@ -32,18 +35,18 @@ function App() {
     if (!firebaseUser) return history.push(Routes.Login);
     if (!profile) return history.push(Routes.SignUpComplete);
 
-    history.push(Routes.Main);
-  }, [appStore, history, appStore.profile, appStore.firebaseUser]);
+    history.push(pathname);
+  }, [appStore, history, appStore.profile, appStore.firebaseUser, pathname]);
 
   const appContent = appStore.loading ? (
     <Loading />
   ) : (
-    <div className="App" data-testid="App">
+    <div className="App bg-main" data-testid="App">
       {appStore.firebaseUser && appStore.profile ? (
         <>
           <div className="body">
             <Route exact path={Routes.Main} component={Main} />
-            <Route path={Routes.Map} component={Map} />
+            <Route path={Routes.Map} component={MapPage} />
             <Route path={Routes.Settings} component={Settings} />
             <Route path={Routes.Profile} component={Profile} />
             <Route path={Routes.Friends} component={Friends} />
