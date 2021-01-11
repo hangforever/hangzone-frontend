@@ -3,6 +3,8 @@ import { useHistory } from 'react-router';
 import * as profileApi from 'api/profiles';
 import appStoreContext from 'stores/appStoreContext';
 import { Routes } from 'types';
+import InputText from './InputText';
+import Button from './Button';
 
 const SignUpComplete: React.FC<{}> = () => {
   const [displayName, updateDisplayName] = useState('');
@@ -25,26 +27,29 @@ const SignUpComplete: React.FC<{}> = () => {
   }
 
   return (
-    <div className="SignUpComplete Login">
-      <div className="row">
-        <form onSubmit={handleComplete} className="form__anon">
-          <div className="form__inner">
-            <span>enter a name you would like others to see:</span>
-            <input
-              type="text"
-              name="anon_username"
-              placeholder="Username"
-              value={displayName}
-              onChange={(e) => updateDisplayName(e.target.value)}
-            />
-          </div>
-          <input
-            className="btn--no-border"
-            type="submit"
-            value="CONTINUE >>"
-            disabled={!displayName}
-          />
-        </form>
+    <div className="SignUpComplete bg-fresh">
+      <div className="container login__normal">
+        <div className="row">
+          <form onSubmit={handleComplete} className="form__anon">
+            <div className="form__inner">
+              <div className="form-group">
+                <p className="pull-left">
+                  enter a name you would like others to see:
+                </p>
+                <InputText
+                  type="text"
+                  name="anon_username"
+                  placeholder="Username"
+                  value={displayName}
+                  onChange={(e) => updateDisplayName(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="form-group">
+              <Button disabled={!displayName}>Contine</Button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

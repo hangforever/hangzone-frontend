@@ -1,11 +1,14 @@
 @import 'styles/colors';
 
-.Login {
+.Login,
+.SignUpComplete,
+.SignUp {
   flex-grow: 1;
   flex-direction: column;
   height: 100vh;
   display: flex;
   align-items: center;
+  width: 100%;
   .login__normal {
     margin-top: 3rem;
     flex-grow: 1;
