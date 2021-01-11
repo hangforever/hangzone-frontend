@@ -67,6 +67,7 @@ const Login: React.FC = () => {
         <div className="row">
           <form onSubmit={handleLogin}>
             <div className="form__inner">
+              {error && <div className="form-group has-error">{error}</div>}
               <div className="form-group">
                 <InputText
                   name="email"
@@ -85,7 +86,6 @@ const Login: React.FC = () => {
               </div>
               {/* TODO: Setup forgot password */}
               <Link to="/login">Forgot password?</Link>
-              {error && <div className="form-group has-error">{error}</div>}
             </div>
             <div className="form-group">
               <Button>Log In</Button>
