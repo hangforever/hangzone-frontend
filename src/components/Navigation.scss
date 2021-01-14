@@ -10,14 +10,25 @@
     display: flex;
     height: 100%;
     margin: 0;
-    padding: 0;
+    padding: 0 3rem;
+    background: $purple;
 
     a {
-      background: $bg-btn;
       height: 100%;
       width: 100%;
       color: $font-secondary;
       text-decoration: none;
+      &:focus {
+        outline: none;
+      }
+      &.active {
+        path {
+          fill: $red;
+        }
+        span {
+          color: $red;
+        }
+      }
 
       li {
         height: calc(100% - 10px);
@@ -29,6 +40,7 @@
         flex: 1;
 
         svg {
+          margin-bottom: 5px;
         }
         span {
           font-size: $font-sm;
