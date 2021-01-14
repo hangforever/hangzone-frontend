@@ -3,7 +3,6 @@ import { observer } from 'mobx-react-lite';
 import appStoreContext from '../stores/appStoreContext';
 import Modal from '../components/Modal';
 import './NewZone.scss';
-import '../styles/modifiers.scss';
 
 const NewZoneModal = () => {
   const appStore = useContext(appStoreContext);
