@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router';
 import firebaseContext from 'firebaseContext';
 import API from 'api/axios';
@@ -8,10 +8,22 @@ import * as authApi from '../api/auth';
 import './Login.scss';
 
 const SignUp: React.FC = () => {
+  const [error, setError] = useState('');
   const [email, updateEmail] = useState('');
   const [password, updatePassword] = useState('');
   const history = useHistory();
   const firebase = useContext(firebaseContext);
+
+  useEffect(() => {
+    if (email && password) {
+      setError('');
+    }
+  }, [email, password]);
+
+  function handleError(e: Error): void {
+    setError(e.message);
+    console.error(e);
+  }
 
   async function handleSignUp(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -22,7 +34,11 @@ const SignUp: React.FC = () => {
       API.defaults.headers['Authorization'] = `Bearer ${token}`;
       history.push('/');
     } catch (e) {
-      console.error(e);
+      if (e.message === 'Request failed with status code 404') {
+        handleError(new Error('Email is already registered'));
+      } else {
+        handleError(e);
+      }
     }
   }
 
@@ -32,6 +48,7 @@ const SignUp: React.FC = () => {
         <div className="row">
           <form onSubmit={handleSignUp}>
             <div className="form__inner">
+              {error && <div className="form-group has-error">{error}</div>}
               <div className="form-group">
                 <InputText
                   type="text"
