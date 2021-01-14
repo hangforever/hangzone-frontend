@@ -44,10 +44,11 @@ export default function DebugZone() {
             <Button>Create a new zone!</Button>
           </div>
           <div className="form-group">
-            <Button iconGlyph="magnifying-glass">Search</Button>
-          </div>
-          <div className="form-group">
-            <Button faceColor="green" shadowColor="black" className="hw-100">
+            <Button
+              faceColor="black"
+              shadowColor="red"
+              iconGlyph="magnifying-glass"
+            >
               Search
             </Button>
           </div>
