@@ -53,6 +53,7 @@ function handleAuthChange(history: History): void {
   firebase.auth().onAuthStateChanged(async function (firebaseUser) {
     if (process.env.REACT_APP_DEBUG_MODE === 'true') {
       history.push(Routes.DebugZone);
+      appStore.loading = false;
       return;
     }
     try {
