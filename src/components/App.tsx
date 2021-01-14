@@ -89,6 +89,7 @@ function App() {
           </div>
 
           <Navigation />
+          <div className="spacer"></div>
         </>
       ) : (
         <>
