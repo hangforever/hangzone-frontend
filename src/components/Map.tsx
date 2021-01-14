@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   Map,
   InfoWindow,
@@ -6,37 +6,42 @@ import {
   GoogleApiWrapper,
   IProvidedProps,
 } from 'google-maps-react';
+import Loading from './Loading';
 import './Map.scss';
 
-const LoadingContainer = () => <div>Fancy loading container!</div>;
+const LoadingContainer = () => <Loading>Loading bangzones...</Loading>;
 
 interface Props extends IProvidedProps {}
 
-function HangzoneMap({ google }: Props) {
-  return (
-    <div className="HangzoneMap">
-      <Map
-        google={google}
-        //@ts-ignore
-        zoom={14}
-      >
-        <Marker
-          onClick={() => console.log('marker clicked')}
-          // @ts-ignore
-          name={'Current location'}
-        />
-
-        <InfoWindow
-          // @ts-ignore
-          onClose={() => console.log('Info window closed')}
+class HangzoneMap extends Component<Props> {
+  render() {
+    return (
+      <div className="HangzoneMap">
+        <Map
+          google={this.props.google}
+          //@ts-ignore
+          zoom={14}
         >
-          <div>
-            <h1>Placeholder</h1>
-          </div>
-        </InfoWindow>
-      </Map>
-    </div>
-  );
+          <Marker
+            // @ts-ignore
+            onClick={this.onMarkerClick}
+            // @ts-ignore
+            name={'Current location'}
+          >
+            <InfoWindow
+              visible={true}
+              // @ts-ignore
+              onClose={() => console.log('Info window closed')}
+            >
+              <div>
+                <h1>Placeholder</h1>
+              </div>
+            </InfoWindow>
+          </Marker>
+        </Map>
+      </div>
+    );
+  }
 }
 
 export default GoogleApiWrapper({

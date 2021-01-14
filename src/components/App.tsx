@@ -24,7 +24,7 @@ function App() {
   useEffect(() => handleAuthChange(history), [history]);
 
   const appContent = appStore.loading ? (
-    <Loading />
+    <Loading>Loading...</Loading>
   ) : (
     <div className="App bg-main" data-testid="App">
       {appStore.firebaseUser && appStore.profile ? (
