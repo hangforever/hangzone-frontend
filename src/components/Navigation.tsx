@@ -1,26 +1,30 @@
 import './Navigation.scss';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { User, Notebook, Map } from './icons';
 import Routes from '../types/Routes';
 
 const Navigation = () => {
   return (
     <nav className="Navigation">
       <ul>
-        <NavLink exact activeClassName="active" to={Routes.Main}>
-          <li>Main</li>
+        <NavLink activeClassName="active" to={Routes.Profile}>
+          <li>
+            <User />
+            <span>Profile</span>
+          </li>
         </NavLink>
         <NavLink activeClassName="active" to={Routes.Map}>
-          <li>Map</li>
+          <li>
+            <Map />
+            <span>Map</span>
+          </li>
         </NavLink>
         <NavLink activeClassName="active" to={Routes.Friends}>
-          <li>Friends</li>
-        </NavLink>
-        <NavLink activeClassName="active" to={Routes.Profile}>
-          <li>Profile</li>
-        </NavLink>
-        <NavLink activeClassName="active" to={Routes.Settings}>
-          <li>Settings</li>
+          <li>
+            <Notebook />
+            <span>Friends</span>
+          </li>
         </NavLink>
       </ul>
     </nav>

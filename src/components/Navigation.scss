@@ -1,4 +1,4 @@
-@import 'styles/colors';
+@import 'styles/main';
 
 .Navigation {
   margin: 0;
@@ -19,28 +19,20 @@
       color: $font-secondary;
       text-decoration: none;
 
-      &.active {
-        background: $bg-btn-active;
-        li {
-          border-right: none;
-        }
-      }
-
-      &:last-child {
-        li {
-          border-right: none;
-        }
-      }
-
       li {
         height: calc(100% - 10px);
         margin: 5px 0;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
         flex: 1;
-        text-align: center;
-        border-right: 2px solid $border-primary;
+
+        svg {
+        }
+        span {
+          font-size: $font-sm;
+        }
       }
     }
   }
