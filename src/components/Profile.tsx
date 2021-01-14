@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { observer } from 'mobx-react-lite';
 import { appStoreContext } from 'stores';
-import firebaseContext from 'firebaseContext';
+import firebaseContext, { handleSignOut } from 'firebaseContext';
 import * as profileApi from 'api/profiles';
 import { NavLink } from 'react-router-dom';
 import Field from 'components/Field';
@@ -64,6 +64,9 @@ const Profile = () => {
 
   return firebaseUser && profile ? (
     <div className="Profile">
+      <button className="button button-primary" onClick={handleSignOut}>
+        Sign Out
+      </button>
       <Modal active={modalActive} onCloseClick={() => updateModalActive(false)}>
         <Field
           label="Enter a url"

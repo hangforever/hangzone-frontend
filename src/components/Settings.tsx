@@ -1,25 +1,13 @@
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react-lite';
 import { appStoreContext } from 'stores';
-import firebaseContext from 'firebaseContext';
 import { ISettings } from 'types';
 
 export default observer(function Settings() {
   const appStore = useContext(appStoreContext);
-  const firebase = useContext(firebaseContext);
 
   function updateSetting(e: React.ChangeEvent<HTMLInputElement>) {
     appStore.settings[e.target.name as keyof ISettings] = e.target.checked;
-  }
-  function handleSignOut() {
-    firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        appStore.firebaseUser = null;
-        appStore.profile = null;
-      })
-      .catch(() => alert('whoops'));
   }
 
   return (
@@ -57,9 +45,6 @@ export default observer(function Settings() {
         </div>
         <input type="submit" value="Save" />
       </form>
-      <button className="button button-primary" onClick={handleSignOut}>
-        Sign Out
-      </button>
     </div>
   );
 });
