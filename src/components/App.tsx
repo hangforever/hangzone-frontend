@@ -23,11 +23,9 @@ function App() {
 
   useEffect(() => handleAuthChange(history), [history]);
 
-  const appContent = appStore.loading ? (
-    <Loading>Loading...</Loading>
-  ) : (
+  const appContent = (
     <div className="App bg-main" data-testid="App">
-      {appStore.firebaseUser && appStore.profile ? (
+      {appStore.signedIn ? (
         <>
           <div className="body">
             <Route exact path={Routes.Main} component={Main} />
@@ -55,7 +53,7 @@ function App() {
   return (
     <>
       <div id="portal-root" />
-      {appContent}
+      {appStore.loading ? <Loading>Loading...</Loading> : appContent}
     </>
   );
 }

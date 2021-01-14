@@ -11,7 +11,6 @@ const SignUp: React.FC = () => {
   const [error, setError] = useState('');
   const [email, updateEmail] = useState('');
   const [password, updatePassword] = useState('');
-  const history = useHistory();
   const firebase = useContext(firebaseContext);
 
   useEffect(() => {
@@ -32,7 +31,6 @@ const SignUp: React.FC = () => {
       await firebase.auth().signInWithEmailAndPassword(email, password);
       const token = await firebase.auth().currentUser?.getIdToken();
       API.defaults.headers['Authorization'] = `Bearer ${token}`;
-      history.push('/');
     } catch (e) {
       if (e.message === 'Request failed with status code 404') {
         handleError(new Error('Email is already registered'));

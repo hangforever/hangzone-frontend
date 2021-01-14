@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import firebaseContext from 'firebaseContext';
 import { Routes } from 'types';
 import * as profileApi from 'api/profiles';
+import appStoreContext from 'stores/appStoreContext';
 import Button from './Button';
 import InputText from './InputText';
 import './Login.scss';
@@ -15,6 +16,7 @@ const Login: React.FC = () => {
   const [anonUsername, updateAnonUsername] = useState('');
   const history = useHistory();
   const firebase = useContext(firebaseContext);
+  const appStore = useContext(appStoreContext);
 
   useEffect(() => {
     if (email && password) {
@@ -27,12 +29,17 @@ const Login: React.FC = () => {
     console.error(e);
   }
 
+  function transferUser() {
+    appStore.signedIn = true;
+    history.push(Routes.Profile);
+  }
+
   function handleGmailLogin() {
     const gAuthProvider = new firebase.auth.GoogleAuthProvider();
     firebase
       .auth()
       .signInWithPopup(gAuthProvider)
-      .then(() => history.push('/'))
+      .then(transferUser)
       .catch(handleError);
   }
 
@@ -41,7 +48,7 @@ const Login: React.FC = () => {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(() => history.push('/'))
+      .then(transferUser)
       .catch(handleError);
   }
 
@@ -57,7 +64,7 @@ const Login: React.FC = () => {
           throw new Error('Anonymous Login failed!');
         }
       })
-      .then(() => history.push('/'))
+      .then(transferUser)
       .catch(handleError);
   }
 

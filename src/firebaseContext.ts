@@ -34,6 +34,7 @@ function handleSignOut() {
     .then(() => {
       appStore.firebaseUser = null;
       appStore.profile = null;
+      appStore.signedIn = false;
     })
     .catch(() => alert('whoops'));
 }
@@ -45,7 +46,6 @@ function handleSignOut() {
 function handleAuthChange(history: History): void {
   async function checkFirebaseUser(firebaseUser: firebase.User | null) {
     if (!firebaseUser) {
-      appStore.loading = false;
       history.push(Routes.Login);
       throw new Error('No firebase user');
     }
@@ -57,7 +57,6 @@ function handleAuthChange(history: History): void {
   async function checkProfile() {
     const profile = await profileApi.get();
     if (!profile) {
-      appStore.loading = false;
       history.push(Routes.SignUpComplete);
       throw new Error('No profile');
     }
@@ -75,12 +74,12 @@ function handleAuthChange(history: History): void {
     try {
       await checkFirebaseUser(firebaseUser);
       await checkProfile();
+      appStore.signedIn = true;
     } catch (e) {
       console.error(e);
     }
 
     appStore.loading = false;
-    appStore.signedIn = true;
   });
 }
 

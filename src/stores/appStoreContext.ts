@@ -48,6 +48,7 @@ export class AppStore {
 }
 decorate(AppStore, {
   loading: observable,
+  signedIn: observable,
   wordOfTheDay: observable,
   firebaseUser: observable,
   profile: observable,
