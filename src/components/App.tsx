@@ -6,7 +6,6 @@ import Navigation from 'components/Navigation';
 import Main from 'components/Main';
 import Login from 'components/Login';
 import MapPage from 'components/MapPage';
-import Settings from 'components/Settings';
 import Profile from 'components/Profile';
 import SignUp from 'components/SignUp';
 import SignUpComplete from 'components/SignUpComplete';
@@ -33,7 +32,6 @@ function App() {
           <div className="body">
             <Route exact path={Routes.Main} component={Main} />
             <Route path={Routes.Map} component={MapPage} />
-            <Route path={Routes.Settings} component={Settings} />
             <Route path={Routes.Profile} component={Profile} />
             <Route path={Routes.Friends} component={Friends} />
           </div>

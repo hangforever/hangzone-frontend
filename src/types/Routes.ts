@@ -8,7 +8,6 @@ enum Routes {
   SignUp = '/sign-up',
   SignUpComplete = '/sign-up/complete',
   Map = '/map',
-  Settings = '/settings',
   Profile = '/profile',
   Friends = '/friends',
   DebugZone = '/debug-zone',
