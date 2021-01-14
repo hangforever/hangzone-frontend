@@ -12,6 +12,11 @@ code {
     monospace;
 }
 
+// There is currently no way to suppress this through their API
+.firebase-emulator-warning {
+  display: none;
+}
+
 .bg-fresh {
   background: $bg-secondary;
   background-image: url(../assets/images/background.png);
