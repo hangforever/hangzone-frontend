@@ -1,28 +1,45 @@
-import React, { useContext } from 'react';
-import { observer } from 'mobx-react-lite';
-import appStoreContext from '../stores/appStoreContext';
-import HangzoneItem from './HangzoneItem';
-import NewZone from './NewZone';
+import React from 'react';
+import {
+  Map,
+  InfoWindow,
+  Marker,
+  GoogleApiWrapper,
+  IProvidedProps,
+} from 'google-maps-react';
+import './Map.scss';
 
-const Map = () => {
-  const appStore = useContext(appStoreContext);
+const LoadingContainer = () => <div>Fancy loading container!</div>;
 
+interface Props extends IProvidedProps {}
+
+function HangzoneMap({ google }: Props) {
   return (
-    <div className="map-container">
-      <h1>Hangzones</h1>
-      <ul>
-        {appStore.hangzones.map((hangzone) => (
+    <div className="HangzoneMap">
+      <Map
+        google={google}
+        //@ts-ignore
+        zoom={14}
+      >
+        <Marker
+          onClick={() => console.log('marker clicked')}
+          // @ts-ignore
+          name={'Current location'}
+        />
+
+        <InfoWindow
+          // @ts-ignore
+          onClose={() => console.log('Info window closed')}
+        >
           <div>
-            <HangzoneItem key={hangzone.id} {...hangzone} />
-            <button onClick={() => appStore.removeHangzone(hangzone.id)}>
-              Remove Bangerino
-            </button>
+            <h1>Placeholder</h1>
           </div>
-        ))}
-      </ul>
-      <NewZone />
+        </InfoWindow>
+      </Map>
     </div>
   );
-};
+}
 
-export default observer(Map);
+export default GoogleApiWrapper({
+  apiKey: process.env.REACT_APP_MAPS_API_KEY as string,
+  LoadingContainer,
+})(HangzoneMap);

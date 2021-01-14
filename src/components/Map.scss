@@ -1,0 +1,12 @@
+@import 'styles/main';
+
+.body {
+  // necessary because the HangzoneMap is wrapper
+  > div {
+    @include height-width(100%);
+    position: relative;
+  }
+}
+
+.HangzoneMap {
+}
