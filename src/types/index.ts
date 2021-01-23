@@ -26,6 +26,6 @@ export enum Status {
   Offline = 'offline',
 }
 
-export type ToolColor = "green" | "red" | "black" | "turquoise" | "white";
+export type ToolColor = 'green' | 'red' | 'black' | 'turquoise' | 'white';
 
 export { Routes };
