@@ -1,7 +1,7 @@
 import { createContext } from 'react';
 import firebase from 'firebase';
 import { observable, action, decorate, computed } from 'mobx';
-import { Hangzone, ISettings, IProfile, LatLng } from 'types';
+import { Hangzone, ISettings, IProfile } from 'types';
 import * as hangzoneAPI from 'api/hangzones';
 
 export class AppStore {
