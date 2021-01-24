@@ -11,6 +11,14 @@ export async function get(): Promise<Hangzone[]> {
   return data.data.hangzones;
 }
 
+export async function create(
+  hangzone: Partial<Hangzone> = {}
+): Promise<Hangzone[]> {
+  const { data, status } = await API.post(`/api/hangzones`, { hangzone });
+  if (status !== 200) throw new Error(data.message);
+  return data.data.hangzones;
+}
+
 export async function checkIn(hangzoneId: string): Promise<Hangzone> {
   const { data, status } = await API.post(`api/hangzones/checkin`, {
     hangzoneId,
