@@ -1,8 +1,8 @@
 import { Router } from 'express';
-// import * as functions from 'firebase-functions';
-// import * as admin from 'firebase-admin';
+import * as functions from 'firebase-functions';
+import * as admin from 'firebase-admin';
 import * as faker from 'faker';
-import { IGetUserAuthInfoRequest, IProfile, Hangzone, LatLng } from './types';
+import { IGetUserAuthInfoRequest, Hangzone, LatLng } from './types';
 import * as utils from './apiUtils';
 
 const router = Router();
@@ -31,14 +31,53 @@ function randomHangzone(): Hangzone {
   };
 }
 
+const hangzones: Hangzone[] = new Array(5).fill(0).map(() => randomHangzone());
+
 /**
  * Get ones own profile
  */
 router.get('/', async (req: IGetUserAuthInfoRequest, res) => {
-  const hangzones: Hangzone[] = new Array(5)
-    .fill(0)
-    .map(() => randomHangzone());
   return res.json(utils.successData({ hangzones }));
+});
+
+/**
+ * Check into a hangzone
+ */
+router.post('/checkin', async (req: IGetUserAuthInfoRequest, res) => {
+  const firebaseUserUID = req.user?.uid;
+  if (!firebaseUserUID) throw new Error('Not a valid user');
+
+  const { hangzoneId } = req.body;
+  // check required params
+  const paramErr = utils.requiredParameterChecker({
+    hangzoneId,
+  });
+  if (paramErr) return res.status(422).json(utils.errorData(422, paramErr));
+
+  const hangzone = hangzones.find((zone) => zone.id === hangzoneId);
+  if (!hangzone)
+    return res
+      .status(404)
+      .json(utils.errorData(404, 'Hangzone does not exist'));
+
+  // Update hangzone
+  hangzone.checkedInProfileIds = [
+    ...hangzone.checkedInProfileIds,
+    firebaseUserUID,
+  ];
+
+  // Update profile
+  const docRef = await admin
+    .firestore()
+    .collection('profiles')
+    .doc(firebaseUserUID);
+
+  functions.logger.log(
+    `Profile ${firebaseUserUID} checked into hangzone ${hangzone.id}`
+  );
+  await docRef.update({ hangzoneId });
+
+  return res.json(utils.successData({ hangzone }));
 });
 
 export default router;

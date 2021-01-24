@@ -12,7 +12,7 @@ const router = Router();
  * Get ones own profile
  */
 router.get('/', async (req: IGetUserAuthInfoRequest, res) => {
-  const profile = await getOwnProfile(req);
+  const profile = await utils.getOwnProfile(req);
   return res.json(utils.successData({ profile }));
 });
 
@@ -23,7 +23,7 @@ router.get('/friends', async (req: IGetUserAuthInfoRequest, res) => {
   const firebaseUserUID = req.user?.uid;
   if (!firebaseUserUID) throw new Error('Not a valid user');
 
-  const profile = await getOwnProfile(req);
+  const profile = await utils.getOwnProfile(req);
   if (!profile) throw new Error('User does not have profile');
 
   const friendUserIds = Object.keys(profile.friendIds);
@@ -120,20 +120,6 @@ async function createProfile(
   await docRef.set(newProfile);
   const createdProfile = await docRef.get();
   return createdProfile.data() as IProfile | undefined;
-}
-
-async function getOwnProfile(req: IGetUserAuthInfoRequest) {
-  const firebaseUserUID = req.user?.uid;
-  if (!firebaseUserUID) throw new Error('Not a valid user');
-
-  const profile = (await admin
-    .firestore()
-    .collection('profiles')
-    .doc(firebaseUserUID)
-    .get()
-    .then((doc) => doc.data())) as IProfile | null;
-
-  return profile;
 }
 
 export default router;
