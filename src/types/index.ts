@@ -33,6 +33,7 @@ export interface IProfile {
   bio?: string;
   photoURL?: string;
   position?: LatLng;
+  hangzoneId?: ID;
 }
 
 export enum Status {

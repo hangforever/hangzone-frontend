@@ -9,42 +9,29 @@ export class AppStore {
   firebaseUser: firebase.User | null = null;
   profile: IProfile | null = null;
   friendProfiles: IProfile[] = [];
-  hangzones: Hangzone[] = [];
   settings: ISettings = {
     gpsOn: true,
     emailOnFriendHang: true,
     notifications: true,
   };
 
-  addHangzone(
-    name: string,
-    description: string,
-    position: LatLng,
-    isPrivate: boolean = true
-  ) {
-    console.log(this.profile);
-    const hangzone: Hangzone = {
-      id: this.hangzones.length.toString(),
-      name,
-      description,
-      isPrivate,
-      position,
-      checkedInProfileIds: [],
-      adminProfileZIds: [],
-    };
-    this.hangzones.push(hangzone);
-  }
-
-  removeHangzone(id: string) {
-    this.hangzones = this.hangzones.filter((h) => h.id !== id);
-  }
-
-  updateHangzone(id: string, diff: Partial<Hangzone>) {
-    const newHangzones = this.hangzones.map((h) =>
-      h.id === id ? { ...h, ...diff } : h
-    );
-    this.hangzones = newHangzones;
-  }
+  // addHangzone(
+  //   name: string,
+  //   description: string,
+  //   position: LatLng,
+  //   isPrivate: boolean = true
+  // ) {
+  //   console.log(this.profile);
+  //   const hangzone: Hangzone = {
+  //     name,
+  //     description,
+  //     isPrivate,
+  //     position,
+  //     checkedInProfileIds: [],
+  //     adminProfileZIds: [],
+  //   };
+  //   this.hangzones.push(hangzone);
+  // }
 
   get profilePhoto() {
     return this.profile?.photoURL || this.firebaseUser?.photoURL || '';
@@ -55,12 +42,8 @@ decorate(AppStore, {
   signedIn: observable,
   firebaseUser: observable,
   profile: observable,
-  hangzones: observable,
   friendProfiles: observable,
   settings: observable,
-  addHangzone: action,
-  removeHangzone: action,
-  updateHangzone: action,
   profilePhoto: computed,
 });
 
