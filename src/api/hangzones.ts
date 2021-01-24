@@ -10,3 +10,11 @@ export async function get(): Promise<Hangzone[]> {
   if (status !== 200) throw new Error(data.message);
   return data.data.hangzones;
 }
+
+export async function checkIn(hangzoneId: string): Promise<Hangzone> {
+  const { data, status } = await API.post(`api/hangzones/checkin`, {
+    hangzoneId,
+  });
+  if (status !== 200) throw new Error(data.message);
+  return data.data.hangzone;
+}
