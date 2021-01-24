@@ -2,6 +2,7 @@ import { createContext } from 'react';
 import firebase from 'firebase';
 import { observable, action, decorate, computed } from 'mobx';
 import { Hangzone, ISettings, IProfile, LatLng } from 'types';
+import * as hangzoneAPI from 'api/hangzones';
 
 export class AppStore {
   loading: boolean = true;
@@ -33,6 +34,15 @@ export class AppStore {
   //   this.hangzones.push(hangzone);
   // }
 
+  async checkIn(hangzoneId: string): Promise<Hangzone | null> {
+    if (this.profile) {
+      const hangzone = await hangzoneAPI.checkIn(hangzoneId);
+      this.profile.hangzoneId = hangzone.id;
+      return hangzone;
+    }
+    return null;
+  }
+
   get profilePhoto() {
     return this.profile?.photoURL || this.firebaseUser?.photoURL || '';
   }
@@ -45,6 +55,7 @@ decorate(AppStore, {
   friendProfiles: observable,
   settings: observable,
   profilePhoto: computed,
+  checkIn: action,
 });
 
 const appStore = new AppStore();

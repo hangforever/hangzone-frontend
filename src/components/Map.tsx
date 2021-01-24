@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import {
   Map,
   Marker,
   GoogleApiWrapper,
   IProvidedProps,
 } from 'google-maps-react';
+import { observer } from 'mobx-react-lite';
 import HangzoneInfoWindow from './HangzoneInfoWindow';
 import { Hangzone, LatLng } from 'types';
 import * as hangzonesAPI from 'api/hangzones';
 import Loading from './Loading';
+import appStoreContext from '../stores/appStoreContext';
 import mapPin from 'assets/images/map_pin.svg';
 import './Map.scss';
 
@@ -17,8 +19,9 @@ const LoadingContainer = () => <Loading>Loading bangzones...</Loading>;
 interface Props extends IProvidedProps {}
 
 function HangzoneMap({ google }: Props) {
+  const appStore = useContext(appStoreContext);
   const [hangzones, setHangzones] = useState<Hangzone[]>([]);
-  const [selectedHangzone, setSelectedHangzone] = useState<Hangzone>();
+  const [selectedHangzoneId, setSelectedHangzoneId] = useState<string>();
   const [selectedMarker, setSelectedMarker] = useState<Hangzone>();
   const [curLatLng, setCurLatLng] = useState<LatLng | null>(null);
   const [showCreateZoneInfo, setShowcreateZoneInfo] = useState<boolean>(false);
@@ -28,9 +31,22 @@ function HangzoneMap({ google }: Props) {
     console.log([lat, lng]);
   }
 
+  const selectedHangzone = hangzones.find((h) => h.id === selectedHangzoneId);
+
+  function isCheckedIn(): boolean {
+    if (!(selectedHangzone && appStore.profile?.hangzoneId)) return false;
+
+    return appStore.profile.hangzoneId === selectedHangzone.id;
+  }
+
+  async function fetchHangzones() {
+    const hangzones = await hangzonesAPI.get();
+    setHangzones(hangzones);
+  }
+
   useEffect(() => {
-    hangzonesAPI.get().then(setHangzones);
-  }, []);
+    fetchHangzones();
+  }, [appStore.profile?.hangzoneId]);
 
   return (
     <div className="HangzoneMap">
@@ -61,7 +77,7 @@ function HangzoneMap({ google }: Props) {
               scaledSize: new google.maps.Size(24, 24),
             }}
             onClick={(_props, marker) => {
-              setSelectedHangzone(zone);
+              setSelectedHangzoneId(zone.id);
               setSelectedMarker(marker);
             }}
           />
@@ -87,6 +103,10 @@ function HangzoneMap({ google }: Props) {
             visible
             marker={selectedMarker}
             hangzone={selectedHangzone}
+            checkedIn={isCheckedIn()}
+            onJoin={async () => {
+              await appStore.checkIn(selectedHangzone.id);
+            }}
           />
         )}
       </Map>
@@ -97,4 +117,4 @@ function HangzoneMap({ google }: Props) {
 export default GoogleApiWrapper({
   apiKey: process.env.REACT_APP_MAPS_API_KEY as string,
   LoadingContainer,
-})(HangzoneMap);
+})(observer(HangzoneMap));
