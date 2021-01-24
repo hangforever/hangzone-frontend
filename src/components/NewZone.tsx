@@ -79,7 +79,7 @@ const NewZoneModal = () => {
             </div>
             <button
               onClick={() => {
-                appStore.addHangzone(name, description, isPrivate);
+                appStore.addHangzone(name, description, [0, 0]);
                 resetForm();
                 toggleActive(!active);
               }}
