@@ -26,7 +26,7 @@ function randomHangzone(): Hangzone {
     description: faker.hacker.phrase(),
     isPrivate: Boolean(Math.round(Math.random())),
     checkedInProfileIds: [],
-    adminProfileZIds: [],
+    adminProfileIds: [],
     position: randomPos(),
   };
 }
@@ -38,6 +38,33 @@ let hangzones: Hangzone[] = new Array(10).fill(0).map(() => randomHangzone());
  */
 router.get('/', async (req: IGetUserAuthInfoRequest, res) => {
   return res.json(utils.successData({ hangzones }));
+});
+
+/**
+ * Create a hangzone
+ */
+router.post('/', async (req: IGetUserAuthInfoRequest, res) => {
+  const firebaseUserUID = req.user?.uid;
+  if (!firebaseUserUID) throw new Error('Not a valid user');
+
+  const { hangzone: hangzoneData } = req.body;
+  // check required params
+  const paramErr = utils.requiredParameterChecker({
+    hangzone: hangzoneData,
+  });
+  if (paramErr) return res.status(422).json(utils.errorData(422, paramErr));
+
+  try {
+    if (!req.user?.uid) throw new Error('Not a valid user');
+
+    const hangzone = await createHangzone(req.user?.uid, hangzoneData);
+    if (!hangzone) throw new Error('Firestore did not return data');
+
+    return res.json(utils.successData({ hangzone: hangzoneData }));
+  } catch (e) {
+    functions.logger.log(`Error creating profile: ${e}`);
+    return res.status(500).json(utils.errorData(500, e.message));
+  }
 });
 
 /**
@@ -93,5 +120,35 @@ router.post('/checkin', async (req: IGetUserAuthInfoRequest, res) => {
 
   return res.json(utils.successData({ hangzone }));
 });
+
+async function createHangzone(
+  firebaseUserUID: string,
+  hangzone: Partial<Hangzone> = {}
+): Promise<Hangzone | undefined> {
+  if (!hangzone.name) {
+    throw Error('Display name is required');
+  }
+  if (!hangzone.description) {
+    throw Error('Description is required');
+  }
+  if (!hangzone.position) {
+    throw Error('Position is required');
+  }
+  const newHangzone = {
+    name: hangzone.name,
+    description: hangzone.description,
+    isPrivate: !!hangzone.isPrivate,
+    checkedInProfileIds: [],
+    adminProfileIds: [],
+    position: hangzone.position,
+  };
+  const docRef = await admin
+    .firestore()
+    .collection('hangzones')
+    .doc(firebaseUserUID);
+  await docRef.set(newHangzone);
+  const createdHangzone = await docRef.get();
+  return createdHangzone.data() as Hangzone | undefined;
+}
 
 export default router;

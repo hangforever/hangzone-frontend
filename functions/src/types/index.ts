@@ -10,7 +10,7 @@ export interface Hangzone {
   description: string;
   isPrivate: boolean;
   checkedInProfileIds: ID[];
-  adminProfileZIds: ID[];
+  adminProfileIds: ID[];
   position: LatLng;
 }
 

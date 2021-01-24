@@ -29,7 +29,7 @@ export class AppStore {
   //     isPrivate,
   //     position,
   //     checkedInProfileIds: [],
-  //     adminProfileZIds: [],
+  //     adminProfileIds: [],
   //   };
   //   this.hangzones.push(hangzone);
   // }
