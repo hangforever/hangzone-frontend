@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useHistory } from 'react-router';
 import firebaseContext from 'firebaseContext';
 import API from 'api/axios';
 import InputText from './InputText';
