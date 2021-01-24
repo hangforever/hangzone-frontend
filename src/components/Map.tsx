@@ -10,6 +10,7 @@ import { observer } from 'mobx-react-lite';
 import HangzoneInfoWindow from './HangzoneInfoWindow';
 import { Hangzone, LatLng } from 'types';
 import * as hangzonesAPI from 'api/hangzones';
+import InputText from './InputText';
 import Loading from './Loading';
 import appStoreContext from '../stores/appStoreContext';
 import mapPin from 'assets/images/map_pin.svg';
@@ -51,6 +52,13 @@ function HangzoneMap({ google }: Props) {
 
   return (
     <div className="HangzoneMap">
+      <InputText
+        className="search-input"
+        iconGlyph="magnifying-glass"
+        placeholder="Search locations"
+        shadowColor="black"
+        solid
+      />
       <Map
         google={google}
         //@ts-ignore
