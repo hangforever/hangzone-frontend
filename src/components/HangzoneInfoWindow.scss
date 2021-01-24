@@ -33,10 +33,16 @@
     display: flex;
     text-align: center;
     .checked-in-option {
+      border: 1px solid $red-light;
+      cursor: pointer;
       flex: 1;
       .icon img {
         height: 20px;
         display: inline-block;
+      }
+      &:active {
+        border: 1px solid $green;
+        border-radius: 10px;
       }
     }
   }
