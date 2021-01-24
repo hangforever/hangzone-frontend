@@ -12,7 +12,8 @@
     padding-right: 2rem;
     h3,
     .hangsters,
-    .description {
+    .description,
+    .checked-in-options {
       margin-bottom: 1rem;
     }
     h3 {
@@ -26,6 +27,18 @@
   .join-btn {
     width: 100%;
     margin: 12px 0;
+  }
+  .checked-in-options {
+    font-size: $font-sm;
+    display: flex;
+    text-align: center;
+    .checked-in-option {
+      flex: 1;
+      .icon img {
+        height: 20px;
+        display: inline-block;
+      }
+    }
   }
 }
 

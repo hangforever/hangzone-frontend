@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import { InfoWindow, IInfoWindowProps } from 'google-maps-react';
 import Button from './Button';
 import { Hangzone } from 'types';
+import shareSvg from 'assets/images/share.svg';
+import inviteSvg from 'assets/images/invite.svg';
+import ellipsisSvg from 'assets/images/ellipsis.svg';
 import './HangzoneInfoWindow.scss';
 
 class InfoWindowEx extends Component {
@@ -48,6 +51,15 @@ export default function HangzoneInfoWindow({
   onJoin,
   ...infoWindowProps
 }: Props) {
+  function handleCopyURL() {
+    console.log('unimplemented!');
+  }
+  function handleInviteFriends() {
+    console.log('unimplemented!');
+  }
+  function handleMoreOptions() {
+    console.log('unimplemented!');
+  }
   return (
     <InfoWindowEx {...infoWindowProps}>
       <div className="info-window">
@@ -58,16 +70,22 @@ export default function HangzoneInfoWindow({
         <div className="description">{hangzone.description}</div>
         {checkedIn ? (
           <div className="checked-in-options">
-            <div className="checked-in-option">
-              <span className="icon"></span>
+            <div className="checked-in-option" onClick={handleCopyURL}>
+              <span className="icon">
+                <img src={shareSvg} alt="Share/Copy URL Icon" />
+              </span>
               <div className="text">Share/Copy URL</div>
             </div>
-            <div className="checked-in-option">
-              <span className="icon"></span>
+            <div className="checked-in-option" onClick={handleInviteFriends}>
+              <span className="icon">
+                <img src={inviteSvg} alt="Invite Friends Icon" />
+              </span>
               <div className="text">Invite Friends</div>
             </div>
-            <div className="checked-in-option">
-              <span className="icon"></span>
+            <div className="checked-in-option" onClick={handleMoreOptions}>
+              <span className="icon">
+                <img src={ellipsisSvg} alt="More Options Icon" />
+              </span>
               <div className="text">More Options</div>
             </div>
           </div>

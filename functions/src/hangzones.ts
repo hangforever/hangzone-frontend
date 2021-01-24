@@ -31,7 +31,7 @@ function randomHangzone(): Hangzone {
   };
 }
 
-let hangzones: Hangzone[] = new Array(2).fill(0).map(() => randomHangzone());
+let hangzones: Hangzone[] = new Array(10).fill(0).map(() => randomHangzone());
 
 /**
  * Get ones own profile
