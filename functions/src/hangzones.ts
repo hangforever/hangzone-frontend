@@ -31,7 +31,7 @@ function randomHangzone(): Hangzone {
   };
 }
 
-const hangzones: Hangzone[] = new Array(5).fill(0).map(() => randomHangzone());
+let hangzones: Hangzone[] = new Array(2).fill(0).map(() => randomHangzone());
 
 /**
  * Get ones own profile
@@ -59,12 +59,26 @@ router.post('/checkin', async (req: IGetUserAuthInfoRequest, res) => {
     return res
       .status(404)
       .json(utils.errorData(404, 'Hangzone does not exist'));
+  if (hangzone.checkedInProfileIds.includes(firebaseUserUID)) {
+    return res.json(utils.successData({ hangzone }));
+  }
 
-  // Update hangzone
+  // Sign in to other hangzone
   hangzone.checkedInProfileIds = [
     ...hangzone.checkedInProfileIds,
     firebaseUserUID,
   ];
+  // Sign out of other hangzones
+  hangzones = hangzones.map((hang) => {
+    if (hang.id === hangzone.id) return hang;
+
+    if (hang.checkedInProfileIds.includes(firebaseUserUID)) {
+      hang.checkedInProfileIds = hang.checkedInProfileIds.filter(
+        (profId) => profId !== firebaseUserUID
+      );
+    }
+    return hang;
+  });
 
   // Update profile
   const docRef = await admin
