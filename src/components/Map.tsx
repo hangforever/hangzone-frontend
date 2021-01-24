@@ -4,6 +4,7 @@ import {
   Marker,
   GoogleApiWrapper,
   IProvidedProps,
+  InfoWindow,
 } from 'google-maps-react';
 import { observer } from 'mobx-react-lite';
 import HangzoneInfoWindow from './HangzoneInfoWindow';
@@ -22,13 +23,13 @@ function HangzoneMap({ google }: Props) {
   const appStore = useContext(appStoreContext);
   const [hangzones, setHangzones] = useState<Hangzone[]>([]);
   const [selectedHangzoneId, setSelectedHangzoneId] = useState<string>();
-  const [selectedMarker, setSelectedMarker] = useState<Hangzone>();
+  const [selectedMarker, setSelectedMarker] = useState();
+  const [newMarker, setNewMarker] = useState();
   const [curLatLng, setCurLatLng] = useState<LatLng | null>(null);
-  const [showCreateZoneInfo, setShowcreateZoneInfo] = useState<boolean>(false);
+  const [showCreateZoneInfo, setShowCreateZoneInfo] = useState<boolean>(false);
   function handleMapClick(lat: number, lng: number) {
     setCurLatLng([lat, lng]);
-    setShowcreateZoneInfo(true);
-    console.log([lat, lng]);
+    setShowCreateZoneInfo(true);
   }
 
   const selectedHangzone = hangzones.find((h) => h.id === selectedHangzoneId);
@@ -95,9 +96,16 @@ function HangzoneMap({ google }: Props) {
               anchor: new google.maps.Point(32, 32),
               scaledSize: new google.maps.Size(24, 24),
             }}
+            onClick={(_props, marker) => setNewMarker(marker)}
           />
         )}
-        {selectedHangzone && (
+        {newMarker && (
+          // @ts-ignore
+          <InfoWindow visible={showCreateZoneInfo} marker={newMarker}>
+            <div>New Hangzone!</div>
+          </InfoWindow>
+        )}
+        {selectedHangzone && selectedMarker && (
           // @ts-ignore
           <HangzoneInfoWindow
             visible

@@ -18,7 +18,6 @@ export interface Hangzone {
   checkedInProfileIds: ID[];
   adminProfileZIds: ID[];
   position: LatLng;
-  marker?: string;
 }
 
 export interface ISettings {
