@@ -4,6 +4,7 @@ import * as admin from 'firebase-admin';
 import * as cors from 'cors';
 import authRouter from './auth';
 import profilesRouter from './profiles';
+import hangzonesRouter from './hangzones';
 import { IGetUserAuthInfoRequest } from './types';
 import * as utils from './apiUtils';
 
@@ -44,5 +45,6 @@ app.use(cors({ origin: true }));
 
 app.use('/auth', authRouter);
 app.use('/profiles', authenticate, profilesRouter);
+app.use('/hangzones', authenticate, hangzonesRouter);
 
 export const api = functions.https.onRequest(app);

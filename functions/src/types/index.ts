@@ -1,11 +1,17 @@
 import { Request } from 'express';
 import * as admin from 'firebase-admin';
 
+type ID = string;
+export type LatLng = [number, number];
+
 export interface Hangzone {
   id: string;
   name: string;
-  isPrivate: boolean;
   description: string;
+  isPrivate: boolean;
+  checkedInProfileIds: ID[];
+  adminProfileZIds: ID[];
+  position: LatLng;
 }
 
 export interface ISettings {
