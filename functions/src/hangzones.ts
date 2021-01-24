@@ -57,7 +57,7 @@ router.post('/', async (req: IGetUserAuthInfoRequest, res) => {
   try {
     if (!req.user?.uid) throw new Error('Not a valid user');
 
-    const hangzone = await createHangzone(req.user?.uid, hangzoneData);
+    const hangzone = await createHangzone(hangzoneData);
     if (!hangzone) throw new Error('Firestore did not return data');
 
     return res.json(utils.successData({ hangzone: hangzoneData }));
@@ -122,7 +122,6 @@ router.post('/checkin', async (req: IGetUserAuthInfoRequest, res) => {
 });
 
 async function createHangzone(
-  firebaseUserUID: string,
   hangzone: Partial<Hangzone> = {}
 ): Promise<Hangzone | undefined> {
   if (!hangzone.name) {
@@ -145,8 +144,7 @@ async function createHangzone(
   const docRef = await admin
     .firestore()
     .collection('hangzones')
-    .doc(firebaseUserUID);
-  await docRef.set(newHangzone);
+    .add(newHangzone);
   const createdHangzone = await docRef.get();
   return createdHangzone.data() as Hangzone | undefined;
 }
