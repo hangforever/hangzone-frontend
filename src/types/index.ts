@@ -1,10 +1,24 @@
 import Routes from './Routes';
 
+type ID = string;
+type LatLng = [number, number];
+
+export interface Invitation {
+  invitedProfileId: ID;
+  inviterProfileId: ID;
+  hangzoneId: ID;
+  body: string;
+}
+
 export interface Hangzone {
   id: string;
   name: string;
-  isPrivate: boolean;
   description: string;
+  isPrivate: boolean;
+  checkedInProfileIds: ID[];
+  adminProfileZIds: ID[];
+  position: LatLng;
+  marker?: string;
 }
 
 export interface ISettings {
