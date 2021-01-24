@@ -1,9 +1,21 @@
 @import 'styles/colors';
 
-.Login {
+.Login,
+.SignUpComplete,
+.SignUp {
+  flex-grow: 1;
+  flex-direction: column;
   height: 100vh;
   display: flex;
   align-items: center;
+  width: 100%;
+  .login__normal {
+    margin-top: 3rem;
+    flex-grow: 1;
+  }
+  .login__anonomous {
+    margin-bottom: 3rem;
+  }
   form {
     display: flex;
     flex-direction: column;
@@ -14,24 +26,25 @@
       text-align: center;
       padding-top: 1.5rem;
       padding-bottom: 1.5rem;
+
+      a {
+        color: $red-light;
+        display: block;
+        text-align: left;
+      }
+    }
+
+    .form-group {
+      width: 100%;
+      .Button {
+        width: 100%;
+      }
     }
   }
 
   .form__anon {
     .form__inner {
       border: none;
-    }
-  }
-
-  .btn--no-border {
-    display: block;
-    margin: 0;
-    padding: 0 10px 0 10px;
-    border: 1px solid transparent;
-    font-size: inherit;
-    font-weight: bold;
-    &:focus {
-      border: 1px solid $border-primary;
     }
   }
 }

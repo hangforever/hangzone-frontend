@@ -4,6 +4,10 @@ import Button from './Button';
 import Notification from './Notification';
 import Portal from './Portal';
 import { User, Notebook, Map } from './icons';
+import mapPin from 'assets/images/map_pin.svg';
+import mapPinShine from 'assets/images/map_pin_shine.svg';
+import unfocusedPin from 'assets/images/unfocused_pin.svg';
+import unfocusedPinPulse from 'assets/images/unfocused_pin_pulse.svg';
 import './DebugZone.scss';
 
 /**
@@ -40,10 +44,11 @@ export default function DebugZone() {
             <Button>Create a new zone!</Button>
           </div>
           <div className="form-group">
-            <Button iconGlyph="magnifying-glass">Search</Button>
-          </div>
-          <div className="form-group">
-            <Button faceColor="green" shadowColor="black" className="hw-100">
+            <Button
+              faceColor="black"
+              shadowColor="red"
+              iconGlyph="magnifying-glass"
+            >
               Search
             </Button>
           </div>
@@ -63,6 +68,14 @@ export default function DebugZone() {
             <User className="fill-white" />
             <Notebook className="fill-red" />
             <Map className="fill-white" />
+          </div>
+          <div className="form-group">
+            <img className="w50" src={mapPin} alt="" />
+            <img className="w50" src={mapPinShine} alt="" />
+          </div>
+          <div className="form-group">
+            <img className="w50" src={unfocusedPin} alt="" />
+            <img className="w50" src={unfocusedPinPulse} alt="" />
           </div>
         </div>
       </div>

@@ -1,10 +1,14 @@
 import React from 'react';
 import './Loading.scss';
 
-const Loading = () => (
-  <div className="Loading" data-testid="Loading" aria-busy>
-    <div className="Loading__message">Loading...</div>
-  </div>
-);
+interface Props {
+  children?: React.ReactNode;
+}
 
-export default Loading;
+export default function Loading({ children }: Props) {
+  return (
+    <div className="Loading bg-fresh" data-testid="Loading" aria-busy>
+      <div className="Loading__message">{children}</div>
+    </div>
+  );
+}

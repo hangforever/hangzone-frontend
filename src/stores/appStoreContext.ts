@@ -5,6 +5,7 @@ import { Hangzone, ISettings, IProfile } from 'types';
 
 export class AppStore {
   loading: boolean = true;
+  signedIn: boolean = false;
   firebaseUser: firebase.User | null = null;
   profile: IProfile | null = null;
   friendProfiles: IProfile[] = [];
@@ -47,6 +48,7 @@ export class AppStore {
 }
 decorate(AppStore, {
   loading: observable,
+  signedIn: observable,
   wordOfTheDay: observable,
   firebaseUser: observable,
   profile: observable,

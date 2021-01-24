@@ -6,7 +6,6 @@ import Navigation from 'components/Navigation';
 import Main from 'components/Main';
 import Login from 'components/Login';
 import Map from 'components/Map';
-import Settings from 'components/Settings';
 import Profile from 'components/Profile';
 import SignUp from 'components/SignUp';
 import SignUpComplete from 'components/SignUpComplete';
@@ -15,41 +14,28 @@ import Friends from 'components/Friends';
 import DebugZone from 'components/DebugZone';
 import { Routes } from 'types';
 import { appStoreContext } from 'stores';
+import { handleAuthChange } from 'firebaseContext';
 import { isDevelopment } from '../util';
 
 function App() {
   const appStore = useContext(appStoreContext);
   const history = useHistory();
 
-  useEffect(() => {
-    if (process.env.REACT_APP_DEBUG_MODE === 'true') {
-      history.push(Routes.DebugZone);
-      return;
-    }
-    // FIXME: This code that pushes to routes should probably be
-    // handled synchronously in the login handler
-    const { profile, firebaseUser } = appStore;
-    if (!firebaseUser) return history.push(Routes.Login);
-    if (!profile) return history.push(Routes.SignUpComplete);
+  useEffect(() => handleAuthChange(history), [history]);
 
-    history.push(Routes.Main);
-  }, [appStore, history, appStore.profile, appStore.firebaseUser]);
-
-  const appContent = appStore.loading ? (
-    <Loading />
-  ) : (
-    <div className="App" data-testid="App">
-      {appStore.firebaseUser && appStore.profile ? (
+  const appContent = (
+    <div className="App bg-main" data-testid="App">
+      {appStore.signedIn ? (
         <>
           <div className="body">
             <Route exact path={Routes.Main} component={Main} />
             <Route path={Routes.Map} component={Map} />
-            <Route path={Routes.Settings} component={Settings} />
             <Route path={Routes.Profile} component={Profile} />
             <Route path={Routes.Friends} component={Friends} />
           </div>
 
           <Navigation />
+          <div className="spacer"></div>
         </>
       ) : (
         <>
@@ -67,7 +53,7 @@ function App() {
   return (
     <>
       <div id="portal-root" />
-      {appContent}
+      {appStore.loading ? <Loading>Loading...</Loading> : appContent}
     </>
   );
 }

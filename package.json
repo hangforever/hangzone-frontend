@@ -12,19 +12,20 @@
   "private": true,
   "scripts": {
     "bootstrap": "yarn && cd ./functions && yarn && cd ../",
+    "backup": "firebase emulators:export ./emulators.backup",
+    "build": "NODE_ENV=production react-scripts build",
+    "deploy": "yarn build && firebase deploy",
     "dev": "concurrently --kill-others 'yarn dev:react' 'cd ./functions && yarn serve:all'",
     "dev:backup": "concurrently --kill-others 'yarn dev:react' 'cd ./functions && yarn serve:all:backup'",
     "dev:firebase": "NODE_ENV=development firebase serve -p 4000",
     "dev:react": "NODE_ENV=development react-scripts start",
-    "backup": "firebase emulators:export ./emulators.backup",
-    "deploy": "yarn build && firebase deploy",
-    "build": "NODE_ENV=production react-scripts build",
-    "test": "react-scripts test --watchAll=false",
-    "test:watch": "react-scripts test",
+    "docs:api": "docker-compose up swagger-redoc",
     "eject": "react-scripts eject",
+    "lint": "eslint --ext js,ts,tsx src",
     "prettier:check": "prettier --check ./src",
     "prettier:write": "prettier --write ./src",
-    "docs:api": "docker-compose up swagger-redoc"
+    "test": "react-scripts test --watchAll=false",
+    "test:watch": "react-scripts test"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.6",
@@ -42,6 +43,7 @@
   "dependencies": {
     "axios": "^0.21.0",
     "firebase": "^8.2.1",
+    "google-maps-react": "^2.0.6",
     "http-proxy-middleware": "^1.0.4",
     "mobx": "^5.15.4",
     "mobx-react-lite": "^2.0.7",

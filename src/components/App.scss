@@ -1,19 +1,24 @@
 @import 'styles/colors';
 
 .App {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-rows: auto 10% 2%;
   height: 100vh;
+  width: 100vw;
+  grid-template-areas: 'body' 'nav' 'spacer';
 
   .body {
     overflow: auto;
-    height: 90vh;
-    padding: 1rem;
-    width: calc(100vw - 2rem);
+    flex-grow: 1;
+    grid-area: body;
   }
 
   .Navigation {
-    height: 10vh;
+    grid-area: nav;
+  }
+
+  .spacer {
+    grid-area: spacer;
+    background-color: $purple;
   }
 }

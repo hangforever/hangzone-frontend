@@ -1,15 +1,17 @@
 $turquoise: #47e5bc;
 $green: #75ff44;
 $red: #ff1469;
+$red-light: #ef476f;
 $white: #fff;
 $black: #000;
+$purple: #351431;
 
 $font-primary: $black;
 $font-secondary: $white;
-$bg-primary: #351431;
-$bg-secondary: #444444;
+$bg-primary: $white;
+$bg-secondary: $purple;
 $bg-btn: $black;
-$bg-btn-active: #871a1a;
+$bg-btn-active: $red;
 $border-primary: #444444;
 $status-active: green;
 $status-inactive: orange;

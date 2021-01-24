@@ -1,4 +1,4 @@
-@import 'styles/colors';
+@import 'styles/main';
 
 .Navigation {
   margin: 0;
@@ -10,24 +10,23 @@
     display: flex;
     height: 100%;
     margin: 0;
-    padding: 0;
+    padding: 0 3rem;
+    background: $purple;
 
     a {
-      background: $bg-btn;
       height: 100%;
       width: 100%;
       color: $font-secondary;
-
-      &.active {
-        background: $bg-btn-active;
-        li {
-          border-right: none;
-        }
+      text-decoration: none;
+      &:focus {
+        outline: none;
       }
-
-      &:last-child {
-        li {
-          border-right: none;
+      &.active {
+        path {
+          fill: $red;
+        }
+        span {
+          color: $red;
         }
       }
 
@@ -35,11 +34,17 @@
         height: calc(100% - 10px);
         margin: 5px 0;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
         flex: 1;
-        text-align: center;
-        border-right: 2px solid $border-primary;
+
+        svg {
+          margin-bottom: 5px;
+        }
+        span {
+          font-size: $font-sm;
+        }
       }
     }
   }

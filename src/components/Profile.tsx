@@ -1,13 +1,14 @@
 import React, { useState, useContext } from 'react';
 import { observer } from 'mobx-react-lite';
 import { appStoreContext } from 'stores';
-import firebaseContext from 'firebaseContext';
+import firebaseContext, { handleSignOut } from 'firebaseContext';
 import * as profileApi from 'api/profiles';
 import { NavLink } from 'react-router-dom';
 import Field from 'components/Field';
 import Modal from 'components/Modal';
 import ProgressBar from 'components/ProgressBar';
 import Routes from 'types/Routes';
+import { ISettings } from 'types';
 import './Profile.scss';
 
 const Profile = () => {
@@ -17,6 +18,9 @@ const Profile = () => {
   const [modalActive, updateModalActive] = useState(false);
   const [uploadProgress, updateUploadProgress] = useState(0);
 
+  function updateSetting(e: React.ChangeEvent<HTMLInputElement>) {
+    appStore.settings[e.target.name as keyof ISettings] = e.target.checked;
+  }
   function handleUpgradeAccount() {
     alert('Unimplemented');
     console.log(
@@ -64,6 +68,9 @@ const Profile = () => {
 
   return firebaseUser && profile ? (
     <div className="Profile">
+      <button className="button button-primary" onClick={handleSignOut}>
+        Sign Out
+      </button>
       <Modal active={modalActive} onCloseClick={() => updateModalActive(false)}>
         <Field
           label="Enter a url"
@@ -134,6 +141,41 @@ const Profile = () => {
           />
           <button onClick={() => updateModalActive(true)}>change photo</button>
         </div>
+      </div>
+      <div className="Settings">
+        <h2>Settings</h2>
+        <form className="Settings__form">
+          <div className="form-group">
+            <label htmlFor="gps">GPS on?</label>
+            <input
+              type="checkbox"
+              name="gpsOn"
+              checked={appStore.settings.gpsOn}
+              onChange={updateSetting}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="email-on-friend-hang">
+              Email on friend's hanging?
+            </label>
+            <input
+              type="checkbox"
+              name="emailOnFriendHang"
+              checked={appStore.settings.emailOnFriendHang}
+              onChange={updateSetting}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="notifications">Notifications</label>
+            <input
+              type="checkbox"
+              name="notifications"
+              checked={appStore.settings.notifications}
+              onChange={updateSetting}
+            />
+          </div>
+          <input type="submit" value="Save" />
+        </form>
       </div>
     </div>
   ) : null;
