@@ -1,7 +1,7 @@
 import Routes from './Routes';
 
 type ID = string;
-type LatLng = [number, number];
+export type LatLng = [number, number];
 
 export interface Invitation {
   invitedProfileId: ID;
@@ -32,6 +32,7 @@ export interface IProfile {
   friendIds: { [userId: string]: boolean };
   bio?: string;
   photoURL?: string;
+  position?: LatLng;
 }
 
 export enum Status {
