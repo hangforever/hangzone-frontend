@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import {
   Map,
-  InfoWindow,
   Marker,
   GoogleApiWrapper,
   IProvidedProps,
 } from 'google-maps-react';
+import HangzoneInfoWindow from './HangzoneInfoWindow';
 import { Hangzone, LatLng } from 'types';
 import * as hangzonesAPI from 'api/hangzones';
 import Loading from './Loading';
@@ -83,12 +83,11 @@ function HangzoneMap({ google }: Props) {
         )}
         {selectedHangzone && (
           // @ts-ignore
-          <InfoWindow visible marker={selectedMarker}>
-            <div className="info-window">
-              {selectedHangzone.name}
-              {selectedHangzone.description}
-            </div>
-          </InfoWindow>
+          <HangzoneInfoWindow
+            visible
+            marker={selectedMarker}
+            hangzone={selectedHangzone}
+          />
         )}
       </Map>
     </div>
