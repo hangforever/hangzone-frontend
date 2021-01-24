@@ -1,9 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import './App.scss';
-import { Route, useHistory } from 'react-router-dom';
+import { Redirect, Route, useHistory } from 'react-router-dom';
 import Navigation from 'components/Navigation';
-import Main from 'components/Main';
 import Login from 'components/Login';
 import Map from 'components/Map';
 import Profile from 'components/Profile';
@@ -28,7 +27,9 @@ function App() {
       {appStore.signedIn ? (
         <>
           <div className="body">
-            <Route exact path={Routes.Main} component={Main} />
+            <Route exact path={Routes.Main}>
+              <Redirect to={Routes.Profile} />
+            </Route>
             <Route path={Routes.Map} component={Map} />
             <Route path={Routes.Profile} component={Profile} />
             <Route path={Routes.Friends} component={Friends} />
