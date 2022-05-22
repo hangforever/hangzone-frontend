@@ -1,72 +1,29 @@
 {
   "name": "hangzone",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An app for hanging",
   "engines": {
-    "node": "~12"
+    "node": "~14"
   },
   "main": "src/index.js",
   "repository": "git@github.com:hangforever/hangzone.git",
-  "author": "aburd <burdick.aaron@gmail.com>, scott coffrin <scott.coffrin@gmail.com>",
+  "author": "aburd <aaron.burdick@protonmail.com>, scott coffrin <scott.coffrin@gmail.com>",
   "license": "MIT",
-  "private": true,
   "scripts": {
-    "bootstrap": "yarn && cd ./functions && yarn && cd ../",
-    "backup": "firebase emulators:export ./emulators.backup",
-    "build": "NODE_ENV=production react-scripts build",
-    "deploy": "yarn build && firebase deploy",
-    "dev": "concurrently --kill-others 'yarn dev:react' 'cd ./functions && yarn serve:all'",
-    "dev:backup": "concurrently --kill-others 'yarn dev:react' 'cd ./functions && yarn serve:all:backup'",
-    "dev:firebase": "NODE_ENV=development firebase serve -p 4000",
-    "dev:react": "NODE_ENV=development react-scripts start",
-    "docs:api": "docker-compose up swagger-redoc",
-    "eject": "react-scripts eject",
-    "lint": "eslint --ext js,ts,tsx src",
-    "prettier:check": "prettier --check ./src",
-    "prettier:write": "prettier --write ./src",
-    "test": "react-scripts test --watchAll=false",
-    "test:watch": "react-scripts test"
-  },
-  "devDependencies": {
-    "@testing-library/jest-dom": "^5.11.6",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "@types/jest": "^24.0.0",
-    "@types/node": "^12.0.0",
-    "@types/react": "^16.9.0",
-    "@types/react-dom": "^16.9.0",
-    "@types/react-router-dom": "^5.1.5",
-    "concurrently": "^5.3.0",
-    "npm-run-all": "^4.1.5",
-    "prettier": "^2.2.0"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "axios": "^0.21.0",
-    "firebase": "^8.2.1",
-    "google-maps-react": "^2.0.6",
-    "http-proxy-middleware": "^1.0.4",
-    "mobx": "^5.15.4",
-    "mobx-react-lite": "^2.0.7",
-    "node-sass": "^4.14.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1",
-    "typescript": "~3.7.2"
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^6.3.0"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "@vitejs/plugin-react": "^1.3.0",
+    "typescript": "^4.6.3",
+    "vite": "^2.9.9"
   }
 }
