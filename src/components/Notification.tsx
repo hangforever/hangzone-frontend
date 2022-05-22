@@ -1,5 +1,5 @@
 import React from 'react';
-import { ToolColor } from 'types';
+import { ToolColor } from '@types';
 import { backgroundColor } from 'util/colors';
 import './Notification.scss';
 

@@ -2,7 +2,7 @@ import './Navigation.scss';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { User, Notebook, Map } from './icons';
-import Routes from '../types/Routes';
+import Routes from '@types/Routes';
 
 const Navigation = () => {
   return (

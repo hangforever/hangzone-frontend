@@ -7,7 +7,7 @@ import {
   IProvidedProps,
 } from 'google-maps-react';
 import Loading from './Loading';
-import mapPin from 'assets/images/map_pin.svg';
+import mapPin from '@assets/images/map_pin.svg';
 import './Map.scss';
 
 const LoadingContainer = () => <Loading>Loading bangzones...</Loading>;

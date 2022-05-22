@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router';
 import * as profileApi from 'api/profiles';
 import appStoreContext from 'stores/appStoreContext';
-import { Routes } from 'types';
+import { Routes } from '@types';
 import InputText from './InputText';
 import Button from './Button';
 

@@ -1,17 +1,17 @@
 import React, { useContext, useEffect } from 'react';
 import './App.scss';
 import { Route, useHistory } from 'react-router-dom';
-import Navigation from 'components/Navigation';
-import Main from '@src/components/Main';
-import Login from '@src/components/Login';
-import Map from '@src/components/Map';
-import Profile from '@src/components/Profile';
-import SignUp from '@src/components/SignUp';
-import SignUpComplete from '@src/components/SignUpComplete';
-import Loading from '@src/components/Loading';
-import Friends from '@src/components/Friends';
-import DebugZone from '@src/components/DebugZone';
-import { Routes } from 'types';
+import Navigation from '@components/Navigation';
+import Main from '@components/Main';
+import Login from '@components/Login';
+import Map from '@components/Map';
+import Profile from '@components/Profile';
+import SignUp from '@components/SignUp';
+import SignUpComplete from '@components/SignUpComplete';
+import Loading from '@components/Loading';
+import Friends from '@components/Friends';
+import DebugZone from '@components/DebugZone';
+import { Routes } from '@types';
 import { isDevelopment } from '../util';
 
 function App() {

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Hangzone } from 'types';
+import { Hangzone } from '@types';
 import { appStoreContext } from 'stores';
 
 interface Props extends Hangzone {}

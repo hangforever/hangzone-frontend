@@ -1,8 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
-import firebaseContext from 'firebaseContext';
-import { Routes } from 'types';
+import { Routes } from '@types';
 import * as profileApi from 'api/profiles';
 import appStoreContext from 'stores/appStoreContext';
 import Button from './Button';

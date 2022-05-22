@@ -1,5 +1,5 @@
 import React from 'react';
-import { Status } from 'types';
+import { Status } from '@types';
 import './StatusMark.scss';
 
 const StatusMark: React.FC<{ status: Status }> = ({ status }) => (

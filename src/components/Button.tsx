@@ -1,6 +1,6 @@
 import React from 'react';
 import { backgroundColor } from 'util/colors';
-import { ToolColor } from 'types';
+import { ToolColor } from '@types';
 import './Button.scss';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
