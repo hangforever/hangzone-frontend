@@ -4,10 +4,10 @@ import { appStoreContext } from 'stores';
 import firebaseContext, { handleSignOut } from 'firebaseContext';
 import * as profileApi from 'api/profiles';
 import { NavLink } from 'react-router-dom';
-import Field from 'components/Field';
-import Modal from 'components/Modal';
-import ProgressBar from 'components/ProgressBar';
-import Routes from 'types/Routes';
+import Field from '@src/components/Field';
+import Modal from '@src/components/Modal';
+import ProgressBar from '@src/components/ProgressBar';
+import Routes from '@src/types/Routes';
 import { ISettings } from 'types';
 import './Profile.scss';
 

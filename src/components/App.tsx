@@ -1,31 +1,25 @@
 import React, { useContext, useEffect } from 'react';
-import { observer } from 'mobx-react-lite';
 import './App.scss';
 import { Route, useHistory } from 'react-router-dom';
 import Navigation from 'components/Navigation';
-import Main from 'components/Main';
-import Login from 'components/Login';
-import Map from 'components/Map';
-import Profile from 'components/Profile';
-import SignUp from 'components/SignUp';
-import SignUpComplete from 'components/SignUpComplete';
-import Loading from 'components/Loading';
-import Friends from 'components/Friends';
-import DebugZone from 'components/DebugZone';
+import Main from '@src/components/Main';
+import Login from '@src/components/Login';
+import Map from '@src/components/Map';
+import Profile from '@src/components/Profile';
+import SignUp from '@src/components/SignUp';
+import SignUpComplete from '@src/components/SignUpComplete';
+import Loading from '@src/components/Loading';
+import Friends from '@src/components/Friends';
+import DebugZone from '@src/components/DebugZone';
 import { Routes } from 'types';
-import { appStoreContext } from 'stores';
-import { handleAuthChange } from 'firebaseContext';
 import { isDevelopment } from '../util';
 
 function App() {
-  const appStore = useContext(appStoreContext);
   const history = useHistory();
-
-  useEffect(() => handleAuthChange(history), [history]);
 
   const appContent = (
     <div className="App bg-main" data-testid="App">
-      {appStore.signedIn ? (
+      {false ? (
         <>
           <div className="body">
             <Route exact path={Routes.Main} component={Main} />
@@ -53,7 +47,7 @@ function App() {
   return (
     <>
       <div id="portal-root" />
-      {appStore.loading ? <Loading>Loading...</Loading> : appContent}
+      {true ? <Loading>Loading...</Loading> : appContent}
     </>
   );
 }
