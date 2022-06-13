@@ -1,6 +1,4 @@
 import React, { useState, useContext } from 'react';
-import { observer } from 'mobx-react-lite';
-import appStoreContext from '../stores/appStoreContext';
 import FriendsList from './FriendsList';
 import './Friends.scss';
 
@@ -8,13 +6,7 @@ interface Props {}
 
 const Friends: React.FC<Props> = () => {
   const [search, updateSearch] = useState('');
-  const appStore = useContext(appStoreContext);
-  const { firebaseUser, profile, friendProfiles } = appStore;
-
-  const filteredFriends = friendProfiles.filter((cur) => {
-    const searchRegex = new RegExp(`.*${search}.*`, 'i');
-    return searchRegex.test(cur.displayName);
-  });
+  // const { firebaseUser, profile, friendProfiles } = appStore;
 
   const handleAddFriend = () => {
     /***
@@ -28,7 +20,7 @@ const Friends: React.FC<Props> = () => {
      */
   };
 
-  return firebaseUser && profile && friendProfiles.length > 0 ? (
+  return false ? (
     <div className="Friends">
       <div className="Friends__search">
         <input
@@ -41,7 +33,7 @@ const Friends: React.FC<Props> = () => {
         />
       </div>
       <div className="Friends__friends-list">
-        <FriendsList friends={filteredFriends} />
+        <FriendsList friends={[]} />
       </div>
       <div className="Friends__controls">
         <button
@@ -69,4 +61,4 @@ const Friends: React.FC<Props> = () => {
   );
 };
 
-export default observer(Friends);
+export default Friends;

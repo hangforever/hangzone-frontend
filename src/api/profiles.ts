@@ -1,4 +1,4 @@
-import { IProfile } from '@types';
+import { IProfile } from '@src/types';
 import API from './axios';
 
 /**

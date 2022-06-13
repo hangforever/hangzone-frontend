@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import './App.scss';
-import { Route, useHistory } from 'react-router-dom';
+import { Route, useNavigate } from 'react-router-dom';
 import Navigation from '@components/Navigation';
 import Main from '@components/Main';
 import Login from '@components/Login';
@@ -11,21 +11,21 @@ import SignUpComplete from '@components/SignUpComplete';
 import Loading from '@components/Loading';
 import Friends from '@components/Friends';
 import DebugZone from '@components/DebugZone';
-import { Routes } from '@types';
+import { Routes } from '@src/types';
 import { isDevelopment } from '../util';
 
 function App() {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const appContent = (
     <div className="App bg-main" data-testid="App">
       {false ? (
         <>
           <div className="body">
-            <Route exact path={Routes.Main} component={Main} />
-            <Route path={Routes.Map} component={Map} />
-            <Route path={Routes.Profile} component={Profile} />
-            <Route path={Routes.Friends} component={Friends} />
+            <Route path={Routes.Main}><Main /></Route>
+            <Route path={Routes.Map}><Map /></Route>
+            <Route path={Routes.Profile}><Profile /></Route>
+            <Route path={Routes.Friends}><Friends /></Route>
           </div>
 
           <Navigation />
@@ -33,11 +33,11 @@ function App() {
         </>
       ) : (
         <>
-          <Route path={Routes.Login} component={Login} />
-          <Route exact path={Routes.SignUp} component={SignUp} />
-          <Route path={Routes.SignUpComplete} component={SignUpComplete} />
+          <Route path={Routes.Login}><Login /></Route>
+          <Route path={Routes.SignUp}><SignUp /></Route>
+          <Route path={Routes.SignUpComplete}><SignUpComplete /></Route>
           {isDevelopment() && (
-            <Route path={Routes.DebugZone} component={DebugZone} />
+            <Route path={Routes.DebugZone}><DebugZone /></Route>
           )}
         </>
       )}
@@ -52,4 +52,4 @@ function App() {
   );
 }
 
-export default observer(App);
+export default App;

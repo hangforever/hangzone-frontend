@@ -1,16 +1,14 @@
 import React, { useState, useContext } from 'react';
-import { useHistory } from 'react-router';
-import * as profileApi from 'api/profiles';
-import appStoreContext from 'stores/appStoreContext';
-import { Routes } from '@types';
+import { useNavigate } from 'react-router-dom';
+import * as profileApi from '@src/api/profiles';
+import { Routes } from '@src/types';
 import InputText from './InputText';
 import Button from './Button';
 
 const SignUpComplete: React.FC<{}> = () => {
   const [error, setError] = useState('');
   const [displayName, updateDisplayName] = useState('');
-  const appStore = useContext(appStoreContext);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   function handleError(e: Error): void {
     setError(e.message);
@@ -19,17 +17,11 @@ const SignUpComplete: React.FC<{}> = () => {
 
   async function handleComplete(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    try {
-      const profile = await profileApi.create({ displayName });
-      if (profile) {
-        appStore.profile = profile;
-        appStore.signedIn = true;
-        history.push(Routes.Profile);
-      } else {
-        throw new Error('Could not create profile.');
-      }
-    } catch (e) {
-      handleError(e);
+    const profile = await profileApi.create({ displayName });
+    if (profile) {
+      navigate(Routes.Profile);
+    } else {
+      throw new Error('Could not create profile.');
     }
   }
 

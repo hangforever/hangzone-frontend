@@ -1,9 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { useHistory } from 'react-router';
-import { Link } from 'react-router-dom';
-import { Routes } from '@types';
-import * as profileApi from 'api/profiles';
-import appStoreContext from 'stores/appStoreContext';
+import { useNavigate, Link } from 'react-router-dom';
+import { Routes } from '@src/types';
+import * as profileApi from '@src/api/profiles';
 import Button from './Button';
 import InputText from './InputText';
 import './Login.scss';
@@ -13,9 +11,7 @@ const Login: React.FC = () => {
   const [email, updateEmail] = useState('');
   const [password, updatePassword] = useState('');
   const [anonUsername, updateAnonUsername] = useState('');
-  const history = useHistory();
-  const firebase = useContext(firebaseContext);
-  const appStore = useContext(appStoreContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (email && password) {
@@ -23,48 +19,23 @@ const Login: React.FC = () => {
     }
   }, [email, password]);
 
-  function handleError(e: firebase.default.auth.AuthError): void {
-    setError(e.message);
-    console.error(e);
+  function handleError(): void {
   }
 
   function transferUser() {
-    appStore.signedIn = true;
-    history.push(Routes.Profile);
+    navigate(Routes.Profile);
   }
 
   function handleGmailLogin() {
-    const gAuthProvider = new firebase.auth.GoogleAuthProvider();
-    firebase
-      .auth()
-      .signInWithPopup(gAuthProvider)
-      .then(transferUser)
-      .catch(handleError);
+    console.log('TODO: login gmail');
   }
 
   function handleLogin(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(transferUser)
-      .catch(handleError);
+    console.log('TODO: login');
   }
 
   function handleAnonLogin(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    firebase
-      .auth()
-      .signInAnonymously()
-      .then(({ user }) => {
-        if (user) {
-          return profileApi.create({ displayName: anonUsername });
-        } else {
-          throw new Error('Anonymous Login failed!');
-        }
-      })
-      .then(transferUser)
-      .catch(handleError);
+    console.log('TODO: login anon');
   }
 
   return (
@@ -99,7 +70,7 @@ const Login: React.FC = () => {
             <div className="form-group">
               <Button
                 shadowColor="red"
-                onClick={() => history.push(Routes.SignUp)}
+                onClick={() => navigate(Routes.SignUp)}
               >
                 Sign Up Instead
               </Button>

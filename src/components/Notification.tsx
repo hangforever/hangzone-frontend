@@ -1,6 +1,6 @@
 import React from 'react';
-import { ToolColor } from '@types';
-import { backgroundColor } from 'util/colors';
+import { ToolColor } from '@src/types';
+import { backgroundColor } from '@src/util/colors';
 import './Notification.scss';
 
 type Direction = 'up' | 'down' | 'left' | 'right';
