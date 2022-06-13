@@ -1,25 +1,18 @@
 import React, { useState, useContext } from 'react';
-import { observer } from 'mobx-react-lite';
-import { appStoreContext } from 'stores';
-import firebaseContext, { handleSignOut } from 'firebaseContext';
-import * as profileApi from 'api/profiles';
 import { NavLink } from 'react-router-dom';
-import Field from 'components/Field';
-import Modal from 'components/Modal';
-import ProgressBar from 'components/ProgressBar';
-import Routes from 'types/Routes';
-import { ISettings } from 'types';
+import Field from '@src/components/Field';
+import Modal from '@src/components/Modal';
+import ProgressBar from '@src/components/ProgressBar';
+import Routes from '@src/types/Routes';
+import { ISettings } from '@src/types';
 import './Profile.scss';
 
 const Profile = () => {
-  const appStore = useContext(appStoreContext);
-  const firebase = useContext(firebaseContext);
-  const { firebaseUser, profile } = appStore;
   const [modalActive, updateModalActive] = useState(false);
   const [uploadProgress, updateUploadProgress] = useState(0);
 
   function updateSetting(e: React.ChangeEvent<HTMLInputElement>) {
-    appStore.settings[e.target.name as keyof ISettings] = e.target.checked;
+    console.log('updateSetting');
   }
   function handleUpgradeAccount() {
     alert('Unimplemented');
@@ -28,47 +21,12 @@ const Profile = () => {
     );
   }
   async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files && e.target.files[0];
-    try {
-      if (!file)
-        throw new Error('There was a problem getting your profile image.');
-
-      const storageRef = firebase.storage().ref();
-      const userProfileImgRef = storageRef.child(
-        `profile/images/${appStore.firebaseUser?.uid}`
-      );
-      const uploadTask = userProfileImgRef.put(file);
-
-      // https://firebase.google.com/docs/storage/web/upload-files#full_example
-      uploadTask.on(
-        'state_changed',
-        function (snapshot) {
-          const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          updateUploadProgress(progress);
-        },
-        function (error) {
-          alert(error.message);
-        },
-        function () {
-          uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-            if (appStore.profile && appStore.firebaseUser) {
-              appStore.profile.photoURL = downloadURL;
-              profileApi.set(appStore.profile);
-              updateUploadProgress(0);
-              updateModalActive(false);
-            }
-          });
-        }
-      );
-    } catch (e) {
-      alert(e.message);
-    }
+    console.log('handleImageUpload');
   }
 
-  return firebaseUser && profile ? (
+  return true ? (
     <div className="Profile">
-      <button className="button button-primary" onClick={handleSignOut}>
+      <button className="button button-primary" onClick={() => console.log('sign out')}>
         Sign Out
       </button>
       <Modal active={modalActive} onCloseClick={() => updateModalActive(false)}>
@@ -76,8 +34,7 @@ const Profile = () => {
           label="Enter a url"
           initialActive
           onSubmit={(newURL) => {
-            profile.photoURL = newURL;
-            profileApi.set(profile);
+            // TODO: profile url
             updateModalActive(false);
           }}
         />
@@ -92,13 +49,13 @@ const Profile = () => {
         <ProgressBar progress={uploadProgress} />
       </Modal>
       <div>
-        {firebaseUser.isAnonymous ? (
+        {true ? (
           <div>
             Anonomous User <br />
             {/* TODO: Decide how to handle upgrading */}
             <button onClick={handleUpgradeAccount}>Upgrade Account</button>
             <button>
-              <NavLink activeClassName="active" to={Routes.SignUp}>
+              <NavLink to={Routes.SignUp}>
                 SignUp
               </NavLink>
             </button>
@@ -106,7 +63,7 @@ const Profile = () => {
         ) : (
           <Field
             label="email"
-            initialValue={firebaseUser.email || ''}
+            initialValue={''}
             disabled
           />
         )}
@@ -114,20 +71,18 @@ const Profile = () => {
       <div className="Profile__user-name">
         <Field
           label="user name"
-          initialValue={profile.displayName}
+          initialValue={''}
           onSubmit={(value) => {
-            profile.displayName = value;
-            profileApi.set(profile);
+            // TODO: profile display name
           }}
         />
       </div>
       <div className="Profile__bio">
         <Field
           label="bio"
-          initialValue={profile.bio || ''}
+          initialValue={''}
           onSubmit={(value) => {
-            profile.bio = value;
-            profileApi.set(profile);
+            // TODO: bio
           }}
         />
       </div>
@@ -136,7 +91,7 @@ const Profile = () => {
         <div className="Profile__photo-area">
           <img
             className="Profile__profile-photo"
-            src={appStore.profilePhoto}
+            src={''}
             alt="user profile"
           />
           <button onClick={() => updateModalActive(true)}>change photo</button>
@@ -150,7 +105,7 @@ const Profile = () => {
             <input
               type="checkbox"
               name="gpsOn"
-              checked={appStore.settings.gpsOn}
+              checked={true}
               onChange={updateSetting}
             />
           </div>
@@ -161,7 +116,7 @@ const Profile = () => {
             <input
               type="checkbox"
               name="emailOnFriendHang"
-              checked={appStore.settings.emailOnFriendHang}
+              checked={true}
               onChange={updateSetting}
             />
           </div>
@@ -170,7 +125,7 @@ const Profile = () => {
             <input
               type="checkbox"
               name="notifications"
-              checked={appStore.settings.notifications}
+              checked={true}
               onChange={updateSetting}
             />
           </div>
@@ -181,4 +136,4 @@ const Profile = () => {
   ) : null;
 };
 
-export default observer(Profile);
+export default Profile;

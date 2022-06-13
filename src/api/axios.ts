@@ -1,9 +1,7 @@
 import axios from 'axios';
 
-const baseURL =
-  process.env.NODE_ENV === 'development'
-    ? process.env.REACT_APP_URL_BASE_DEV
-    : process.env.REACT_APP_URL_BASE_PRD;
+// TODO: manage urls depending on env
+const baseURL = "http://localhost:8000";
 
 export default axios.create({
   baseURL,

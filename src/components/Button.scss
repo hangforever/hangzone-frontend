@@ -1,9 +1,9 @@
-@import 'styles/main';
+@import '@src/styles/main';
 
 .Button {
   display: inline-block;
   position: relative;
-  margin: $border-size / 2;
+  margin: calc($border-size / 2);
 
   > button {
     width: 100%;

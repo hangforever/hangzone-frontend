@@ -2,7 +2,9 @@ import { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './Portal.scss';
 
-interface Props {}
+interface Props {
+  children: React.ReactNode;
+}
 
 export default class Modal extends Component<Props> {
   private el: HTMLElement;

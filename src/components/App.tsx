@@ -1,37 +1,31 @@
 import React, { useContext, useEffect } from 'react';
-import { observer } from 'mobx-react-lite';
 import './App.scss';
-import { Route, useHistory } from 'react-router-dom';
-import Navigation from 'components/Navigation';
-import Main from 'components/Main';
-import Login from 'components/Login';
-import Map from 'components/Map';
-import Profile from 'components/Profile';
-import SignUp from 'components/SignUp';
-import SignUpComplete from 'components/SignUpComplete';
-import Loading from 'components/Loading';
-import Friends from 'components/Friends';
-import DebugZone from 'components/DebugZone';
-import { Routes } from 'types';
-import { appStoreContext } from 'stores';
-import { handleAuthChange } from 'firebaseContext';
+import { Route, useNavigate } from 'react-router-dom';
+import Navigation from '@components/Navigation';
+import Main from '@components/Main';
+import Login from '@components/Login';
+import Map from '@components/Map';
+import Profile from '@components/Profile';
+import SignUp from '@components/SignUp';
+import SignUpComplete from '@components/SignUpComplete';
+import Loading from '@components/Loading';
+import Friends from '@components/Friends';
+import DebugZone from '@components/DebugZone';
+import { Routes } from '@src/types';
 import { isDevelopment } from '../util';
 
 function App() {
-  const appStore = useContext(appStoreContext);
-  const history = useHistory();
-
-  useEffect(() => handleAuthChange(history), [history]);
+  const navigate = useNavigate();
 
   const appContent = (
     <div className="App bg-main" data-testid="App">
-      {appStore.signedIn ? (
+      {false ? (
         <>
           <div className="body">
-            <Route exact path={Routes.Main} component={Main} />
-            <Route path={Routes.Map} component={Map} />
-            <Route path={Routes.Profile} component={Profile} />
-            <Route path={Routes.Friends} component={Friends} />
+            <Route path={Routes.Main}><Main /></Route>
+            <Route path={Routes.Map}><Map /></Route>
+            <Route path={Routes.Profile}><Profile /></Route>
+            <Route path={Routes.Friends}><Friends /></Route>
           </div>
 
           <Navigation />
@@ -39,11 +33,11 @@ function App() {
         </>
       ) : (
         <>
-          <Route path={Routes.Login} component={Login} />
-          <Route exact path={Routes.SignUp} component={SignUp} />
-          <Route path={Routes.SignUpComplete} component={SignUpComplete} />
+          <Route path={Routes.Login}><Login /></Route>
+          <Route path={Routes.SignUp}><SignUp /></Route>
+          <Route path={Routes.SignUpComplete}><SignUpComplete /></Route>
           {isDevelopment() && (
-            <Route path={Routes.DebugZone} component={DebugZone} />
+            <Route path={Routes.DebugZone}><DebugZone /></Route>
           )}
         </>
       )}
@@ -53,9 +47,9 @@ function App() {
   return (
     <>
       <div id="portal-root" />
-      {appStore.loading ? <Loading>Loading...</Loading> : appContent}
+      {true ? <Loading>Loading...</Loading> : appContent}
     </>
   );
 }
 
-export default observer(App);
+export default App;

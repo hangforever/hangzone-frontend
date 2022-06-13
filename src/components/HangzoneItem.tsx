@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
-import { Hangzone } from 'types';
-import { appStoreContext } from 'stores';
+import { Hangzone } from '@src/types';
 
 interface Props extends Hangzone {}
 
@@ -10,7 +9,6 @@ const HangzoneItem: React.FC<Props> = ({
   description,
   isPrivate,
 }) => {
-  const appStore = useContext(appStoreContext);
   return (
     <li>
       ID: {id} <br />
@@ -18,7 +16,7 @@ const HangzoneItem: React.FC<Props> = ({
       <input
         type="text"
         value={name}
-        onChange={(e) => appStore.updateHangzone(id, { name: e.target.value })}
+        onChange={(e) => {}}
       />{' '}
       <br />
       Description: {description} <br />

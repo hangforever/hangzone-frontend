@@ -8,11 +8,11 @@ import API from './axios';
 export async function signUp(
   email: string,
   password: string
-): Promise<firebase.default.User | null> {
+): Promise<null> {
   const { data, status } = await API.post('/api/auth/signup', {
     email,
     password,
   });
   if (status !== 200) throw new Error(data.message);
-  return data.data.user;
+  return null;
 }
