@@ -7,16 +7,17 @@ interface Props {
   maxHeight?: string;
   maxWidth?: string;
   onCloseClick: () => void;
+  children: React.ReactNode;
 }
 
-const Modal: React.FC<Props> = ({
+const Modal = ({
   active,
   className = '',
   maxHeight = '',
   maxWidth = '',
   onCloseClick,
   children,
-}) => {
+}: Props) => {
   return active ? (
     <div className="Modal">
       <div

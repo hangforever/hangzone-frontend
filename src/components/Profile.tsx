@@ -4,7 +4,7 @@ import Field from '@src/components/Field';
 import Modal from '@src/components/Modal';
 import ProgressBar from '@src/components/ProgressBar';
 import Routes from '@src/types/Routes';
-import { ISettings } from '@types';
+import { ISettings } from '@src/types';
 import './Profile.scss';
 
 const Profile = () => {
@@ -34,8 +34,7 @@ const Profile = () => {
           label="Enter a url"
           initialActive
           onSubmit={(newURL) => {
-            profile.photoURL = newURL;
-            profileApi.set(profile);
+            // TODO: profile url
             updateModalActive(false);
           }}
         />
@@ -50,13 +49,13 @@ const Profile = () => {
         <ProgressBar progress={uploadProgress} />
       </Modal>
       <div>
-        {firebaseUser.isAnonymous ? (
+        {true ? (
           <div>
             Anonomous User <br />
             {/* TODO: Decide how to handle upgrading */}
             <button onClick={handleUpgradeAccount}>Upgrade Account</button>
             <button>
-              <NavLink activeClassName="active" to={Routes.SignUp}>
+              <NavLink to={Routes.SignUp}>
                 SignUp
               </NavLink>
             </button>
@@ -64,7 +63,7 @@ const Profile = () => {
         ) : (
           <Field
             label="email"
-            initialValue={firebaseUser.email || ''}
+            initialValue={''}
             disabled
           />
         )}
@@ -72,20 +71,18 @@ const Profile = () => {
       <div className="Profile__user-name">
         <Field
           label="user name"
-          initialValue={profile.displayName}
+          initialValue={''}
           onSubmit={(value) => {
-            profile.displayName = value;
-            profileApi.set(profile);
+            // TODO: profile display name
           }}
         />
       </div>
       <div className="Profile__bio">
         <Field
           label="bio"
-          initialValue={profile.bio || ''}
+          initialValue={''}
           onSubmit={(value) => {
-            profile.bio = value;
-            profileApi.set(profile);
+            // TODO: bio
           }}
         />
       </div>
@@ -94,7 +91,7 @@ const Profile = () => {
         <div className="Profile__photo-area">
           <img
             className="Profile__profile-photo"
-            src={appStore.profilePhoto}
+            src={''}
             alt="user profile"
           />
           <button onClick={() => updateModalActive(true)}>change photo</button>
@@ -108,7 +105,7 @@ const Profile = () => {
             <input
               type="checkbox"
               name="gpsOn"
-              checked={appStore.settings.gpsOn}
+              checked={true}
               onChange={updateSetting}
             />
           </div>

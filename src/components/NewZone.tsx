@@ -1,11 +1,8 @@
 import React, { useContext, useState } from 'react';
-import { observer } from 'mobx-react-lite';
-import appStoreContext from '../stores/appStoreContext';
 import Modal from '../components/Modal';
 import './NewZone.scss';
 
 const NewZoneModal = () => {
-  const appStore = useContext(appStoreContext);
   const [active, toggleActive] = useState(false);
   const [name, updateName] = useState('');
   const [isPrivate, updateIsPrivate] = useState(true);
@@ -79,7 +76,7 @@ const NewZoneModal = () => {
             </div>
             <button
               onClick={() => {
-                appStore.addHangzone(name, description, isPrivate);
+                // TODO: add hangzone to state
                 resetForm();
                 toggleActive(!active);
               }}
@@ -101,4 +98,4 @@ const NewZoneModal = () => {
   );
 };
 
-export default observer(NewZoneModal);
+export default NewZoneModal;

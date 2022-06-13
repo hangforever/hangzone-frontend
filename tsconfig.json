@@ -26,5 +26,6 @@
     "jsx": "react-jsx"
   },
   "include": ["src", "src/custom.d.ts"],
+  "exclude": ["./src/**/*.test.tsx", "./src/__mocks__/**"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
