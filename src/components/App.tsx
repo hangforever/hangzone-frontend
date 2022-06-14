@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import './App.scss';
-import { Route, useNavigate } from 'react-router-dom';
+import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 import Navigation from '@components/Navigation';
 import Main from '@components/Main';
 import Login from '@components/Login';
@@ -11,35 +11,40 @@ import SignUpComplete from '@components/SignUpComplete';
 import Loading from '@components/Loading';
 import Friends from '@components/Friends';
 import DebugZone from '@components/DebugZone';
-import { Routes } from '@src/types';
+import { Routes as AppRoutes } from '@src/types';
+import { useAuth0 } from '@auth0/auth0-react';
 import { isDevelopment } from '../util';
 
 function App() {
+  const { logout, isLoading, isAuthenticated } = useAuth0();
   const navigate = useNavigate();
 
   const appContent = (
     <div className="App bg-main" data-testid="App">
-      {false ? (
+      {isAuthenticated ? (
         <>
           <div className="body">
-            <Route path={Routes.Main}><Main /></Route>
-            <Route path={Routes.Map}><Map /></Route>
-            <Route path={Routes.Profile}><Profile /></Route>
-            <Route path={Routes.Friends}><Friends /></Route>
+            <Routes>
+              <Route path={AppRoutes.Main} element={<Main />} />
+              <Route path={AppRoutes.Map} element={<Map />} />
+              <Route path={AppRoutes.Profile} element={<Profile />} />
+              <Route path={AppRoutes.Friends} element={<Friends />} />
+            </Routes>
           </div>
 
           <Navigation />
           <div className="spacer"></div>
         </>
       ) : (
-        <>
-          <Route path={Routes.Login}><Login /></Route>
-          <Route path={Routes.SignUp}><SignUp /></Route>
-          <Route path={Routes.SignUpComplete}><SignUpComplete /></Route>
+        <Routes>
+          <Route path={AppRoutes.Login} element={<Login />} />
+          <Route path={AppRoutes.SignUp} element={<SignUp />} />
+          <Route path={AppRoutes.SignUpComplete} element={<SignUpComplete />} />
           {isDevelopment() && (
-            <Route path={Routes.DebugZone}><DebugZone /></Route>
+            <Route path={AppRoutes.DebugZone} element={<DebugZone />} />
           )}
-        </>
+          <Route path="*" element={<Navigate to={AppRoutes.Login} replace />} />
+        </Routes>
       )}
     </div>
   );
@@ -47,7 +52,7 @@ function App() {
   return (
     <>
       <div id="portal-root" />
-      {true ? <Loading>Loading...</Loading> : appContent}
+      {isLoading ? <Loading /> : appContent}
     </>
   );
 }

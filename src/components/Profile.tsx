@@ -5,11 +5,13 @@ import Modal from '@src/components/Modal';
 import ProgressBar from '@src/components/ProgressBar';
 import Routes from '@src/types/Routes';
 import { ISettings } from '@src/types';
+import { useAuth0 } from '@auth0/auth0-react';
 import './Profile.scss';
 
 const Profile = () => {
   const [modalActive, updateModalActive] = useState(false);
   const [uploadProgress, updateUploadProgress] = useState(0);
+  const { logout } = useAuth0();
 
   function updateSetting(e: React.ChangeEvent<HTMLInputElement>) {
     console.log('updateSetting');
@@ -26,7 +28,7 @@ const Profile = () => {
 
   return true ? (
     <div className="Profile">
-      <button className="button button-primary" onClick={() => console.log('sign out')}>
+      <button className="button button-primary" onClick={() => logout({ returnTo: window.location.origin })}>
         Sign Out
       </button>
       <Modal active={modalActive} onCloseClick={() => updateModalActive(false)}>
