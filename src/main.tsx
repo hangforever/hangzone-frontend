@@ -10,15 +10,15 @@ const root = ReactDOM.createRoot(container);
 
 root.render(
   <React.StrictMode>
-    <Router>
       <Auth0Provider
         domain="dev-544ohv26.us.auth0.com"
         clientId="dM0h47bJkqv6p3gCVmFhnm7IMVQzB900"
         redirectUri={window.location.origin}
       >
+    <Router>
         <App />
-      </Auth0Provider>
     </Router>
+      </Auth0Provider>
   </React.StrictMode>
 );
 

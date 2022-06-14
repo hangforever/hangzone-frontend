@@ -1,12 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Routes } from '@src/types';
-import * as profileApi from '@src/api/profiles';
+import { useAuth0 } from '@auth0/auth0-react';
 import Button from './Button';
 import InputText from './InputText';
 import './Login.scss';
 
 const Login: React.FC = () => {
+  const { loginWithRedirect } = useAuth0();
   const [error, setError] = useState('');
   const [email, updateEmail] = useState('');
   const [password, updatePassword] = useState('');
@@ -73,6 +74,12 @@ const Login: React.FC = () => {
                 onClick={() => navigate(Routes.SignUp)}
               >
                 Sign Up Instead
+              </Button>
+              <Button
+                shadowColor="red"
+                onClick={() => loginWithRedirect()}
+              >
+                Login with Auth0
               </Button>
             </div>
             <div className="form-group">
